@@ -2,13 +2,11 @@
 //  Rover.h
 //  Rover
 //
-//  Created by Sean Rucker on 2016-09-29.
-//  Copyright © 2016 Sean Rucker. All rights reserved.
+//  Created by Sean Rucker on 2016-11-21.
+//  Copyright © 2016 Rover Labs Inc. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
-
-#import <Rover/RVRGimbalPlaceManager.h>
 
 //! Project version number for Rover.
 FOUNDATION_EXPORT double RoverVersionNumber;

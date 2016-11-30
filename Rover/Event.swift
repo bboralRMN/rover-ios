@@ -1,84 +1,85 @@
 //
 //  Event.swift
-//  Pods
+//  Rover
 //
-//  Created by Ata Namvari on 2016-01-25.
-//
+//  Created by Sean Rucker on 2016-11-24.
+//  Copyright © 2016 Rover Labs Inc. All rights reserved.
 //
 
 import Foundation
-import CoreLocation
 
-public enum Event {
+struct Event: Serializeable {
     
-    case applicationOpen(date: Date)
-    case deviceUpdate(date: Date)
+    let eventId: UUID
     
-    case didUpdateLocation(CLLocation, date: Date)
+    let timestamp: Date
     
-    case didEnterBeaconRegion(CLBeaconRegion, config: BeaconConfiguration?, place: Place?, date: Date)
-    case didExitBeaconRegion(CLBeaconRegion, config: BeaconConfiguration?, place: Place?,  date: Date)
-
-    case didEnterCircularRegion(CLCircularRegion, place: Place?, date: Date)
-    case didExitCircularRegion(CLCircularRegion, place: Place?, date: Date)
+    let name: String
     
-    case didReceiveMessage(Message)
-    case didOpenMessage(Message, source: String, date: Date)
+    let attributes: JSON?
     
-    case didEnterGimbalPlace(id: String, date: Date)
-    case didExitGimbalPlace(id: String, date: Date)
-    
-    case didLaunchExperience(Experience, session: String, date: Date)
-    case didDismissExperience(Experience, session: String, date: Date)
-    case didViewScreen(Screen, experience: Experience, fromScreen: Screen?, fromBlock: Block?, session: String, date: Date)
-    case didPressBlock(Block, screen: Screen, experience: Experience, session: String, date: Date)
-    
-    var properties: [String: Any] {
-        switch self {
-        case .didUpdateLocation(let location, let date):
-            return ["location": location, "date": date]
-        case .didEnterBeaconRegion(let region, let config, let location, let date):
-            return ["region": region, "config": config, "location": location, "date": date]
-        case .didExitBeaconRegion(let region, let config, let location, let date):
-            return ["region": region, "config": config, "location": location, "date": date]
-        case .didEnterCircularRegion(let region, let location, let date):
-            return ["region": region, "location": location, "date": date]
-        case .didExitCircularRegion(let region, let location, let date):
-            return ["region": region, "location": location, "date": date]
-        case .didOpenMessage(let message, let source, let date):
-            return ["message": message, "source": source, "date": date]
-        case .didEnterGimbalPlace(let placeId, let date):
-            return ["gimbalPlaceId": placeId, "date": date]
-        case .didEnterGimbalPlace(let placeId, let date):
-            return ["gimbalPlaceId": placeId, "date": date]
-        default:
-            return [:]
-        }
+    init(name: String, attributes: JSON? = nil, eventId: UUID = UUID(), timestamp: Date = Date()) {
+        self.name = name
+        self.attributes = attributes
+        self.eventId = eventId
+        self.timestamp = timestamp
     }
     
-}
-
-extension Event {
-    
-    func call(_ observer: RoverObserver) {
-        switch self {
-        case .didEnterBeaconRegion(_, let config?, let place?, _):
-            observer.didEnterBeaconRegion?(config: config, place: place)
-        case .didExitBeaconRegion(_, let config?, let place?, _):
-            observer.didExitBeaconRegion?(config: config, place: place)
-        case .didEnterCircularRegion(_, let place?, _):
-            observer.didEnterGeofence?(place: place)
-        case .didExitCircularRegion(_, let place?, _):
-            observer.didExitGeofence?(place: place)
-        case .didReceiveMessage(let message):
-            observer.didReceiveMessage?(message)
-        default:
-            break
+    func serialize() -> JSON {
+        var payload: JSON = [
+            "eventId": eventId.uuidString,
+            "name": name,
+            "timestamp": timestamp.iso8601FormattedString
+        ]
+        
+        if let attributes = attributes {
+            payload["attributes"] = coerceJSONObject(attributes)
         }
+        
+        return payload
     }
-
+    
+    func coerceJSONObject(_ obj: Any) -> Any {
+        // TODO: Ensure all attributes can be sent as a payload
+        return obj
+    }
 }
 
 
 
-
+//static id SEGCoerceJSONObject(id obj) {
+//    // if the object is a NSString, NSNumber or NSNull
+//    // then we're good
+//    if ([obj isKindOfClass:[NSString class]] ||
+//        [obj isKindOfClass:[NSNumber class]] ||
+//        [obj isKindOfClass:[NSNull class]]) {
+//        return obj;
+//    }
+//
+//    if ([obj isKindOfClass:[NSArray class]]) {
+//        NSMutableArray *array = [NSMutableArray array];
+//        for (id i in obj)
+//            [array addObject:SEGCoerceJSONObject(i)];
+//        return array;
+//    }
+//
+//    if ([obj isKindOfClass:[NSDictionary class]]) {
+//        NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+//        for (NSString *key in obj) {
+//            if (![key isKindOfClass:[NSString class]])
+//                SEGLog(@"warning: dictionary keys should be strings. got: %@. coercing " @"to: %@", [key class], [key description]);
+//            dict[key.description] = SEGCoerceJSONObject(obj[key]);
+//        }
+//        return dict;
+//    }
+//
+//    if ([obj isKindOfClass:[NSDate class]])
+//        return iso8601FormattedString(obj);
+//
+//    if ([obj isKindOfClass:[NSURL class]])
+//        return [obj absoluteString];
+//
+//    // default to sending the object's description
+//    SEGLog(@"warning: dictionary values should be valid json types. got: %@. " @"coercing to: %@", [obj class], [obj description]);
+//    return [obj description];
+//}
