@@ -12,10 +12,7 @@ import XCTest
 class EventManagerTests: XCTestCase {
     
     func testAddingEventsSize() {
-        var config = TestConfiguration()
-        config.sendAt = Int.max
-        
-        let eventManager = EventManager(configuration: config)
+        let eventManager = EventManager(uploadClient: MockUploadClient())
         
         for _ in 1...5 {
             eventManager.trackEvent(name: "test")
@@ -27,20 +24,19 @@ class EventManagerTests: XCTestCase {
         XCTAssertEqual(eventManager.events.count, 5)
     }
     
-    func testSendAtSize() {
+    func testFlushEventsAtSize() {
         let e = expectation(description: "First batch size equals sendAt")
         
-        let config = TestConfiguration()
-        let eventManager = EventManager(configuration: config)
+        let eventManager = EventManager(uploadClient: MockUploadClient())
         
         NotificationCenter.default.addObserver(forName: .didFinishUpload, object: eventManager, queue: nil) { notification in
             
             let events = notification.userInfo?["events"] as! [Event]
-            XCTAssertEqual(events.count, config.sendAt)
+            XCTAssertEqual(events.count, eventManager.flushAt)
             e.fulfill()
         }
         
-        for _ in 1...config.sendAt {
+        for _ in 1...eventManager.flushAt {
             eventManager.trackEvent(name: "test")
         }
         
@@ -54,21 +50,16 @@ class EventManagerTests: XCTestCase {
         uploadClient.success = false
         uploadClient.retry = true
         
-        var config = TestConfiguration()
-        config.sendAt = 1
-        config.maxBatchSize = 10
-        config.uploadClient = uploadClient
-        
-        let eventManager = EventManager(configuration: config)
+        let eventManager = EventManager(flushAt: 1, maxBatchSize: 10, uploadClient: uploadClient)
         var batchCount = 0
         
         NotificationCenter.default.addObserver(forName: .didFinishUpload, object: eventManager, queue: nil) { notification in
             batchCount += 1
             
             let events = notification.userInfo?["events"] as! [Event]
-            XCTAssertLessThanOrEqual(events.count, config.maxBatchSize)
+            XCTAssertLessThanOrEqual(events.count, eventManager.maxBatchSize)
             
-            if batchCount < 3 * config.maxBatchSize {
+            if batchCount < 3 * eventManager.maxBatchSize {
                 eventManager.trackEvent(name: "test")
             } else {
                 e.fulfill()
@@ -80,27 +71,22 @@ class EventManagerTests: XCTestCase {
         waitForExpectations(timeout: 10, handler: nil)
     }
     
-    func testMaxTotalEvents() {
+    func testMaxQueueSize() {
         let e = expectation(description: "Events array never exceeds maxTotalEvents")
         
         let uploadClient = MockUploadClient()
         uploadClient.success = false
         uploadClient.retry = true
         
-        var config = TestConfiguration()
-        config.sendAt = 1
-        config.maxTotalEvents = 10
-        config.uploadClient = uploadClient
-        
-        let eventManager = EventManager(configuration: config)
+        let eventManager = EventManager(flushAt: 1, maxQueueSize: 10, uploadClient: uploadClient)
         var batchCount = 0
         
         NotificationCenter.default.addObserver(forName: .didFinishUpload, object: eventManager, queue: nil) { notification in
             batchCount += 1
             
-            XCTAssertLessThanOrEqual(eventManager.events.count, config.maxTotalEvents)
+            XCTAssertLessThanOrEqual(eventManager.events.count, eventManager.maxQueueSize)
             
-            if batchCount < 3 * config.maxTotalEvents {
+            if batchCount < 3 * eventManager.maxQueueSize {
                 eventManager.trackEvent(name: "test")
             } else {
                 e.fulfill()
@@ -111,19 +97,6 @@ class EventManagerTests: XCTestCase {
         
         waitForExpectations(timeout: 10, handler: nil)
     }
-}
-
-fileprivate struct TestConfiguration: EventManagerConfiguration {
-    
-    var sendAt: Int = 20
-    
-    var maxBatchSize: Int = 100
-    
-    var maxTotalEvents: Int = 1000
-    
-    var uploadURL: URL = URL(string: "http://example.com")!
-    
-    var uploadClient: HTTPUploadClient = MockUploadClient()
 }
 
 fileprivate class MockUploadClient: HTTPUploadClient {
@@ -131,7 +104,7 @@ fileprivate class MockUploadClient: HTTPUploadClient {
     var success: Bool = true
     var retry: Bool = false
     
-    fileprivate func upload(url: URL, body: JSON, completionHandler: @escaping (Bool, Bool) -> Void) -> URLSessionUploadTask {
+    fileprivate func upload(url: URL, body: JSON, completionHandler: @escaping (Bool, Bool) -> Void) -> HTTPSessionUploadTask {
         completionHandler(self.success, self.retry)
         return URLSessionUploadTask()
     }

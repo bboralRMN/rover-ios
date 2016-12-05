@@ -8,9 +8,11 @@
 
 import Foundation
 
-struct Configuration {
+struct RoverConfig {
     
-    var flushAt = 20
+    var flushEventsAt = 20
     
     var maxBatchSize = 100
+    
+    var maxTotalEvents = 1000
 }

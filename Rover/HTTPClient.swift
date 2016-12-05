@@ -10,22 +10,21 @@ import Foundation
 
 class HTTPClient: HTTPUploadClient {
 
-    func upload(url: URL, body: JSON, completionHandler: @escaping (Bool, Bool) -> Void) -> URLSessionUploadTask {
-        
-        let config = URLSessionConfiguration.default
+    let session: HTTPSession
+    
+    init(session: HTTPSession? = nil) {
+        self.session = session ?? URLSession(configuration: URLSessionConfiguration.default)
+    }
+    
+    func upload(url: URL, body: JSON, completionHandler: @escaping (Bool, Bool) -> Void) -> HTTPSessionUploadTask {
         
         let token = "foobar"
         
-        config.httpAdditionalHeaders = [
-            "Accept-Endcoding": "gzip",
-            "Content-Encoding": "gzip",
-            "Content-Type": "application/json",
-            "Authorization": "Bearer \(token)"
-        ]
-        
-        let session = URLSession(configuration: config)
-        
         var request = URLRequest(url: url)
+        request.setValue("gzip", forHTTPHeaderField: "Accept-Encoding")
+        request.setValue("gzip", forHTTPHeaderField: "Content-Encoding")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         request.httpMethod = "POST"
         
         let payload = try? JSONSerialization.data(withJSONObject: body, options: [])
@@ -59,16 +58,4 @@ class HTTPClient: HTTPUploadClient {
         task.resume()
         return task
     }
-}
-
-protocol HTTPClientConfiguration {
-    
-    var apiEndpoint: String { get }
-    
-    var accountToken: String { get }
-}
-
-protocol HTTPUploadClient {
-    
-    func upload(url: URL, body: JSON, completionHandler: @escaping (Bool, Bool) -> Void) -> URLSessionUploadTask
 }

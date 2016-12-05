@@ -16,7 +16,15 @@ extension Notification.Name {
 
 class EventManager {
     
-    let config: EventManagerConfiguration
+    let flushAt: Int
+    
+    let maxBatchSize: Int
+    
+    let maxQueueSize: Int
+    
+    let uploadURL: URL
+    
+    let uploadClient: HTTPUploadClient
     
     let serialQueue: OperationQueue = {
         let q = OperationQueue()
@@ -27,10 +35,14 @@ class EventManager {
     var events = [Event]()
     
     var uploadBatch: [Event]?
-    var uploadTask: URLSessionUploadTask?
+    var uploadTask: HTTPSessionUploadTask?
     
-    init(configuration: EventManagerConfiguration) {
-        self.config = configuration
+    init(flushAt: Int? = nil, maxBatchSize: Int? = nil, maxQueueSize: Int? = nil, uploadURL: URL? = nil, uploadClient: HTTPUploadClient? = nil) {
+        self.flushAt = flushAt ?? 20
+        self.maxBatchSize = maxBatchSize ?? 100
+        self.maxQueueSize = maxQueueSize ?? 1000
+        self.uploadURL = uploadURL ?? URL(string: "http://example.com")!
+        self.uploadClient = uploadClient ?? HTTPClient()
     }
     
     func trackEvent(name: String, attributes: JSON? = nil) {
@@ -41,7 +53,7 @@ class EventManager {
         serialQueue.addOperation {
             self.add(event: event)
             self.persistEvents()
-            self.sendEvents(minBatchSize: self.config.sendAt)
+            self.sendEvents(minBatchSize: self.flushAt)
         }
     }
     
@@ -52,7 +64,7 @@ class EventManager {
      */
     
     func add(event: Event) {
-        if events.count == config.maxTotalEvents {
+        if events.count == maxQueueSize {
             events.remove(at: 0)
         }
         
@@ -70,7 +82,7 @@ class EventManager {
         }
         
         guard events.count >= minBatchSize else {
-            print("\(events.count) events found, will send at \(minBatchSize)")
+            print("\(events.count) events is less than the minimum batch size of \(minBatchSize)")
             return
         }
         
@@ -79,7 +91,7 @@ class EventManager {
             return
         }
         
-        let eventsToSend = Array(events.prefix(config.maxBatchSize))
+        let eventsToSend = Array(events.prefix(maxBatchSize))
         print("Sending \(eventsToSend.count) events")
         
         let body = [
@@ -88,7 +100,7 @@ class EventManager {
             }
         ]
         
-        uploadTask = config.uploadClient.upload(url: config.uploadURL, body: body) { success, retry in
+        uploadTask = uploadClient.upload(url: uploadURL, body: body) { success, retry in
             self.serialQueue.addOperation {
                 if !retry {
                     self.remove(events: eventsToSend)
@@ -116,17 +128,4 @@ class EventManager {
             return !eventsToRemove.contains() { $0.eventId == event.eventId }
         }
     }
-}
-
-protocol EventManagerConfiguration {
-
-    var sendAt: Int { get }
-    
-    var maxBatchSize: Int { get }
-    
-    var maxTotalEvents: Int { get }
-    
-    var uploadURL: URL { get }
-    
-    var uploadClient: HTTPUploadClient { get }
 }
