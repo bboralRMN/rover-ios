@@ -7,23 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		DB0C39071DEDE4BD0094CC6D /* EventTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0C39061DEDE4BD0094CC6D /* EventTest.swift */; };
-		DB2BA9101DEF33B500C18878 /* HTTPSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2BA90F1DEF33B500C18878 /* HTTPSession.swift */; };
-		DB2BA9141DEF340200C18878 /* URLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2BA9131DEF340200C18878 /* URLSession.swift */; };
-		DB2BA9161DF0B17100C18878 /* HTTPUploadClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2BA9151DF0B17100C18878 /* HTTPUploadClient.swift */; };
-		DB2BA9181DF211AD00C18878 /* HTTPSessionUploadTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2BA9171DF211AD00C18878 /* HTTPSessionUploadTask.swift */; };
-		DB2BA91B1DF2121F00C18878 /* URLSessionUploadTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2BA91A1DF2121F00C18878 /* URLSessionUploadTask.swift */; };
-		DB8927721DE8A5C70005D035 /* Serializeable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8927711DE8A5C70005D035 /* Serializeable.swift */; };
-		DB8927761DE8BB890005D035 /* AsynchronousOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8927751DE8BB890005D035 /* AsynchronousOperation.swift */; };
+		DBB958FB1E525E3E003A30E7 /* Rover.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB958FA1E525E3E003A30E7 /* Rover.swift */; };
+		DBB958FD1E52606A003A30E7 /* RoverConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB958FC1E52606A003A30E7 /* RoverConfiguration.swift */; };
 		DBE762C31DE382CF00183297 /* Rover.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBE762B91DE382CF00183297 /* Rover.framework */; };
-		DBE762C81DE382CF00183297 /* EventManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE762C71DE382CF00183297 /* EventManagerTests.swift */; };
 		DBE762CA1DE382CF00183297 /* Rover.h in Headers */ = {isa = PBXBuildFile; fileRef = DBE762BC1DE382CF00183297 /* Rover.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		DBE762DF1DE7429600183297 /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE762DE1DE7429600183297 /* HTTPClient.swift */; };
-		DBE762E11DE7437F00183297 /* EventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE762E01DE7437F00183297 /* EventManager.swift */; };
-		DBE762E31DE7473400183297 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE762E21DE7473400183297 /* Event.swift */; };
-		DBE762E51DE7486200183297 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE762E41DE7486200183297 /* Date.swift */; };
-		DBE762ED1DE89CA300183297 /* RoverConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE762EC1DE89CA300183297 /* RoverConfig.swift */; };
-		DBE762F31DE89F5000183297 /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE762F21DE89F5000183297 /* JSON.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,26 +24,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		DB0C39061DEDE4BD0094CC6D /* EventTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTest.swift; sourceTree = "<group>"; };
-		DB2BA90F1DEF33B500C18878 /* HTTPSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPSession.swift; sourceTree = "<group>"; };
-		DB2BA9131DEF340200C18878 /* URLSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLSession.swift; sourceTree = "<group>"; };
-		DB2BA9151DF0B17100C18878 /* HTTPUploadClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPUploadClient.swift; sourceTree = "<group>"; };
-		DB2BA9171DF211AD00C18878 /* HTTPSessionUploadTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPSessionUploadTask.swift; sourceTree = "<group>"; };
-		DB2BA91A1DF2121F00C18878 /* URLSessionUploadTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLSessionUploadTask.swift; sourceTree = "<group>"; };
-		DB8927711DE8A5C70005D035 /* Serializeable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Serializeable.swift; sourceTree = "<group>"; };
-		DB8927751DE8BB890005D035 /* AsynchronousOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsynchronousOperation.swift; sourceTree = "<group>"; };
+		DBB958FA1E525E3E003A30E7 /* Rover.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rover.swift; sourceTree = "<group>"; };
+		DBB958FC1E52606A003A30E7 /* RoverConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoverConfiguration.swift; sourceTree = "<group>"; };
 		DBE762B91DE382CF00183297 /* Rover.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Rover.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBE762BC1DE382CF00183297 /* Rover.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Rover.h; sourceTree = "<group>"; };
 		DBE762BD1DE382CF00183297 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DBE762C21DE382CF00183297 /* RoverTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RoverTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		DBE762C71DE382CF00183297 /* EventManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventManagerTests.swift; sourceTree = "<group>"; };
 		DBE762C91DE382CF00183297 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		DBE762DE1DE7429600183297 /* HTTPClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
-		DBE762E01DE7437F00183297 /* EventManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventManager.swift; sourceTree = "<group>"; };
-		DBE762E21DE7473400183297 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
-		DBE762E41DE7486200183297 /* Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
-		DBE762EC1DE89CA300183297 /* RoverConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoverConfig.swift; sourceTree = "<group>"; };
-		DBE762F21DE89F5000183297 /* JSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,23 +52,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		DB0C39081DEDF77C0094CC6D /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				DBE762E41DE7486200183297 /* Date.swift */,
-			);
-			name = Extensions;
-			sourceTree = "<group>";
-		};
-		DB2BA9191DF2120A00C18878 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				DB2BA9131DEF340200C18878 /* URLSession.swift */,
-				DB2BA91A1DF2121F00C18878 /* URLSessionUploadTask.swift */,
-			);
-			name = Extensions;
-			sourceTree = "<group>";
-		};
 		DBE762AF1DE382CF00183297 = {
 			isa = PBXGroup;
 			children = (
@@ -116,13 +73,10 @@
 		DBE762BB1DE382CF00183297 /* Rover */ = {
 			isa = PBXGroup;
 			children = (
-				DB0C39081DEDF77C0094CC6D /* Extensions */,
-				DBE762F01DE89EC200183297 /* Events */,
-				DBE762DD1DE7426700183297 /* HTTP */,
 				DBE762BC1DE382CF00183297 /* Rover.h */,
+				DBB958FA1E525E3E003A30E7 /* Rover.swift */,
+				DBB958FC1E52606A003A30E7 /* RoverConfiguration.swift */,
 				DBE762BD1DE382CF00183297 /* Info.plist */,
-				DBE762EC1DE89CA300183297 /* RoverConfig.swift */,
-				DB8927751DE8BB890005D035 /* AsynchronousOperation.swift */,
 			);
 			path = Rover;
 			sourceTree = "<group>";
@@ -130,34 +84,9 @@
 		DBE762C61DE382CF00183297 /* RoverTests */ = {
 			isa = PBXGroup;
 			children = (
-				DBE762C71DE382CF00183297 /* EventManagerTests.swift */,
-				DB0C39061DEDE4BD0094CC6D /* EventTest.swift */,
 				DBE762C91DE382CF00183297 /* Info.plist */,
 			);
 			path = RoverTests;
-			sourceTree = "<group>";
-		};
-		DBE762DD1DE7426700183297 /* HTTP */ = {
-			isa = PBXGroup;
-			children = (
-				DB2BA9191DF2120A00C18878 /* Extensions */,
-				DBE762F21DE89F5000183297 /* JSON.swift */,
-				DBE762DE1DE7429600183297 /* HTTPClient.swift */,
-				DB2BA9151DF0B17100C18878 /* HTTPUploadClient.swift */,
-				DB2BA90F1DEF33B500C18878 /* HTTPSession.swift */,
-				DB2BA9171DF211AD00C18878 /* HTTPSessionUploadTask.swift */,
-				DB8927711DE8A5C70005D035 /* Serializeable.swift */,
-			);
-			name = HTTP;
-			sourceTree = "<group>";
-		};
-		DBE762F01DE89EC200183297 /* Events */ = {
-			isa = PBXGroup;
-			children = (
-				DBE762E01DE7437F00183297 /* EventManager.swift */,
-				DBE762E21DE7473400183297 /* Event.swift */,
-			);
-			name = Events;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -271,19 +200,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DBE762ED1DE89CA300183297 /* RoverConfig.swift in Sources */,
-				DB2BA9161DF0B17100C18878 /* HTTPUploadClient.swift in Sources */,
-				DB2BA9141DEF340200C18878 /* URLSession.swift in Sources */,
-				DBE762E11DE7437F00183297 /* EventManager.swift in Sources */,
-				DB8927721DE8A5C70005D035 /* Serializeable.swift in Sources */,
-				DB2BA9101DEF33B500C18878 /* HTTPSession.swift in Sources */,
-				DB2BA91B1DF2121F00C18878 /* URLSessionUploadTask.swift in Sources */,
-				DBE762E31DE7473400183297 /* Event.swift in Sources */,
-				DBE762E51DE7486200183297 /* Date.swift in Sources */,
-				DBE762DF1DE7429600183297 /* HTTPClient.swift in Sources */,
-				DBE762F31DE89F5000183297 /* JSON.swift in Sources */,
-				DB2BA9181DF211AD00C18878 /* HTTPSessionUploadTask.swift in Sources */,
-				DB8927761DE8BB890005D035 /* AsynchronousOperation.swift in Sources */,
+				DBB958FB1E525E3E003A30E7 /* Rover.swift in Sources */,
+				DBB958FD1E52606A003A30E7 /* RoverConfiguration.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -291,8 +209,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DB0C39071DEDE4BD0094CC6D /* EventTest.swift in Sources */,
-				DBE762C81DE382CF00183297 /* EventManagerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
