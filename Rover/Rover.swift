@@ -8,9 +8,13 @@
 
 import Foundation
 
-public class Rover {
+import RoverContext
+import RoverData
+import RoverEvents
+
+open class Rover {
     
-    private static var _shared: Rover?
+    static var _shared: Rover?
     
     public static var shared: Rover {
         guard let shared = _shared else {
@@ -19,9 +23,46 @@ public class Rover {
         return shared
     }
     
-    public static func configure(_ config: RoverConfiguration) {
-        _shared = Rover()
+    public static func configure(_ configuration: RoverConfiguration) {
+        _shared = Rover(configuration: configuration)
     }
     
-    private init() { }
+    var eventManager: EventManager
+    
+    init(configuration: RoverConfiguration) {
+        let endpoint = HTTPEndpoint(url: configuration.apiURL, token: configuration.apiToken)
+        let httpClient = HTTPClient(endpoint: endpoint)
+        
+        eventManager = EventManager(
+            flushAt: configuration.flushAt,
+            maxQueueSize: configuration.maxQueueSize,
+            maxBatchSize: configuration.maxBatchSize,
+            eventTransport: httpClient
+        )
+        
+        eventManager.contextProvider = contextProvider()
+    }
+    
+    open func contextProvider() -> ContextProvider? {
+        let identifiers = [
+            "io.rover.Rover",
+            "io.rover.RoverContext",
+            "io.rover.RoverData",
+            "io.rover.RoverEvents",
+            "io.rover.RoverLogger"
+        ]
+        
+        let providers: [ContextProvider] = [
+            ApplicationContext(),
+            DeviceContext(),
+            FrameworkContext(identifiers: identifiers),
+            LocaleContext(),
+            ScreenContext(),
+            TelephonyContext(),
+            TimeZoneContext(),
+            ReachabilityContext()
+        ]
+        
+        return AmalgamatedContext(providers: providers)
+    }
 }

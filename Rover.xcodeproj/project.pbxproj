@@ -11,6 +11,10 @@
 		DB1CA3301E56C3D000E2DB23 /* RoverData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB1CA32C1E56C3D000E2DB23 /* RoverData.framework */; };
 		DB1CA3311E56C3D000E2DB23 /* RoverEvents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB1CA32D1E56C3D000E2DB23 /* RoverEvents.framework */; };
 		DB1CA3321E56C3D000E2DB23 /* RoverLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB1CA32E1E56C3D000E2DB23 /* RoverLogger.framework */; };
+		DB1CA33A1E56C73B00E2DB23 /* RoverContext.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = DB1CA32B1E56C3D000E2DB23 /* RoverContext.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		DB1CA33B1E56C73C00E2DB23 /* RoverData.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = DB1CA32C1E56C3D000E2DB23 /* RoverData.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		DB1CA33C1E56C73C00E2DB23 /* RoverEvents.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = DB1CA32D1E56C3D000E2DB23 /* RoverEvents.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		DB1CA33D1E56C73C00E2DB23 /* RoverLogger.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = DB1CA32E1E56C3D000E2DB23 /* RoverLogger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DBB958FB1E525E3E003A30E7 /* Rover.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB958FA1E525E3E003A30E7 /* Rover.swift */; };
 		DBB958FD1E52606A003A30E7 /* RoverConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB958FC1E52606A003A30E7 /* RoverConfiguration.swift */; };
 		DBE762C31DE382CF00183297 /* Rover.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBE762B91DE382CF00183297 /* Rover.framework */; };
@@ -26,6 +30,22 @@
 			remoteInfo = Rover;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		DB1CA3391E56C73000E2DB23 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				DB1CA33A1E56C73B00E2DB23 /* RoverContext.framework in CopyFiles */,
+				DB1CA33B1E56C73C00E2DB23 /* RoverData.framework in CopyFiles */,
+				DB1CA33C1E56C73C00E2DB23 /* RoverEvents.framework in CopyFiles */,
+				DB1CA33D1E56C73C00E2DB23 /* RoverLogger.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		DB1CA32B1E56C3D000E2DB23 /* RoverContext.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RoverContext.framework; path = Carthage/Build/iOS/RoverContext.framework; sourceTree = "<group>"; };
@@ -75,6 +95,23 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		DB1CA33E1E56D37C00E2DB23 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				DBE762C91DE382CF00183297 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		DB1CA33F1E56D38600E2DB23 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				DBE762BC1DE382CF00183297 /* Rover.h */,
+				DBE762BD1DE382CF00183297 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		DBE762AF1DE382CF00183297 = {
 			isa = PBXGroup;
 			children = (
@@ -97,10 +134,9 @@
 		DBE762BB1DE382CF00183297 /* Rover */ = {
 			isa = PBXGroup;
 			children = (
-				DBE762BC1DE382CF00183297 /* Rover.h */,
+				DB1CA33F1E56D38600E2DB23 /* Supporting Files */,
 				DBB958FA1E525E3E003A30E7 /* Rover.swift */,
 				DBB958FC1E52606A003A30E7 /* RoverConfiguration.swift */,
-				DBE762BD1DE382CF00183297 /* Info.plist */,
 			);
 			path = Rover;
 			sourceTree = "<group>";
@@ -108,7 +144,7 @@
 		DBE762C61DE382CF00183297 /* RoverTests */ = {
 			isa = PBXGroup;
 			children = (
-				DBE762C91DE382CF00183297 /* Info.plist */,
+				DB1CA33E1E56D37C00E2DB23 /* Supporting Files */,
 			);
 			path = RoverTests;
 			sourceTree = "<group>";
@@ -152,6 +188,7 @@
 				DBE762BE1DE382CF00183297 /* Sources */,
 				DBE762BF1DE382CF00183297 /* Frameworks */,
 				DBE762C01DE382CF00183297 /* Resources */,
+				DB1CA3391E56C73000E2DB23 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -180,6 +217,8 @@
 					};
 					DBE762C11DE382CF00183297 = {
 						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = WDEZX8QD47;
+						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -399,10 +438,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
+				DEVELOPMENT_TEAM = WDEZX8QD47;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = RoverTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.rover.RoverTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -411,6 +457,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
+				DEVELOPMENT_TEAM = WDEZX8QD47;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = RoverTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.rover.RoverTests;
