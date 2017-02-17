@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DB1CA32F1E56C3D000E2DB23 /* RoverContext.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB1CA32B1E56C3D000E2DB23 /* RoverContext.framework */; };
+		DB1CA3301E56C3D000E2DB23 /* RoverData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB1CA32C1E56C3D000E2DB23 /* RoverData.framework */; };
+		DB1CA3311E56C3D000E2DB23 /* RoverEvents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB1CA32D1E56C3D000E2DB23 /* RoverEvents.framework */; };
+		DB1CA3321E56C3D000E2DB23 /* RoverLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB1CA32E1E56C3D000E2DB23 /* RoverLogger.framework */; };
 		DBB958FB1E525E3E003A30E7 /* Rover.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB958FA1E525E3E003A30E7 /* Rover.swift */; };
 		DBB958FD1E52606A003A30E7 /* RoverConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB958FC1E52606A003A30E7 /* RoverConfiguration.swift */; };
 		DBE762C31DE382CF00183297 /* Rover.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBE762B91DE382CF00183297 /* Rover.framework */; };
@@ -24,6 +28,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DB1CA32B1E56C3D000E2DB23 /* RoverContext.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RoverContext.framework; path = Carthage/Build/iOS/RoverContext.framework; sourceTree = "<group>"; };
+		DB1CA32C1E56C3D000E2DB23 /* RoverData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RoverData.framework; path = Carthage/Build/iOS/RoverData.framework; sourceTree = "<group>"; };
+		DB1CA32D1E56C3D000E2DB23 /* RoverEvents.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RoverEvents.framework; path = Carthage/Build/iOS/RoverEvents.framework; sourceTree = "<group>"; };
+		DB1CA32E1E56C3D000E2DB23 /* RoverLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RoverLogger.framework; path = Carthage/Build/iOS/RoverLogger.framework; sourceTree = "<group>"; };
 		DBB958FA1E525E3E003A30E7 /* Rover.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rover.swift; sourceTree = "<group>"; };
 		DBB958FC1E52606A003A30E7 /* RoverConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoverConfiguration.swift; sourceTree = "<group>"; };
 		DBE762B91DE382CF00183297 /* Rover.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Rover.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -38,6 +46,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB1CA32F1E56C3D000E2DB23 /* RoverContext.framework in Frameworks */,
+				DB1CA3301E56C3D000E2DB23 /* RoverData.framework in Frameworks */,
+				DB1CA3311E56C3D000E2DB23 /* RoverEvents.framework in Frameworks */,
+				DB1CA3321E56C3D000E2DB23 /* RoverLogger.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -52,12 +64,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DB1CA32A1E56C3D000E2DB23 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DB1CA32B1E56C3D000E2DB23 /* RoverContext.framework */,
+				DB1CA32C1E56C3D000E2DB23 /* RoverData.framework */,
+				DB1CA32D1E56C3D000E2DB23 /* RoverEvents.framework */,
+				DB1CA32E1E56C3D000E2DB23 /* RoverLogger.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		DBE762AF1DE382CF00183297 = {
 			isa = PBXGroup;
 			children = (
 				DBE762BB1DE382CF00183297 /* Rover */,
 				DBE762C61DE382CF00183297 /* RoverTests */,
 				DBE762BA1DE382CF00183297 /* Products */,
+				DB1CA32A1E56C3D000E2DB23 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -331,6 +355,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = Rover/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -352,6 +380,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = Rover/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
