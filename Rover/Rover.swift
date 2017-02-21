@@ -37,32 +37,8 @@ open class Rover {
             flushAt: configuration.flushAt,
             maxQueueSize: configuration.maxQueueSize,
             maxBatchSize: configuration.maxBatchSize,
-            eventTransport: httpClient
+            eventTransport: httpClient,
+            contextProvider: AmalgamatedContext(providers: configuration.contextProviders)
         )
-        
-        eventManager.contextProvider = contextProvider()
-    }
-    
-    open func contextProvider() -> ContextProvider? {
-        let identifiers = [
-            "io.rover.Rover",
-            "io.rover.RoverContext",
-            "io.rover.RoverData",
-            "io.rover.RoverEvents",
-            "io.rover.RoverLogger"
-        ]
-        
-        let providers: [ContextProvider] = [
-            ApplicationContext(),
-            DeviceContext(),
-            FrameworkContext(identifiers: identifiers),
-            LocaleContext(),
-            ScreenContext(),
-            TelephonyContext(),
-            TimeZoneContext(),
-            ReachabilityContext()
-        ]
-        
-        return AmalgamatedContext(providers: providers)
-    }
+    }    
 }
