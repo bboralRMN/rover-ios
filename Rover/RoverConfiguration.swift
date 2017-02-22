@@ -18,16 +18,19 @@ open class RoverConfiguration {
     
     var flushAt: Int
     
+    var flushInterval: Double
+    
     var maxBatchSize: Int
     
     var maxQueueSize: Int
     
     var contextProviders: [ContextProvider]
     
-    init(apiURL: URL = URL(string: "https://api.rover.io/graphql")!, apiToken: String, flushAt: Int = 20, maxBatchSize: Int = 100, maxQueueSize: Int = 1000, contextProviders: [ContextProvider]? = nil) {
+    init(apiURL: URL = URL(string: "https://api.rover.io/graphql")!, apiToken: String, flushAt: Int = 20, flushInterval: Double = 30.0, maxBatchSize: Int = 100, maxQueueSize: Int = 1000, contextProviders: [ContextProvider]? = nil) {
         self.apiURL = apiURL
         self.apiToken = apiToken
         self.flushAt = flushAt
+        self.flushInterval = flushInterval
         self.maxBatchSize = maxBatchSize
         self.maxQueueSize = maxQueueSize
         
