@@ -12,9 +12,9 @@ import RoverContext
 
 open class RoverConfiguration {
     
-    var apiURL: URL
+    var baseURL: URL
     
-    var apiToken: String
+    var accountToken: String
     
     var flushAt: Int
     
@@ -26,9 +26,9 @@ open class RoverConfiguration {
     
     var contextProviders: [ContextProvider]
     
-    init(apiURL: URL = URL(string: "https://api.rover.io/graphql")!, apiToken: String, flushAt: Int = 20, flushInterval: Double = 30.0, maxBatchSize: Int = 100, maxQueueSize: Int = 1000, contextProviders: [ContextProvider]? = nil) {
-        self.apiURL = apiURL
-        self.apiToken = apiToken
+    init(baseURL: URL = URL(string: "https://api.rover.io/graphql")!, accountToken: String, flushAt: Int = 20, flushInterval: Double = 30.0, maxBatchSize: Int = 100, maxQueueSize: Int = 1000, contextProviders: [ContextProvider]? = nil) {
+        self.baseURL = baseURL
+        self.accountToken = accountToken
         self.flushAt = flushAt
         self.flushInterval = flushInterval
         self.maxBatchSize = maxBatchSize

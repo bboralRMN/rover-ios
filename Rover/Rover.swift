@@ -30,15 +30,14 @@ open class Rover {
     var eventManager: EventManager
     
     init(configuration: RoverConfiguration) {
-        let endpoint = HTTPEndpoint(url: configuration.apiURL, token: configuration.apiToken)
-        let httpClient = HTTPClient(endpoint: endpoint)
+        let apiClient = APIClient(baseURL: configuration.baseURL, accountToken: configuration.accountToken)
         let contextProvider = AmalgamatedContext(providers: configuration.contextProviders)
         
         eventManager = EventManager(flushAt: configuration.flushAt,
                                     flushInterval: configuration.flushInterval,
                                     maxQueueSize: configuration.maxQueueSize,
                                     maxBatchSize: configuration.maxBatchSize,
-                                    httpClient: httpClient,
+                                    apiClient: apiClient,
                                     contextProvider: contextProvider)
     }
 }
