@@ -17,6 +17,7 @@
 		DB1CA33D1E56C73C00E2DB23 /* RoverLogger.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = DB1CA32E1E56C3D000E2DB23 /* RoverLogger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DBB958FB1E525E3E003A30E7 /* Rover.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB958FA1E525E3E003A30E7 /* Rover.swift */; };
 		DBB958FD1E52606A003A30E7 /* RoverConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB958FC1E52606A003A30E7 /* RoverConfiguration.swift */; };
+		DBC5E4EF1E662FA00030FE0C /* APITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC5E4EE1E662FA00030FE0C /* APITests.swift */; };
 		DBE762C31DE382CF00183297 /* Rover.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBE762B91DE382CF00183297 /* Rover.framework */; };
 		DBE762CA1DE382CF00183297 /* Rover.h in Headers */ = {isa = PBXBuildFile; fileRef = DBE762BC1DE382CF00183297 /* Rover.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
@@ -54,6 +55,7 @@
 		DB1CA32E1E56C3D000E2DB23 /* RoverLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RoverLogger.framework; path = Carthage/Build/iOS/RoverLogger.framework; sourceTree = "<group>"; };
 		DBB958FA1E525E3E003A30E7 /* Rover.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rover.swift; sourceTree = "<group>"; };
 		DBB958FC1E52606A003A30E7 /* RoverConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoverConfiguration.swift; sourceTree = "<group>"; };
+		DBC5E4EE1E662FA00030FE0C /* APITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APITests.swift; sourceTree = "<group>"; };
 		DBE762B91DE382CF00183297 /* Rover.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Rover.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBE762BC1DE382CF00183297 /* Rover.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Rover.h; sourceTree = "<group>"; };
 		DBE762BD1DE382CF00183297 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -145,6 +147,7 @@
 			isa = PBXGroup;
 			children = (
 				DB1CA33E1E56D37C00E2DB23 /* Supporting Files */,
+				DBC5E4EE1E662FA00030FE0C /* APITests.swift */,
 			);
 			path = RoverTests;
 			sourceTree = "<group>";
@@ -272,6 +275,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DBC5E4EF1E662FA00030FE0C /* APITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

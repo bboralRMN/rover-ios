@@ -10,7 +10,7 @@ import Foundation
 
 import RoverContext
 
-open class RoverConfiguration {
+public class RoverConfiguration {
     
     var baseURL: URL
     
@@ -26,7 +26,7 @@ open class RoverConfiguration {
     
     var contextProviders: [ContextProvider]
     
-    init(baseURL: URL = URL(string: "https://api.rover.io/graphql")!, accountToken: String, flushAt: Int = 20, flushInterval: Double = 30.0, maxBatchSize: Int = 100, maxQueueSize: Int = 1000, contextProviders: [ContextProvider]? = nil) {
+    public init(baseURL: URL = URL(string: "https://api.rover.io/graphql")!, accountToken: String, flushAt: Int = 20, flushInterval: Double = 30.0, maxBatchSize: Int = 100, maxQueueSize: Int = 1000, contextProviders: [ContextProvider]? = nil) {
         self.baseURL = baseURL
         self.accountToken = accountToken
         self.flushAt = flushAt
