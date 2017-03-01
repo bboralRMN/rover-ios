@@ -10,7 +10,6 @@ import Foundation
 
 import RoverContext
 import RoverData
-import RoverEvents
 
 open class Rover {
     
@@ -30,7 +29,7 @@ open class Rover {
     var eventManager: EventManager
     
     init(configuration: RoverConfiguration) {
-        let apiClient = APIClient(baseURL: configuration.baseURL, accountToken: configuration.accountToken)
+        let apiClient = APIClient(baseURL: configuration.baseURL)
         let contextProvider = AmalgamatedContext(providers: configuration.contextProviders)
         
         eventManager = EventManager(flushAt: configuration.flushAt,

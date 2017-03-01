@@ -41,7 +41,6 @@ public class RoverConfiguration {
                 "io.rover.Rover",
                 "io.rover.RoverContext",
                 "io.rover.RoverData",
-                "io.rover.RoverEvents",
                 "io.rover.RoverLogger"
             ]
             

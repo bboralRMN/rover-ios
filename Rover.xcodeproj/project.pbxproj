@@ -9,15 +9,20 @@
 /* Begin PBXBuildFile section */
 		DB1CA32F1E56C3D000E2DB23 /* RoverContext.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB1CA32B1E56C3D000E2DB23 /* RoverContext.framework */; };
 		DB1CA3301E56C3D000E2DB23 /* RoverData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB1CA32C1E56C3D000E2DB23 /* RoverData.framework */; };
-		DB1CA3311E56C3D000E2DB23 /* RoverEvents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB1CA32D1E56C3D000E2DB23 /* RoverEvents.framework */; };
 		DB1CA3321E56C3D000E2DB23 /* RoverLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB1CA32E1E56C3D000E2DB23 /* RoverLogger.framework */; };
 		DB1CA33A1E56C73B00E2DB23 /* RoverContext.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = DB1CA32B1E56C3D000E2DB23 /* RoverContext.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DB1CA33B1E56C73C00E2DB23 /* RoverData.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = DB1CA32C1E56C3D000E2DB23 /* RoverData.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		DB1CA33C1E56C73C00E2DB23 /* RoverEvents.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = DB1CA32D1E56C3D000E2DB23 /* RoverEvents.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DB1CA33D1E56C73C00E2DB23 /* RoverLogger.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = DB1CA32E1E56C3D000E2DB23 /* RoverLogger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DBB958FB1E525E3E003A30E7 /* Rover.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB958FA1E525E3E003A30E7 /* Rover.swift */; };
 		DBB958FD1E52606A003A30E7 /* RoverConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB958FC1E52606A003A30E7 /* RoverConfiguration.swift */; };
 		DBC5E4EF1E662FA00030FE0C /* APITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC5E4EE1E662FA00030FE0C /* APITests.swift */; };
+		DBC5E4F31E671ED70030FE0C /* Attributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC5E4F21E671ED70030FE0C /* Attributes.swift */; };
+		DBC5E4F51E671EEB0030FE0C /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC5E4F41E671EEB0030FE0C /* Event.swift */; };
+		DBC5E4F71E671F1C0030FE0C /* EventBatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC5E4F61E671F1C0030FE0C /* EventBatch.swift */; };
+		DBC5E4F91E671F320030FE0C /* EventQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC5E4F81E671F320030FE0C /* EventQueue.swift */; };
+		DBC5E4FB1E671F480030FE0C /* EventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC5E4FA1E671F480030FE0C /* EventManager.swift */; };
+		DBC5E4FE1E671F720030FE0C /* EventQueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC5E4FD1E671F720030FE0C /* EventQueueTests.swift */; };
+		DBC5E5001E671F860030FE0C /* EventManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC5E4FF1E671F860030FE0C /* EventManagerTests.swift */; };
 		DBE762C31DE382CF00183297 /* Rover.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBE762B91DE382CF00183297 /* Rover.framework */; };
 		DBE762CA1DE382CF00183297 /* Rover.h in Headers */ = {isa = PBXBuildFile; fileRef = DBE762BC1DE382CF00183297 /* Rover.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
@@ -41,7 +46,6 @@
 			files = (
 				DB1CA33A1E56C73B00E2DB23 /* RoverContext.framework in CopyFiles */,
 				DB1CA33B1E56C73C00E2DB23 /* RoverData.framework in CopyFiles */,
-				DB1CA33C1E56C73C00E2DB23 /* RoverEvents.framework in CopyFiles */,
 				DB1CA33D1E56C73C00E2DB23 /* RoverLogger.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -51,11 +55,17 @@
 /* Begin PBXFileReference section */
 		DB1CA32B1E56C3D000E2DB23 /* RoverContext.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RoverContext.framework; path = Carthage/Build/iOS/RoverContext.framework; sourceTree = "<group>"; };
 		DB1CA32C1E56C3D000E2DB23 /* RoverData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RoverData.framework; path = Carthage/Build/iOS/RoverData.framework; sourceTree = "<group>"; };
-		DB1CA32D1E56C3D000E2DB23 /* RoverEvents.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RoverEvents.framework; path = Carthage/Build/iOS/RoverEvents.framework; sourceTree = "<group>"; };
 		DB1CA32E1E56C3D000E2DB23 /* RoverLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RoverLogger.framework; path = Carthage/Build/iOS/RoverLogger.framework; sourceTree = "<group>"; };
 		DBB958FA1E525E3E003A30E7 /* Rover.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rover.swift; sourceTree = "<group>"; };
 		DBB958FC1E52606A003A30E7 /* RoverConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoverConfiguration.swift; sourceTree = "<group>"; };
 		DBC5E4EE1E662FA00030FE0C /* APITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APITests.swift; sourceTree = "<group>"; };
+		DBC5E4F21E671ED70030FE0C /* Attributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Attributes.swift; sourceTree = "<group>"; };
+		DBC5E4F41E671EEB0030FE0C /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		DBC5E4F61E671F1C0030FE0C /* EventBatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventBatch.swift; sourceTree = "<group>"; };
+		DBC5E4F81E671F320030FE0C /* EventQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventQueue.swift; sourceTree = "<group>"; };
+		DBC5E4FA1E671F480030FE0C /* EventManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventManager.swift; sourceTree = "<group>"; };
+		DBC5E4FD1E671F720030FE0C /* EventQueueTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventQueueTests.swift; sourceTree = "<group>"; };
+		DBC5E4FF1E671F860030FE0C /* EventManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventManagerTests.swift; sourceTree = "<group>"; };
 		DBE762B91DE382CF00183297 /* Rover.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Rover.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBE762BC1DE382CF00183297 /* Rover.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Rover.h; sourceTree = "<group>"; };
 		DBE762BD1DE382CF00183297 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -70,7 +80,6 @@
 			files = (
 				DB1CA32F1E56C3D000E2DB23 /* RoverContext.framework in Frameworks */,
 				DB1CA3301E56C3D000E2DB23 /* RoverData.framework in Frameworks */,
-				DB1CA3311E56C3D000E2DB23 /* RoverEvents.framework in Frameworks */,
 				DB1CA3321E56C3D000E2DB23 /* RoverLogger.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -91,7 +100,6 @@
 			children = (
 				DB1CA32B1E56C3D000E2DB23 /* RoverContext.framework */,
 				DB1CA32C1E56C3D000E2DB23 /* RoverData.framework */,
-				DB1CA32D1E56C3D000E2DB23 /* RoverEvents.framework */,
 				DB1CA32E1E56C3D000E2DB23 /* RoverLogger.framework */,
 			);
 			name = Frameworks;
@@ -112,6 +120,27 @@
 				DBE762BD1DE382CF00183297 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		DBC5E4F11E671EC00030FE0C /* Events */ = {
+			isa = PBXGroup;
+			children = (
+				DBC5E4F21E671ED70030FE0C /* Attributes.swift */,
+				DBC5E4F41E671EEB0030FE0C /* Event.swift */,
+				DBC5E4F61E671F1C0030FE0C /* EventBatch.swift */,
+				DBC5E4F81E671F320030FE0C /* EventQueue.swift */,
+				DBC5E4FA1E671F480030FE0C /* EventManager.swift */,
+			);
+			name = Events;
+			sourceTree = "<group>";
+		};
+		DBC5E4FC1E671F620030FE0C /* Events */ = {
+			isa = PBXGroup;
+			children = (
+				DBC5E4FD1E671F720030FE0C /* EventQueueTests.swift */,
+				DBC5E4FF1E671F860030FE0C /* EventManagerTests.swift */,
+			);
+			name = Events;
 			sourceTree = "<group>";
 		};
 		DBE762AF1DE382CF00183297 = {
@@ -136,6 +165,7 @@
 		DBE762BB1DE382CF00183297 /* Rover */ = {
 			isa = PBXGroup;
 			children = (
+				DBC5E4F11E671EC00030FE0C /* Events */,
 				DB1CA33F1E56D38600E2DB23 /* Supporting Files */,
 				DBB958FA1E525E3E003A30E7 /* Rover.swift */,
 				DBB958FC1E52606A003A30E7 /* RoverConfiguration.swift */,
@@ -146,6 +176,7 @@
 		DBE762C61DE382CF00183297 /* RoverTests */ = {
 			isa = PBXGroup;
 			children = (
+				DBC5E4FC1E671F620030FE0C /* Events */,
 				DB1CA33E1E56D37C00E2DB23 /* Supporting Files */,
 				DBC5E4EE1E662FA00030FE0C /* APITests.swift */,
 			);
@@ -266,7 +297,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DBC5E4FB1E671F480030FE0C /* EventManager.swift in Sources */,
+				DBC5E4F51E671EEB0030FE0C /* Event.swift in Sources */,
+				DBC5E4F71E671F1C0030FE0C /* EventBatch.swift in Sources */,
 				DBB958FB1E525E3E003A30E7 /* Rover.swift in Sources */,
+				DBC5E4F31E671ED70030FE0C /* Attributes.swift in Sources */,
+				DBC5E4F91E671F320030FE0C /* EventQueue.swift in Sources */,
 				DBB958FD1E52606A003A30E7 /* RoverConfiguration.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -275,6 +311,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DBC5E4FE1E671F720030FE0C /* EventQueueTests.swift in Sources */,
+				DBC5E5001E671F860030FE0C /* EventManagerTests.swift in Sources */,
 				DBC5E4EF1E662FA00030FE0C /* APITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
