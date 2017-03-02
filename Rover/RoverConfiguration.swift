@@ -8,8 +8,6 @@
 
 import Foundation
 
-import RoverContext
-
 public class RoverConfiguration {
     
     var baseURL: URL
@@ -24,9 +22,9 @@ public class RoverConfiguration {
     
     var maxQueueSize: Int
     
-    var contextProviders: [ContextProvider]
+    var plugins: [Plugin]
     
-    public init(baseURL: URL = URL(string: "https://api.rover.io/graphql")!, accountToken: String, flushAt: Int = 20, flushInterval: Double = 30.0, maxBatchSize: Int = 100, maxQueueSize: Int = 1000, contextProviders: [ContextProvider]? = nil) {
+    public init(baseURL: URL = URL(string: "https://api.rover.io/graphql")!, accountToken: String, flushAt: Int = 20, flushInterval: Double = 30.0, maxBatchSize: Int = 100, maxQueueSize: Int = 1000, plugins: [Plugin]? = nil) {
         self.baseURL = baseURL
         self.accountToken = accountToken
         self.flushAt = flushAt
@@ -34,25 +32,24 @@ public class RoverConfiguration {
         self.maxBatchSize = maxBatchSize
         self.maxQueueSize = maxQueueSize
         
-        if let contextProviders = contextProviders {
-            self.contextProviders = contextProviders
+        if let plugins = plugins {
+            self.plugins = plugins
         } else {
             let identifiers = [
                 "io.rover.Rover",
-                "io.rover.RoverContext",
                 "io.rover.RoverData",
                 "io.rover.RoverLogger"
             ]
-            
-            self.contextProviders = [
-                ApplicationContext(),
-                DeviceContext(),
-                FrameworkContext(identifiers: identifiers),
-                LocaleContext(),
-                ScreenContext(),
-                TelephonyContext(),
-                TimeZoneContext(),
-                ReachabilityContext()
+
+            self.plugins = [
+                ApplicationContextPlugin(),
+                DeviceContextPlugin(),
+                FrameworkContextPlugin(identifiers: identifiers),
+                LocaleContextPlugin(),
+                ScreenContextPlugin(),
+                TelephonyContextPlugin(),
+                TimeZoneContextPlugin(),
+                ReachabilityContextPlugin()
             ]
         }
     }

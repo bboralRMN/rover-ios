@@ -1,3 +1,2 @@
 github "RoverPlatform/rover-ios-logger" "ca8afe73a5c8aac1d3e243c1f25991701f469722"
-github "RoverPlatform/rover-ios-context" "764bca81c0afa48c28f628b8d8f95211b6d05af5"
-github "RoverPlatform/rover-ios-data" "218bd5e9b2b1aba4f1653f9ce7820f6d73cb40c0"
+github "RoverPlatform/rover-ios-data" "a4d02ee0a812904f33cd16a4d3871c27ba1f3702"

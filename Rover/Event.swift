@@ -8,7 +8,6 @@
 
 import Foundation
 
-import RoverContext
 import RoverData
 
 struct Event {

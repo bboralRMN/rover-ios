@@ -8,7 +8,6 @@
 
 import Foundation
 
-import RoverContext
 import RoverData
 import RoverLogger
 
@@ -54,9 +53,9 @@ public class EventManager {
     
     let flushInterval: Double
     
-    let contextProvider: ContextProvider?
-    
     let application: ApplicationType
+    
+    var contextProvider: ContextProvider?
     
     var eventQueue: EventQueue
     
@@ -87,7 +86,7 @@ public class EventManager {
          maxQueueSize: Int,
          maxBatchSize: Int,
          apiClient: EventsAPIClient,
-         contextProvider: ContextProvider?,
+         contextProvider: ContextProvider? = nil,
          application: ApplicationType? = nil,
          notificationCenter: NotificationCenterType? = nil) {
         
@@ -117,7 +116,7 @@ public class EventManager {
     public func trackEvent(name: String, attributes: Attributes? = nil) {
         
         // Create the event on the current thread so the context and timestamp are more accurate
-        let context = contextProvider?.capture()
+        let context = contextProvider?.captureContext(Context())
         let event = Event(name: name, attributes: attributes, context: context)
         
         serialQueue.addOperation {
