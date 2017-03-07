@@ -93,14 +93,12 @@ extension DefaultAssembler: Assembler {
             ]
             
             if let prevEventsPlugin = prevResult {
-                var nextEventsPlugin = prevEventsPlugin
-                nextEventsPlugin.taskFactory = httpPlugin
-                nextEventsPlugin.contextProviders = contextProviders
-                return nextEventsPlugin
+                prevEventsPlugin.taskFactory = httpPlugin
+                prevEventsPlugin.contextProviders = contextProviders
+                return prevEventsPlugin
             }
             
             return EventsPlugin(taskFactory: httpPlugin, contextProviders: contextProviders)
         }
-        
     }
 }

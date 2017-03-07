@@ -255,7 +255,7 @@ class EventsManagerTests: XCTestCase {
     func testReassign() {
         let taskFactory = MockTaskFactory()
         let eventsManager = EventsManager(taskFactory: taskFactory)
-        let otherEventsManager = eventsManager
+        let _ = eventsManager
     }
 }
 
