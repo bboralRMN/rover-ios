@@ -10,17 +10,20 @@ import Foundation
 
 import RoverData
 
-struct Event {
+public struct Event {
     
     // Auto-generated and should never change
     let eventId = UUID()
-    let timestamp = Date()
     
-    var name: String
-    var attributes: Attributes?
-    var context: Context?
+    public let timestamp = Date()
     
-    init(name: String, attributes: Attributes? = nil, context: Context? = nil) {
+    public var name: String
+    
+    public var attributes: Attributes?
+    
+    public var context: Context?
+    
+    public init(name: String, attributes: Attributes? = nil, context: Context? = nil) {
         self.name = name
         self.attributes = attributes
         self.context = context

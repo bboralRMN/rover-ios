@@ -8,53 +8,37 @@
 
 import Foundation
 
-import RoverData
-import RoverLogger
-
-open class Rover {
+public class Rover {
     
-    static var _shared: Rover?
+    public static let shared = Rover()
     
     var plugins = PluginMap()
+}
+
+// MARK: PluginResolver
+
+extension Rover: PluginResolver {
     
-    var apiClient: APIClient
-    
-    var eventManager: EventManager
-    
-    init(configuration: RoverConfiguration) {
-        apiClient = APIClient(baseURL: configuration.baseURL)
+    public func resolve<T: Plugin>(_ pluginType: T.Type, name: String? = nil) -> T? {
+        typealias Factory = (PluginResolver) -> T
+        let key = PluginKey(factoryType: Factory.self, name: name)
         
-        eventManager = EventManager(flushAt: configuration.flushAt,
-                                    flushInterval: configuration.flushInterval,
-                                    maxQueueSize: configuration.maxQueueSize,
-                                    maxBatchSize: configuration.maxBatchSize,
-                                    apiClient: apiClient)
+        guard let entry = plugins[key] as? PluginEntry<T>, let factory = entry.factory as? Factory else {
+            return nil
+        }
         
-        plugins = configuration.plugins
-            .map(register)
-            .reduce(plugins, addToMap)
-        
-        apiClient.authorizer = self
-        eventManager.contextProvider = self
+        return factory(self)
     }
 }
 
-// MARK: Configuration
+// MARK: PluginContainer
 
-extension Rover {
+extension Rover: PluginContainer {
     
-    public static var shared: Rover {
-        guard let shared = _shared else {
-            fatalError("Rover shared instance accessed before calling configure")
-        }
-        return shared
-    }
-    
-    public static func configure(_ configuration: RoverConfiguration) {
-        guard _shared == nil else {
-            logger.error("Rover can only be configured once")
-            return
-        }
-        _shared = Rover(configuration: configuration)
+    @discardableResult public func register<T>(_ pluginType: T.Type, name: String? = nil, factory: @escaping (PluginResolver) -> T) -> PluginEntry<T> {
+        let key = PluginKey(factoryType: type(of: factory), name: nil)
+        let entry = PluginEntry(pluginType: pluginType, factory: factory)
+        plugins[key] = entry
+        return entry
     }
 }

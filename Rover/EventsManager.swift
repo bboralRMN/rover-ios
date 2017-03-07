@@ -1,5 +1,5 @@
 //
-//  EventManager.swift
+//  EventsManager.swift
 //  Rover
 //
 //  Created by Sean Rucker on 2017-02-03.
@@ -11,35 +11,15 @@ import Foundation
 import RoverData
 import RoverLogger
 
-// MARK: ApplicationType
-
-protocol ApplicationType {
-    
-    func beginBackgroundTask(expirationHandler handler: (() -> Void)?) -> UIBackgroundTaskIdentifier
-    
-    func endBackgroundTask(_ identifier: UIBackgroundTaskIdentifier)
-}
-
-extension UIApplication: ApplicationType { }
-
-// MARK: NotificationCenterType
-
-protocol NotificationCenterType {
-    
-    @discardableResult func addObserver(forName name: NSNotification.Name?, object obj: Any?, queue: OperationQueue?, using block: @escaping (Notification) -> Void) -> NSObjectProtocol
-}
-
-extension NotificationCenter: NotificationCenterType { }
-
 // MARK: Notification
 
 extension Notification.Name {
     static let didTrackEvent = Notification.Name("io.rover.didTrackEvent")
 }
 
-// MARK: EventManager
+// MARK: EventsManager
 
-public class EventManager {
+public class EventsManager {
     
     let serialQueue: OperationQueue = {
         let q = OperationQueue()
@@ -47,7 +27,7 @@ public class EventManager {
         return q
     }()
     
-    let apiClient: EventsAPIClient
+    let taskFactory: EventTaskFactory
     
     let flushAt: Int
     
@@ -55,7 +35,7 @@ public class EventManager {
     
     let application: ApplicationType
     
-    var contextProvider: ContextProvider?
+    var contextProviders: [ContextProvider]
     
     var eventQueue: EventQueue
     
@@ -65,36 +45,37 @@ public class EventManager {
     
     var timer: Timer?
     
-    public convenience init(flushAt: Int,
-                            flushInterval: Double,
-                            maxQueueSize: Int,
-                            maxBatchSize: Int,
-                            apiClient: EventsAPIClient,
-                            contextProvider: ContextProvider?) {
+    public convenience init(taskFactory: EventTaskFactory,
+                            contextProviders: [ContextProvider]? = nil,
+                            flushAt: Int? = nil,
+                            flushInterval: Double? = nil,
+                            maxBatchSize: Int? = nil,
+                            maxQueueSize: Int? = nil) {
         
-        self.init(flushAt: flushAt,
+        self.init(taskFactory: taskFactory,
+                  contextProviders: contextProviders,
+                  flushAt: flushAt,
                   flushInterval: flushInterval,
-                  maxQueueSize: maxQueueSize,
                   maxBatchSize: maxBatchSize,
-                  apiClient: apiClient,
-                  contextProvider: contextProvider,
-                  application: nil)
+                  maxQueueSize: maxQueueSize,
+                  application: nil,
+                  notificationCenter: nil)
     }
     
-    init(flushAt: Int,
-         flushInterval: Double,
-         maxQueueSize: Int,
-         maxBatchSize: Int,
-         apiClient: EventsAPIClient,
-         contextProvider: ContextProvider? = nil,
-         application: ApplicationType? = nil,
-         notificationCenter: NotificationCenterType? = nil) {
+    init(taskFactory: EventTaskFactory,
+         contextProviders: [ContextProvider]?,
+         flushAt: Int?,
+         flushInterval: Double?,
+         maxBatchSize: Int?,
+         maxQueueSize: Int?,
+         application: ApplicationType?,
+         notificationCenter: NotificationCenterType?) {
         
-        self.flushAt = flushAt
-        self.flushInterval = flushInterval
-        self.eventQueue = EventQueue(maxQueueSize: maxQueueSize, maxBatchSize: maxBatchSize)
-        self.apiClient = apiClient
-        self.contextProvider = contextProvider
+        self.taskFactory = taskFactory
+        self.contextProviders = contextProviders ?? [ContextProvider]()
+        self.flushAt = flushAt ?? 20
+        self.flushInterval = flushInterval ?? 30.0
+        self.eventQueue = EventQueue(maxBatchSize: maxBatchSize ?? 100, maxQueueSize: maxQueueSize ?? 1000)
         self.application = application ?? UIApplication.shared
         
         let notificationCenter = notificationCenter ?? NotificationCenter.default
@@ -116,7 +97,7 @@ public class EventManager {
     public func trackEvent(name: String, attributes: Attributes? = nil) {
         
         // Create the event on the current thread so the context and timestamp are more accurate
-        let context = contextProvider?.captureContext(Context())
+        let context = captureContext()
         let event = Event(name: name, attributes: attributes, context: context)
         
         serialQueue.addOperation {
@@ -136,6 +117,15 @@ public class EventManager {
         serialQueue.addOperation {
             self.sendEvents()
         }
+    }
+    
+    func captureContext() -> Context? {
+        guard !contextProviders.isEmpty else {
+            return nil
+        }
+        
+        let emptyContext = Context()
+        return contextProviders.reduce(emptyContext) { $1.captureContext($0) }
     }
     
     // The following methods access or modify the variable event manager properties and should only be called from an operation added to the serial queue.
@@ -208,7 +198,7 @@ public class EventManager {
             return
         }
         
-        uploadTask = apiClient.trackEventsTask(events: batch) { result in
+        uploadTask = taskFactory.trackEventsTask(events: batch) { result in
             self.serialQueue.addOperation {
                 switch result {
                 case let .error(_, shouldRetry):
@@ -239,3 +229,23 @@ public class EventManager {
         uploadTask?.resume()
     }
 }
+
+// MARK: ApplicationType
+
+protocol ApplicationType {
+    
+    func beginBackgroundTask(expirationHandler handler: (() -> Void)?) -> UIBackgroundTaskIdentifier
+    
+    func endBackgroundTask(_ identifier: UIBackgroundTaskIdentifier)
+}
+
+extension UIApplication: ApplicationType { }
+
+// MARK: NotificationCenterType
+
+protocol NotificationCenterType {
+    
+    @discardableResult func addObserver(forName name: NSNotification.Name?, object obj: Any?, queue: OperationQueue?, using block: @escaping (Notification) -> Void) -> NSObjectProtocol
+}
+
+extension NotificationCenter: NotificationCenterType { }

@@ -9,8 +9,8 @@
 import Foundation
 
 struct EventQueue {
-    var maxQueueSize: Int
     var maxBatchSize: Int
+    var maxQueueSize: Int
     var events = [Event]()
 }
 
@@ -20,9 +20,9 @@ extension EventQueue {
         return events.count
     }
     
-    init(maxQueueSize: Int, maxBatchSize: Int) {
-        self.maxQueueSize = maxQueueSize
+    init(maxBatchSize: Int, maxQueueSize: Int) {
         self.maxBatchSize = maxBatchSize
+        self.maxQueueSize = maxQueueSize
     }
     
     mutating func add(event: Event) {

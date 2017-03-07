@@ -15,7 +15,7 @@ class EventQueueTests: XCTestCase {
     func testRoverEventQueue() {
         let generatedEvents = (1...9).map { Event(name: "\($0)") } // generatedEvents: [1][2][3][4][5][6][7][8][9]
         
-        var eventQueue = EventQueue(maxQueueSize: 5, maxBatchSize: 3) // eventQueue: <empty>
+        var eventQueue = EventQueue(maxBatchSize: 3, maxQueueSize: 5) // eventQueue: <empty>
         XCTAssertEqual(eventQueue.count, 0)
         
         var batch = eventQueue.nextBatch(minSize: 2) // batch: <empty>

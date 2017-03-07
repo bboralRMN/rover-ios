@@ -56,6 +56,12 @@ extension LocaleContextPlugin: ContextProvider {
             logger.debug("localeScript not found")
         }
         
+        // TODO: Capture the user's preferred language
+        // Locale.preferredLanguages.first
+        
+        // TODO: Consider observing this property for locale changes
+        // NSLocale.currentLocaleDidChangeNotification
+        
         return nextContext
     }
 }

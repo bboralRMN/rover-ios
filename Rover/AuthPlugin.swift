@@ -2,37 +2,38 @@
 //  AuthPlugin.swift
 //  Rover
 //
-//  Created by Sean Rucker on 2017-03-01.
+//  Created by Sean Rucker on 2017-03-07.
 //  Copyright © 2017 Rover Labs Inc. All rights reserved.
 //
 
 import Foundation
+
 import RoverData
 import RoverLogger
 
-struct AuthPlugin {
+public struct AuthPlugin: Plugin {
     
-    var accountToken: String
-}
-
-extension AuthPlugin: Plugin {
+    var deviceIdentifier: DeviceIdentifier
     
-    public var name: String {
-        return "AuthPlugin"
+    public var accountToken: String
+    
+    public init(accountToken: String) {
+        self.init(accountToken: accountToken, deviceIdentifier: nil)
     }
     
-    func register(rover: Rover) {
-        
+    init(accountToken: String, deviceIdentifier: DeviceIdentifier?) {
+        self.accountToken = accountToken
+        self.deviceIdentifier = deviceIdentifier ?? UIDevice.current
     }
 }
 
 extension AuthPlugin: Authorizer {
     
-    func authorize(_ request: URLRequest) -> URLRequest {
+    public func authorize(_ request: URLRequest) -> URLRequest {
         var nextRequest = request
         nextRequest.addValue(accountToken, forHTTPHeaderField: "x-rover-account-token")
         
-        if let deviceId = UIDevice.current.identifierForVendor?.uuidString {
+        if let deviceId = deviceIdentifier.identifierForVendor?.uuidString {
             nextRequest.addValue(deviceId, forHTTPHeaderField: "x-rover-device-id")
         } else {
             logger.warn("Failed to obtain identifierForVendor")
@@ -41,3 +42,12 @@ extension AuthPlugin: Authorizer {
         return nextRequest
     }
 }
+
+// MARK: DeviceIdentifier
+
+protocol DeviceIdentifier {
+    
+    var identifierForVendor: UUID? { get }
+}
+
+extension UIDevice: DeviceIdentifier { }

@@ -11,14 +11,14 @@ import RoverLogger
 
 public struct DeviceContextPlugin {
     
-    var device: DeviceType
-    
-    init(device: DeviceType? = nil) {
-        self.device = device ?? UIDevice.current
-    }
+    var systemInfo: SystemInfo
     
     public init() {
-        self.init(device: nil)
+        self.init(systemInfo: nil)
+    }
+    
+    init(systemInfo: SystemInfo? = nil) {
+        self.systemInfo = systemInfo ?? UIDevice.current
     }
 }
 
@@ -54,14 +54,8 @@ extension DeviceContextPlugin: ContextProvider {
         var nextContext = context
         
         nextContext["deviceManufacturer"] = "Apple"
-        nextContext["osName"] = device.systemName
-        nextContext["osVersion"] = device.systemVersion
-        
-        if let deviceId = device.identifierForVendor?.uuidString {
-            nextContext["deviceId"] = deviceId
-        } else {
-            logger.warn("Failed to obtain identifierForVendor")
-        }
+        nextContext["osName"] = systemInfo.systemName
+        nextContext["osVersion"] = systemInfo.systemVersion
         
         if let deviceModel = self.deviceModel() {
             nextContext["deviceModel"] = deviceModel
@@ -73,15 +67,13 @@ extension DeviceContextPlugin: ContextProvider {
     }
 }
 
-// MARK: DeviceType
+// MARK: SystemInfo
 
-protocol DeviceType {
+protocol SystemInfo {
     
     var systemName: String { get }
     
     var systemVersion: String { get }
-    
-    var identifierForVendor: UUID? { get }
 }
 
-extension UIDevice: DeviceType { }
+extension UIDevice: SystemInfo { }
