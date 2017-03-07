@@ -22,16 +22,7 @@ public struct DeviceContextPlugin {
     }
 }
 
-extension DeviceContextPlugin: Plugin {
-    
-    public var name: String {
-        return "DeviceContextPlugin"
-    }
-    
-    public func register(rover: Rover) {
-        
-    }
-}
+extension DeviceContextPlugin: Plugin { }
 
 extension DeviceContextPlugin: ContextProvider {
     

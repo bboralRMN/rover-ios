@@ -17,16 +17,7 @@ public struct FrameworkContextPlugin {
     }
 }
 
-extension FrameworkContextPlugin: Plugin {
-    
-    public var name: String {
-        return "FrameworkContextPlugin"
-    }
-
-    public func register(rover: Rover) {
-        
-    }
-}
+extension FrameworkContextPlugin: Plugin { }
 
 typealias FrameworkIdentifier = String
 typealias FrameworkVersion = String

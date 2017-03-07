@@ -22,16 +22,7 @@ public struct LocaleContextPlugin {
     }
 }
 
-extension LocaleContextPlugin: Plugin {
-    
-    public var name: String {
-        return "LocaleContextPlugin"
-    }
-    
-    public func register(rover: Rover) {
-        
-    }
-}
+extension LocaleContextPlugin: Plugin { }
 
 extension LocaleContextPlugin: ContextProvider {
     

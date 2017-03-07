@@ -22,16 +22,7 @@ public struct ApplicationContextPlugin {
     }
 }
 
-extension ApplicationContextPlugin: Plugin {
-    
-    public var name: String {
-        return "ApplicationContextPlugin"
-    }
-    
-    public func register(rover: Rover) {
-        
-    }
-}
+extension ApplicationContextPlugin: Plugin { }
 
 extension ApplicationContextPlugin: ContextProvider {
     

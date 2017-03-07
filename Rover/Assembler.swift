@@ -92,6 +92,8 @@ extension DefaultAssembler: Assembler {
                 resolver.resolve(ReachabilityContextPlugin.self)!
             ]
             
+            // Treat EventsPlugin as a singleton
+            
             if let prevEventsPlugin = prevResult {
                 prevEventsPlugin.taskFactory = httpPlugin
                 prevEventsPlugin.contextProviders = contextProviders

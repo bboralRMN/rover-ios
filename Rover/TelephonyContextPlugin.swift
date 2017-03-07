@@ -39,16 +39,7 @@ public struct TelephonyContextPlugin {
     }
 }
 
-extension TelephonyContextPlugin: Plugin {
-    
-    public var name: String {
-        return "TelephonyContextPlugin"
-    }
-    
-    public func register(rover: Rover) {
-        
-    }
-}
+extension TelephonyContextPlugin: Plugin { }
 
 extension TelephonyContextPlugin: ContextProvider {
     

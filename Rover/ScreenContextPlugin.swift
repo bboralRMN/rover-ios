@@ -21,16 +21,7 @@ public struct ScreenContextPlugin {
     }
 }
 
-extension ScreenContextPlugin: Plugin {
-    
-    public var name: String {
-        return "ScreenContextPlugin"
-    }
-    
-    public func register(rover: Rover) {
-        
-    }
-}
+extension ScreenContextPlugin: Plugin { }
 
 extension ScreenContextPlugin: ContextProvider {
     

@@ -21,16 +21,7 @@ public struct TimeZoneContextPlugin {
     }
 }
 
-extension TimeZoneContextPlugin: Plugin {
-    
-    public var name: String {
-        return "TimeZoneContextPlugin"
-    }
-    
-    public func register(rover: Rover) {
-        
-    }
-}
+extension TimeZoneContextPlugin: Plugin { }
 
 extension TimeZoneContextPlugin: ContextProvider {
     

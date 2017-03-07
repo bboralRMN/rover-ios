@@ -22,16 +22,7 @@ public struct ReachabilityContextPlugin {
     }
 }
 
-extension ReachabilityContextPlugin: Plugin {
-    
-    public var name: String {
-        return "ReachabilityContextPlugin"
-    }
-    
-    public func register(rover: Rover) {
-        
-    }
-}
+extension ReachabilityContextPlugin: Plugin { }
 
 extension ReachabilityContextPlugin: ContextProvider {
     
