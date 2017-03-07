@@ -10,5 +10,14 @@ import Foundation
 
 public protocol PluginContainer {
     
-    func register<T>(_ pluginType: T.Type, name: String?, factory: @escaping (PluginResolver) -> T) -> PluginEntry<T>
+    @discardableResult func register<T>(_ pluginType: T.Type, factory: @escaping (PluginResolver) -> T) -> PluginEntry<T>
+    
+    @discardableResult func register<T>(_ pluginType: T.Type, name: String?, factory: @escaping (PluginResolver) -> T) -> PluginEntry<T>
+}
+
+extension PluginContainer {
+    
+    @discardableResult public func register<T>(_ pluginType: T.Type, factory: @escaping (PluginResolver) -> T) -> PluginEntry<T> {
+        return register(pluginType, name: nil, factory: factory)
+    }
 }

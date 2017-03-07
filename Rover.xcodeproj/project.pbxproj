@@ -19,10 +19,12 @@
 		DB240A591E6F0742002C7AC6 /* PluginMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB240A581E6F0742002C7AC6 /* PluginMap.swift */; };
 		DB240A5B1E6F0796002C7AC6 /* PluginFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB240A5A1E6F0796002C7AC6 /* PluginFactory.swift */; };
 		DB240A5D1E6F07AD002C7AC6 /* Plugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB240A5C1E6F07AD002C7AC6 /* Plugin.swift */; };
+		DB240A601E6F0B86002C7AC6 /* DefaultAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB240A5F1E6F0B86002C7AC6 /* DefaultAssembler.swift */; };
+		DB240A651E6F0EE2002C7AC6 /* PluginAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB240A641E6F0EE2002C7AC6 /* PluginAssembler.swift */; };
 		DB8E457A1E6C970400E9D293 /* CustomerPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8E45791E6C970400E9D293 /* CustomerPlugin.swift */; };
 		DB8E457C1E6CB2A200E9D293 /* EventsPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8E457B1E6CB2A200E9D293 /* EventsPlugin.swift */; };
 		DBB958FB1E525E3E003A30E7 /* Rover.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB958FA1E525E3E003A30E7 /* Rover.swift */; };
-		DBC5E4EF1E662FA00030FE0C /* APITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC5E4EE1E662FA00030FE0C /* APITests.swift */; };
+		DBC5E4EF1E662FA00030FE0C /* DefaultAssemblerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC5E4EE1E662FA00030FE0C /* DefaultAssemblerTests.swift */; };
 		DBC5E4F31E671ED70030FE0C /* Attributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC5E4F21E671ED70030FE0C /* Attributes.swift */; };
 		DBC5E4F51E671EEB0030FE0C /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC5E4F41E671EEB0030FE0C /* Event.swift */; };
 		DBC5E4F71E671F1C0030FE0C /* EventBatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC5E4F61E671F1C0030FE0C /* EventBatch.swift */; };
@@ -89,10 +91,12 @@
 		DB240A581E6F0742002C7AC6 /* PluginMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PluginMap.swift; sourceTree = "<group>"; };
 		DB240A5A1E6F0796002C7AC6 /* PluginFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PluginFactory.swift; sourceTree = "<group>"; };
 		DB240A5C1E6F07AD002C7AC6 /* Plugin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Plugin.swift; sourceTree = "<group>"; };
+		DB240A5F1E6F0B86002C7AC6 /* DefaultAssembler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultAssembler.swift; sourceTree = "<group>"; };
+		DB240A641E6F0EE2002C7AC6 /* PluginAssembler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PluginAssembler.swift; sourceTree = "<group>"; };
 		DB8E45791E6C970400E9D293 /* CustomerPlugin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerPlugin.swift; sourceTree = "<group>"; };
 		DB8E457B1E6CB2A200E9D293 /* EventsPlugin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsPlugin.swift; sourceTree = "<group>"; };
 		DBB958FA1E525E3E003A30E7 /* Rover.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rover.swift; sourceTree = "<group>"; };
-		DBC5E4EE1E662FA00030FE0C /* APITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APITests.swift; sourceTree = "<group>"; };
+		DBC5E4EE1E662FA00030FE0C /* DefaultAssemblerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultAssemblerTests.swift; sourceTree = "<group>"; };
 		DBC5E4F21E671ED70030FE0C /* Attributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Attributes.swift; sourceTree = "<group>"; };
 		DBC5E4F41E671EEB0030FE0C /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		DBC5E4F61E671F1C0030FE0C /* EventBatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventBatch.swift; sourceTree = "<group>"; };
@@ -209,8 +213,31 @@
 			children = (
 				DB240A501E6EFB57002C7AC6 /* AuthPlugin.swift */,
 				DBC5E5451E677C0F0030FE0C /* HTTPPlugin.swift */,
-				DB8E457B1E6CB2A200E9D293 /* EventsPlugin.swift */,
 				DB8E45791E6C970400E9D293 /* CustomerPlugin.swift */,
+			);
+			name = Data;
+			sourceTree = "<group>";
+		};
+		DB240A611E6F0E6F002C7AC6 /* Events */ = {
+			isa = PBXGroup;
+			children = (
+				DB240A521E6EFE79002C7AC6 /* Context Providers */,
+				DB8E457B1E6CB2A200E9D293 /* EventsPlugin.swift */,
+			);
+			name = Events;
+			sourceTree = "<group>";
+		};
+		DB240A621E6F0EA1002C7AC6 /* Events */ = {
+			isa = PBXGroup;
+			children = (
+				DB240A531E6F0365002C7AC6 /* Context Providers */,
+			);
+			name = Events;
+			sourceTree = "<group>";
+		};
+		DB240A631E6F0EA9002C7AC6 /* Data */ = {
+			isa = PBXGroup;
+			children = (
 			);
 			name = Data;
 			sourceTree = "<group>";
@@ -241,8 +268,9 @@
 		DBC5E5401E676B9C0030FE0C /* Plugins */ = {
 			isa = PBXGroup;
 			children = (
-				DB240A521E6EFE79002C7AC6 /* Context Providers */,
+				DB240A611E6F0E6F002C7AC6 /* Events */,
 				DB240A5E1E6F0A3A002C7AC6 /* Data */,
+				DB240A641E6F0EE2002C7AC6 /* PluginAssembler.swift */,
 				DB240A481E6DDAE9002C7AC6 /* PluginContainer.swift */,
 				DB240A5C1E6F07AD002C7AC6 /* Plugin.swift */,
 				DB240A541E6F06ED002C7AC6 /* PluginEntry.swift */,
@@ -265,7 +293,8 @@
 		DBC5E54F1E6884E40030FE0C /* Plugins */ = {
 			isa = PBXGroup;
 			children = (
-				DB240A531E6F0365002C7AC6 /* Context Providers */,
+				DB240A621E6F0EA1002C7AC6 /* Events */,
+				DB240A631E6F0EA9002C7AC6 /* Data */,
 			);
 			name = Plugins;
 			sourceTree = "<group>";
@@ -297,6 +326,7 @@
 				DB1CA33F1E56D38600E2DB23 /* Supporting Files */,
 				DBC5E54A1E686AA10030FE0C /* Vendor */,
 				DBB958FA1E525E3E003A30E7 /* Rover.swift */,
+				DB240A5F1E6F0B86002C7AC6 /* DefaultAssembler.swift */,
 			);
 			path = Rover;
 			sourceTree = "<group>";
@@ -307,7 +337,7 @@
 				DBC5E54F1E6884E40030FE0C /* Plugins */,
 				DBC5E4FC1E671F620030FE0C /* Events */,
 				DB1CA33E1E56D37C00E2DB23 /* Supporting Files */,
-				DBC5E4EE1E662FA00030FE0C /* APITests.swift */,
+				DBC5E4EE1E662FA00030FE0C /* DefaultAssemblerTests.swift */,
 			);
 			path = RoverTests;
 			sourceTree = "<group>";
@@ -431,10 +461,12 @@
 				DBC5E4F51E671EEB0030FE0C /* Event.swift in Sources */,
 				DBC5E5141E6721B80030FE0C /* ScreenContextPlugin.swift in Sources */,
 				DBC5E4F71E671F1C0030FE0C /* EventBatch.swift in Sources */,
+				DB240A651E6F0EE2002C7AC6 /* PluginAssembler.swift in Sources */,
 				DBC5E50C1E6721560030FE0C /* ApplicationContextPlugin.swift in Sources */,
 				DB240A571E6F0717002C7AC6 /* PluginKey.swift in Sources */,
 				DBC5E5061E67210E0030FE0C /* ContextProvider.swift in Sources */,
 				DBC5E51A1E6721F60030FE0C /* ReachabilityContextPlugin.swift in Sources */,
+				DB240A601E6F0B86002C7AC6 /* DefaultAssembler.swift in Sources */,
 				DB240A551E6F06ED002C7AC6 /* PluginEntry.swift in Sources */,
 				DB240A4B1E6E07DE002C7AC6 /* PluginResolver.swift in Sources */,
 				DBC5E5461E677C0F0030FE0C /* HTTPPlugin.swift in Sources */,
@@ -469,7 +501,7 @@
 				DBC5E5201E67224B0030FE0C /* ApplicationContextPluginTests.swift in Sources */,
 				DBC5E52C1E6723820030FE0C /* TimeZoneContextPluginTests.swift in Sources */,
 				DBC5E52A1E6723620030FE0C /* TelephonyContextPluginTests.swift in Sources */,
-				DBC5E4EF1E662FA00030FE0C /* APITests.swift in Sources */,
+				DBC5E4EF1E662FA00030FE0C /* DefaultAssemblerTests.swift in Sources */,
 				DBC5E52E1E67239C0030FE0C /* ReachabilityContextPluginTests.swift in Sources */,
 				DBC5E5281E6723470030FE0C /* ScreenContextPluginTests.swift in Sources */,
 			);

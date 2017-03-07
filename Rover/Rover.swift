@@ -35,7 +35,7 @@ extension Rover: PluginResolver {
 
 extension Rover: PluginContainer {
     
-    @discardableResult public func register<T>(_ pluginType: T.Type, name: String? = nil, factory: @escaping (PluginResolver) -> T) -> PluginEntry<T> {
+    @discardableResult public func register<T>(_ pluginType: T.Type, name: String?, factory: @escaping (PluginResolver) -> T) -> PluginEntry<T> {
         let key = PluginKey(factoryType: type(of: factory), name: nil)
         let entry = PluginEntry(pluginType: pluginType, factory: factory)
         plugins[key] = entry
