@@ -251,6 +251,12 @@ class EventsManagerTests: XCTestCase {
         notificationCenter.callBlock(name: Notification.Name.UIApplicationWillResignActive.rawValue)
         XCTAssertNil(eventsManager.timer)
     }
+    
+    func testReassign() {
+        let taskFactory = MockTaskFactory()
+        let eventsManager = EventsManager(taskFactory: taskFactory)
+        let otherEventsManager = eventsManager
+    }
 }
 
 // MARK: MockTaskFactory

@@ -2,124 +2,130 @@
 //  RoverTests.swift
 //  Rover
 //
-//  Created by Sean Rucker on 2016-12-05.
-//  Copyright © 2016 Sean Rucker. All rights reserved.
+//  Created by Sean Rucker on 2017-03-07.
+//  Copyright © 2017 Rover Labs Inc. All rights reserved.
 //
 
 import XCTest
+
 @testable import Rover
 
 class RoverTests: XCTestCase {
     
-    func identifyAsMarie() {
-        var traits = Traits()
-        traits.set(identifier: "marieavgeropoulos")
-        traits.set(firstName: "Marie")
-        traits.set(lastName: "Avgeropoulos")
-        traits.set(email: "marie.avgeropoulos@example.com")
-        traits.set(gender: .female)
-        traits.set(age: 30)
-        traits.set(phoneNumber: "555-555-5555")
-        traits.set(tags: ["actress", "model"])
+    func testRegister() {
+        let rover = Rover()
+        XCTAssertEqual(rover.plugins.count, 0)
         
-        Rover.identify(traits: traits)
-    }
-    
-    func testIdentify() {
-        let customer = Rover.customer
-
-        // Can't test for nil because its impossible to reset NSUserDefaults with the
-        // current implementation.
-        // http://stackoverflow.com/questions/19084633/shouldnt-nsuserdefault-be-clean-slate-for-unit-tests
-        
-//        XCTAssertNil(customer.identifier)
-//        XCTAssertNil(customer.firstName)
-//        XCTAssertNil(customer.lastName)
-//        XCTAssertNil(customer.email)
-//        XCTAssertNil(customer.gender)
-//        XCTAssertNil(customer.age)
-//        XCTAssertNil(customer.phone)
-//        XCTAssertNil(customer.tags)
-        
-        identifyAsMarie()
-        
-        XCTAssertEqual(customer.identifier, "marieavgeropoulos")
-        XCTAssertEqual(customer.firstName, "Marie")
-        XCTAssertEqual(customer.lastName, "Avgeropoulos")
-        XCTAssertEqual(customer.gender, Traits.Gender.female.rawValue)
-        XCTAssertEqual(customer.age, 30)
-        XCTAssertEqual(customer.email, "marie.avgeropoulos@example.com")
-        XCTAssertEqual(customer.phone, "555-555-5555")
-        XCTAssertEqual(customer.tags!, ["actress", "model"])
-
-        var traits = Traits()
-        traits.add(tag: "musician")
-        traits.remove(tag: "actress")
-        
-        Rover.identify(traits: traits)
-        XCTAssertEqual(customer.tags!, ["model", "musician"])
-        
-        traits = Traits()
-        traits.set(customValue: "bar", forKey: "foo")
-        
-        Rover.identify(traits: traits)
-        XCTAssertEqual(customer.traits["foo"] as? String, "bar")
-    }
-    
-    func testClearCustomer() {
-        identifyAsMarie()
-        
-        Rover.clearCustomer()
-        
-        let customer = Rover.customer
-        
-        XCTAssertNil(customer.identifier)
-        XCTAssertNil(customer.firstName)
-        XCTAssertNil(customer.lastName)
-        XCTAssertNil(customer.email)
-        XCTAssertNil(customer.gender)
-        XCTAssertNil(customer.age)
-        XCTAssertNil(customer.phone)
-        XCTAssertNil(customer.tags)
-    }
-    
-    func testContinueUserActivity() {
-        let validActivity = NSUserActivity(activityType: NSUserActivityTypeBrowsingWeb)
-        validActivity.webpageURL = URL(string: "https://inbox.rvr.co/foo")
-        XCTAssert(Rover.continueUserActivity(validActivity), "Failed to continue valid user activity")
-        
-        let wrongActivityType = NSUserActivity(activityType: "io.rover.invalid")
-        XCTAssert(!Rover.continueUserActivity(wrongActivityType), "Continued user activity of invalid activityType")
-        
-        let invalidURL = NSUserActivity(activityType: NSUserActivityTypeBrowsingWeb)
-        invalidURL.webpageURL = URL(string: "http://www.example.com/foo")!
-        XCTAssert(!Rover.continueUserActivity(invalidURL), "Continued user activity with invalid webpageURL")
-    }
-    
-    func testOpenURL() {
-        let valid: [URL] = [
-            URL(string: "https://inbox.rvr.co/foo")!,
-            URL(string: "https://inbox.rover.io/foo?version=current")!,
-            URL(string: "http://mlse.rvr.co/foo")!,
-            URL(string: "https://carrot-rewards.rover.io/foo/bar")!,
-            URL(string: "https://CarrotRewards.rvr.co/foo/bar")!
-        ]
-        
-        let invalid: [URL] = [
-            URL(string: "https://rvr.co/foo")!,
-            URL(string: "https://inbox.rover.io/")!,
-            URL(string: "https://inbox.rover.io")!,
-            URL(string: "https://inbox.rover.com/foo")!
-        ]
-        
-        for url in valid {
-            let didOpenURL = Rover.open(url: url)
-            XCTAssert(didOpenURL, "Failed to open valid URL: \(url)")
+        rover.register(DeviceContextPlugin.self) { (resolver, prevResult) in
+            return DeviceContextPlugin()
         }
         
-        for url in invalid {
-            let didOpenURL = Rover.open(url: url)
-            XCTAssert(!didOpenURL, "Opened invalid URL: \(url)")
+        XCTAssertEqual(rover.plugins.count, 1)
+        
+        let firstKey = rover.plugins.first!.key
+        
+        typealias Factory = (Resolver, DeviceContextPlugin?) -> DeviceContextPlugin
+        let constructedKey = PluginKey(factoryType: Factory.self, name: nil)
+        
+        XCTAssertEqual(firstKey, constructedKey)
+    }
+    
+    func testResolveRegisteredPlugin() {
+        let rover = Rover()
+        
+        rover.register(DeviceContextPlugin.self) { (resolver, prevResult) in
+            return DeviceContextPlugin()
         }
+        
+        let plugin = rover.resolve(DeviceContextPlugin.self)!
+        XCTAssertNotNil(plugin)
+    }
+    
+    func testResolveMissingPlugin() {
+        let rover = Rover()
+        
+        let plugin = rover.resolve(DeviceContextPlugin.self)
+        XCTAssertNil(plugin)
+    }
+    
+    func testResolveInvokesFactoryEachTime() {
+        let rover = Rover()
+        
+        var factoryInvocationCount = 0
+        rover.register(DeviceContextPlugin.self) { (resolver, prevResult) in
+            factoryInvocationCount += 1
+            return DeviceContextPlugin()
+        }
+        
+        let _ = rover.resolve(DeviceContextPlugin.self)!
+        let _ = rover.resolve(DeviceContextPlugin.self)!
+        
+        XCTAssertEqual(factoryInvocationCount, 2)
+    }
+    
+    func testMultipleResolveRetainsPreviousValue() {
+        
+        struct MockPlugin: Plugin {
+            var value: Int = 0
+            var prevValues = [Int]()
+        }
+        
+        let rover = Rover()
+        
+        rover.register(MockPlugin.self) { (resolver, prevResult) in
+            if let prevResult = prevResult {
+                let value = prevResult.prevValues.count + 1
+                let prevValues = prevResult.prevValues + [prevResult.value]
+                return MockPlugin(value: value, prevValues: prevValues)
+            }
+            
+            return MockPlugin()
+        }
+        
+        let result1 = rover.resolve(MockPlugin.self)!
+        XCTAssertEqual(result1.value, 0)
+        XCTAssertEqual(result1.prevValues.count, 0)
+        
+        let result2 = rover.resolve(MockPlugin.self)!
+        XCTAssertEqual(result2.value, 1)
+        XCTAssertEqual(result2.prevValues.count, 1)
+        
+        let result3 = rover.resolve(MockPlugin.self)!
+        XCTAssertEqual(result3.value, 2)
+        XCTAssertEqual(result3.prevValues.count, 2)
+    }
+    
+    func testMultipleRegisterRetainsPreviousValue() {
+        
+        struct MockPlugin: Plugin {
+            var value: Int = 0
+            var prevValues = [Int]()
+        }
+        
+        let rover = Rover()
+        
+        
+        func factory(resolver: Resolver, prevResult: MockPlugin?) -> MockPlugin {
+            if let prevResult = prevResult {
+                let value = prevResult.prevValues.count + 1
+                let prevValues = prevResult.prevValues + [prevResult.value]
+                return MockPlugin(value: value, prevValues: prevValues)
+            }
+            
+            return MockPlugin()
+        }
+
+        
+        rover.register(MockPlugin.self, factory: factory)
+        
+        let result1 = rover.resolve(MockPlugin.self)!
+        XCTAssertEqual(result1.value, 0)
+        XCTAssertEqual(result1.prevValues.count, 0)
+        
+        rover.register(MockPlugin.self, factory: factory)
+        
+        let result2 = rover.resolve(MockPlugin.self)!
+        XCTAssertEqual(result2.value, 1)
+        XCTAssertEqual(result2.prevValues.count, 1)
     }
 }

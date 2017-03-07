@@ -27,15 +27,15 @@ public class EventsManager {
         return q
     }()
     
-    let taskFactory: EventTaskFactory
-    
-    let flushAt: Int
-    
-    let flushInterval: Double
-    
-    let application: ApplicationType
+    var taskFactory: EventTaskFactory
     
     var contextProviders: [ContextProvider]
+    
+    var flushAt: Int
+    
+    var flushInterval: Double
+    
+    var application: ApplicationType
     
     var eventQueue: EventQueue
     

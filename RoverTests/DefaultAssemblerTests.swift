@@ -12,14 +12,33 @@ import XCTest
 
 class APITests: XCTestCase {
     
-    func testAssembly() {
-        let assembler = DefaultAssembler(accountToken: "giberish")
-        assembler.assemble(container: Rover.shared)
+    func testAssemblyConfiguration() {
+        let rover = Rover()
         
-        let httpPlugin = Rover.shared.resolve(HTTPPlugin.self)!
+        let assembler = DefaultAssembler(accountToken: "giberish")
+        assembler.assemble(container: rover)
+        
+        let httpPlugin = rover.resolve(HTTPPlugin.self)!
         XCTAssertEqual(httpPlugin.authorizers.count, 2)
         
-        let eventsPlugin = Rover.shared.resolve(EventsPlugin.self)!
+        let eventsPlugin = rover.resolve(EventsPlugin.self)!
         XCTAssertEqual(eventsPlugin.contextProviders.count, 8)
+    }
+    
+    func testEventsManagerRetainsQueue() {
+        let rover = Rover()
+        
+        let assembler = DefaultAssembler(accountToken: "giberish")
+        assembler.assemble(container: rover)
+        
+        let eventsPlugin = rover.resolve(EventsPlugin.self)!
+        eventsPlugin.trackEvent(name: "Test")
+        eventsPlugin.serialQueue.waitUntilAllOperationsAreFinished()
+        XCTAssertEqual(eventsPlugin.eventQueue.count, 1)
+        
+        assembler.assemble(container: rover)
+        
+        let eventsPlugin2 = rover.resolve(EventsPlugin.self)!
+        XCTAssertEqual(eventsPlugin2.eventQueue.count, 1)
     }
 }

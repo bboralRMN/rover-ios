@@ -1,10 +1,19 @@
 //
-//  DefaultAssembler.swift
+//  Assembler.swift
 //  Rover
 //
 //  Created by Sean Rucker on 2017-03-07.
 //  Copyright © 2017 Rover Labs Inc. All rights reserved.
 //
+
+import Foundation
+
+public protocol Assembler {
+    
+    func assemble(container: Container)
+}
+
+// MARK: DefaultAssembler
 
 public struct DefaultAssembler {
     
@@ -15,9 +24,9 @@ public struct DefaultAssembler {
     }
 }
 
-extension DefaultAssembler: PluginAssembler {
+extension DefaultAssembler: Assembler {
     
-    public func assemble(container: PluginContainer) {
+    public func assemble(container: Container) {
         container.register(AuthPlugin.self) { _ in
             return AuthPlugin(accountToken: "giberish")
         }
@@ -26,7 +35,7 @@ extension DefaultAssembler: PluginAssembler {
             return CustomerPlugin()
         }
         
-        container.register(HTTPPlugin.self) { resolver in
+        container.register(HTTPPlugin.self) { (resolver, _) in
             let authPlugin = resolver.resolve(AuthPlugin.self)!
             let customerPlugin = resolver.resolve(CustomerPlugin.self)!
             return HTTPPlugin(authorizers: [authPlugin, customerPlugin])
@@ -69,7 +78,7 @@ extension DefaultAssembler: PluginAssembler {
             return ReachabilityContextPlugin()
         }
         
-        container.register(EventsPlugin.self) { resolver in
+        container.register(EventsPlugin.self) { (resolver, prevResult) in
             let httpPlugin = resolver.resolve(HTTPPlugin.self)!
             
             let contextProviders: [ContextProvider] = [
@@ -82,6 +91,13 @@ extension DefaultAssembler: PluginAssembler {
                 resolver.resolve(TimeZoneContextPlugin.self)!,
                 resolver.resolve(ReachabilityContextPlugin.self)!
             ]
+            
+            if let prevEventsPlugin = prevResult {
+                var nextEventsPlugin = prevEventsPlugin
+                nextEventsPlugin.taskFactory = httpPlugin
+                nextEventsPlugin.contextProviders = contextProviders
+                return nextEventsPlugin
+            }
             
             return EventsPlugin(taskFactory: httpPlugin, contextProviders: contextProviders)
         }

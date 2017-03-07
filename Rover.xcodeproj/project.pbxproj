@@ -11,16 +11,11 @@
 		DB1CA3321E56C3D000E2DB23 /* RoverLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB1CA32E1E56C3D000E2DB23 /* RoverLogger.framework */; };
 		DB1CA33B1E56C73C00E2DB23 /* RoverData.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = DB1CA32C1E56C3D000E2DB23 /* RoverData.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DB1CA33D1E56C73C00E2DB23 /* RoverLogger.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = DB1CA32E1E56C3D000E2DB23 /* RoverLogger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		DB240A491E6DDAE9002C7AC6 /* PluginContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB240A481E6DDAE9002C7AC6 /* PluginContainer.swift */; };
-		DB240A4B1E6E07DE002C7AC6 /* PluginResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB240A4A1E6E07DE002C7AC6 /* PluginResolver.swift */; };
 		DB240A511E6EFB57002C7AC6 /* AuthPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB240A501E6EFB57002C7AC6 /* AuthPlugin.swift */; };
-		DB240A551E6F06ED002C7AC6 /* PluginEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB240A541E6F06ED002C7AC6 /* PluginEntry.swift */; };
-		DB240A571E6F0717002C7AC6 /* PluginKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB240A561E6F0717002C7AC6 /* PluginKey.swift */; };
-		DB240A591E6F0742002C7AC6 /* PluginMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB240A581E6F0742002C7AC6 /* PluginMap.swift */; };
-		DB240A5B1E6F0796002C7AC6 /* PluginFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB240A5A1E6F0796002C7AC6 /* PluginFactory.swift */; };
-		DB240A5D1E6F07AD002C7AC6 /* Plugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB240A5C1E6F07AD002C7AC6 /* Plugin.swift */; };
-		DB240A601E6F0B86002C7AC6 /* DefaultAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB240A5F1E6F0B86002C7AC6 /* DefaultAssembler.swift */; };
-		DB240A651E6F0EE2002C7AC6 /* PluginAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB240A641E6F0EE2002C7AC6 /* PluginAssembler.swift */; };
+		DB240A691E6F10B3002C7AC6 /* EventsPluginTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB240A681E6F10B3002C7AC6 /* EventsPluginTests.swift */; };
+		DB240A6B1E6F1CB2002C7AC6 /* RoverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB240A6A1E6F1CB2002C7AC6 /* RoverTests.swift */; };
+		DB240A6D1E6F41E6002C7AC6 /* Plugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB240A6C1E6F41E6002C7AC6 /* Plugin.swift */; };
+		DB240A6F1E6F421C002C7AC6 /* Assembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB240A6E1E6F421C002C7AC6 /* Assembler.swift */; };
 		DB8E457A1E6C970400E9D293 /* CustomerPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8E45791E6C970400E9D293 /* CustomerPlugin.swift */; };
 		DB8E457C1E6CB2A200E9D293 /* EventsPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8E457B1E6CB2A200E9D293 /* EventsPlugin.swift */; };
 		DBB958FB1E525E3E003A30E7 /* Rover.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB958FA1E525E3E003A30E7 /* Rover.swift */; };
@@ -83,16 +78,11 @@
 /* Begin PBXFileReference section */
 		DB1CA32C1E56C3D000E2DB23 /* RoverData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RoverData.framework; path = Carthage/Build/iOS/RoverData.framework; sourceTree = "<group>"; };
 		DB1CA32E1E56C3D000E2DB23 /* RoverLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RoverLogger.framework; path = Carthage/Build/iOS/RoverLogger.framework; sourceTree = "<group>"; };
-		DB240A481E6DDAE9002C7AC6 /* PluginContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PluginContainer.swift; sourceTree = "<group>"; };
-		DB240A4A1E6E07DE002C7AC6 /* PluginResolver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PluginResolver.swift; sourceTree = "<group>"; };
 		DB240A501E6EFB57002C7AC6 /* AuthPlugin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthPlugin.swift; sourceTree = "<group>"; };
-		DB240A541E6F06ED002C7AC6 /* PluginEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PluginEntry.swift; sourceTree = "<group>"; };
-		DB240A561E6F0717002C7AC6 /* PluginKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PluginKey.swift; sourceTree = "<group>"; };
-		DB240A581E6F0742002C7AC6 /* PluginMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PluginMap.swift; sourceTree = "<group>"; };
-		DB240A5A1E6F0796002C7AC6 /* PluginFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PluginFactory.swift; sourceTree = "<group>"; };
-		DB240A5C1E6F07AD002C7AC6 /* Plugin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Plugin.swift; sourceTree = "<group>"; };
-		DB240A5F1E6F0B86002C7AC6 /* DefaultAssembler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultAssembler.swift; sourceTree = "<group>"; };
-		DB240A641E6F0EE2002C7AC6 /* PluginAssembler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PluginAssembler.swift; sourceTree = "<group>"; };
+		DB240A681E6F10B3002C7AC6 /* EventsPluginTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsPluginTests.swift; sourceTree = "<group>"; };
+		DB240A6A1E6F1CB2002C7AC6 /* RoverTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoverTests.swift; sourceTree = "<group>"; };
+		DB240A6C1E6F41E6002C7AC6 /* Plugin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Plugin.swift; sourceTree = "<group>"; };
+		DB240A6E1E6F421C002C7AC6 /* Assembler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assembler.swift; sourceTree = "<group>"; };
 		DB8E45791E6C970400E9D293 /* CustomerPlugin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerPlugin.swift; sourceTree = "<group>"; };
 		DB8E457B1E6CB2A200E9D293 /* EventsPlugin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsPlugin.swift; sourceTree = "<group>"; };
 		DBB958FA1E525E3E003A30E7 /* Rover.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rover.swift; sourceTree = "<group>"; };
@@ -208,29 +198,11 @@
 			name = "Context Providers";
 			sourceTree = "<group>";
 		};
-		DB240A5E1E6F0A3A002C7AC6 /* Data */ = {
-			isa = PBXGroup;
-			children = (
-				DB240A501E6EFB57002C7AC6 /* AuthPlugin.swift */,
-				DBC5E5451E677C0F0030FE0C /* HTTPPlugin.swift */,
-				DB8E45791E6C970400E9D293 /* CustomerPlugin.swift */,
-			);
-			name = Data;
-			sourceTree = "<group>";
-		};
-		DB240A611E6F0E6F002C7AC6 /* Events */ = {
-			isa = PBXGroup;
-			children = (
-				DB240A521E6EFE79002C7AC6 /* Context Providers */,
-				DB8E457B1E6CB2A200E9D293 /* EventsPlugin.swift */,
-			);
-			name = Events;
-			sourceTree = "<group>";
-		};
 		DB240A621E6F0EA1002C7AC6 /* Events */ = {
 			isa = PBXGroup;
 			children = (
 				DB240A531E6F0365002C7AC6 /* Context Providers */,
+				DB240A681E6F10B3002C7AC6 /* EventsPluginTests.swift */,
 			);
 			name = Events;
 			sourceTree = "<group>";
@@ -268,16 +240,11 @@
 		DBC5E5401E676B9C0030FE0C /* Plugins */ = {
 			isa = PBXGroup;
 			children = (
-				DB240A611E6F0E6F002C7AC6 /* Events */,
-				DB240A5E1E6F0A3A002C7AC6 /* Data */,
-				DB240A641E6F0EE2002C7AC6 /* PluginAssembler.swift */,
-				DB240A481E6DDAE9002C7AC6 /* PluginContainer.swift */,
-				DB240A5C1E6F07AD002C7AC6 /* Plugin.swift */,
-				DB240A541E6F06ED002C7AC6 /* PluginEntry.swift */,
-				DB240A5A1E6F0796002C7AC6 /* PluginFactory.swift */,
-				DB240A561E6F0717002C7AC6 /* PluginKey.swift */,
-				DB240A581E6F0742002C7AC6 /* PluginMap.swift */,
-				DB240A4A1E6E07DE002C7AC6 /* PluginResolver.swift */,
+				DB240A521E6EFE79002C7AC6 /* Context Providers */,
+				DB8E457B1E6CB2A200E9D293 /* EventsPlugin.swift */,
+				DB240A501E6EFB57002C7AC6 /* AuthPlugin.swift */,
+				DBC5E5451E677C0F0030FE0C /* HTTPPlugin.swift */,
+				DB8E45791E6C970400E9D293 /* CustomerPlugin.swift */,
 			);
 			name = Plugins;
 			sourceTree = "<group>";
@@ -326,7 +293,8 @@
 				DB1CA33F1E56D38600E2DB23 /* Supporting Files */,
 				DBC5E54A1E686AA10030FE0C /* Vendor */,
 				DBB958FA1E525E3E003A30E7 /* Rover.swift */,
-				DB240A5F1E6F0B86002C7AC6 /* DefaultAssembler.swift */,
+				DB240A6C1E6F41E6002C7AC6 /* Plugin.swift */,
+				DB240A6E1E6F421C002C7AC6 /* Assembler.swift */,
 			);
 			path = Rover;
 			sourceTree = "<group>";
@@ -337,6 +305,7 @@
 				DBC5E54F1E6884E40030FE0C /* Plugins */,
 				DBC5E4FC1E671F620030FE0C /* Events */,
 				DB1CA33E1E56D37C00E2DB23 /* Supporting Files */,
+				DB240A6A1E6F1CB2002C7AC6 /* RoverTests.swift */,
 				DBC5E4EE1E662FA00030FE0C /* DefaultAssemblerTests.swift */,
 			);
 			path = RoverTests;
@@ -461,31 +430,24 @@
 				DBC5E4F51E671EEB0030FE0C /* Event.swift in Sources */,
 				DBC5E5141E6721B80030FE0C /* ScreenContextPlugin.swift in Sources */,
 				DBC5E4F71E671F1C0030FE0C /* EventBatch.swift in Sources */,
-				DB240A651E6F0EE2002C7AC6 /* PluginAssembler.swift in Sources */,
 				DBC5E50C1E6721560030FE0C /* ApplicationContextPlugin.swift in Sources */,
-				DB240A571E6F0717002C7AC6 /* PluginKey.swift in Sources */,
 				DBC5E5061E67210E0030FE0C /* ContextProvider.swift in Sources */,
 				DBC5E51A1E6721F60030FE0C /* ReachabilityContextPlugin.swift in Sources */,
-				DB240A601E6F0B86002C7AC6 /* DefaultAssembler.swift in Sources */,
-				DB240A551E6F06ED002C7AC6 /* PluginEntry.swift in Sources */,
-				DB240A4B1E6E07DE002C7AC6 /* PluginResolver.swift in Sources */,
+				DB240A6D1E6F41E6002C7AC6 /* Plugin.swift in Sources */,
 				DBC5E5461E677C0F0030FE0C /* HTTPPlugin.swift in Sources */,
 				DBB958FB1E525E3E003A30E7 /* Rover.swift in Sources */,
-				DB240A491E6DDAE9002C7AC6 /* PluginContainer.swift in Sources */,
 				DBC5E4F31E671ED70030FE0C /* Attributes.swift in Sources */,
 				DBC5E5181E6721E70030FE0C /* TimeZoneContextPlugin.swift in Sources */,
 				DBC5E5041E6720FA0030FE0C /* Context.swift in Sources */,
 				DBC5E5101E6721810030FE0C /* FrameworkContextPlugin.swift in Sources */,
-				DB240A591E6F0742002C7AC6 /* PluginMap.swift in Sources */,
+				DB240A6F1E6F421C002C7AC6 /* Assembler.swift in Sources */,
 				DB8E457C1E6CB2A200E9D293 /* EventsPlugin.swift in Sources */,
-				DB240A5B1E6F0796002C7AC6 /* PluginFactory.swift in Sources */,
 				DBC5E5121E6721950030FE0C /* LocaleContextPlugin.swift in Sources */,
 				DBC5E4F91E671F320030FE0C /* EventQueue.swift in Sources */,
 				DB8E457A1E6C970400E9D293 /* CustomerPlugin.swift in Sources */,
 				DBC5E5081E6721220030FE0C /* Reachability.swift in Sources */,
 				DB240A511E6EFB57002C7AC6 /* AuthPlugin.swift in Sources */,
 				DBC5E5161E6721CF0030FE0C /* TelephonyContextPlugin.swift in Sources */,
-				DB240A5D1E6F07AD002C7AC6 /* Plugin.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -502,8 +464,10 @@
 				DBC5E52C1E6723820030FE0C /* TimeZoneContextPluginTests.swift in Sources */,
 				DBC5E52A1E6723620030FE0C /* TelephonyContextPluginTests.swift in Sources */,
 				DBC5E4EF1E662FA00030FE0C /* DefaultAssemblerTests.swift in Sources */,
+				DB240A691E6F10B3002C7AC6 /* EventsPluginTests.swift in Sources */,
 				DBC5E52E1E67239C0030FE0C /* ReachabilityContextPluginTests.swift in Sources */,
 				DBC5E5281E6723470030FE0C /* ScreenContextPluginTests.swift in Sources */,
+				DB240A6B1E6F1CB2002C7AC6 /* RoverTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
