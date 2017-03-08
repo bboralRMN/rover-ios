@@ -22,8 +22,6 @@ public struct DeviceContextPlugin {
     }
 }
 
-extension DeviceContextPlugin: Plugin { }
-
 extension DeviceContextPlugin: ContextProvider {
     
     func deviceModel() -> String? {

@@ -21,8 +21,6 @@ public struct ScreenContextPlugin {
     }
 }
 
-extension ScreenContextPlugin: Plugin { }
-
 extension ScreenContextPlugin: ContextProvider {
     
     public func captureContext(_ context: Context) -> Context {

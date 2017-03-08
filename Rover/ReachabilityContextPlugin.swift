@@ -22,8 +22,6 @@ public struct ReachabilityContextPlugin {
     }
 }
 
-extension ReachabilityContextPlugin: Plugin { }
-
 extension ReachabilityContextPlugin: ContextProvider {
     
     public func captureContext(_ context: Context) -> Context {

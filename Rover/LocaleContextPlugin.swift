@@ -22,8 +22,6 @@ public struct LocaleContextPlugin {
     }
 }
 
-extension LocaleContextPlugin: Plugin { }
-
 extension LocaleContextPlugin: ContextProvider {
     
     public func captureContext(_ context: Context) -> Context {

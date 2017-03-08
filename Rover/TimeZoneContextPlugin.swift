@@ -21,8 +21,6 @@ public struct TimeZoneContextPlugin {
     }
 }
 
-extension TimeZoneContextPlugin: Plugin { }
-
 extension TimeZoneContextPlugin: ContextProvider {
     
     public func captureContext(_ context: Context) -> Context {

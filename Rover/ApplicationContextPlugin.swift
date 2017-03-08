@@ -22,8 +22,6 @@ public struct ApplicationContextPlugin {
     }
 }
 
-extension ApplicationContextPlugin: Plugin { }
-
 extension ApplicationContextPlugin: ContextProvider {
     
     var info: [String: Any] {

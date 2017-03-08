@@ -11,7 +11,7 @@ import Foundation
 import RoverData
 import RoverLogger
 
-public struct AuthPlugin: Plugin {
+public struct AuthPlugin {
     
     var deviceIdentifier: DeviceIdentifier
     

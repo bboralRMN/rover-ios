@@ -39,8 +39,6 @@ public struct TelephonyContextPlugin {
     }
 }
 
-extension TelephonyContextPlugin: Plugin { }
-
 extension TelephonyContextPlugin: ContextProvider {
     
     var radio: String? {

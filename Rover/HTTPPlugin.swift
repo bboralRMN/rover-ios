@@ -10,6 +10,30 @@ import Foundation
 
 import RoverData
 
-public typealias HTTPPlugin = HTTPFactory
+protocol Plugin: class {
+    
+    associatedtype State
+    
+    var state: State { get }
+    
+    func register(dispatcher: Any)
+    
+    func reduce(state: State, action: String)
+}
 
-extension HTTPPlugin: Plugin { }
+class HTTPPlugin: Plugin {
+    
+    typealias State = HTTPFactory
+    
+    var state: State {
+        return HTTPFactory()
+    }
+    
+    func register(dispatcher: Any) {
+        
+    }
+    
+    func reduce(state: State, action: String) {
+        
+    }
+}

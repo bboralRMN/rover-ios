@@ -13,25 +13,25 @@ import RoverData
 
 public typealias EventsPlugin = EventsManager
 
-extension EventsPlugin: Plugin { }
+extension EventsPlugin { }
 
 // MARK: Rover
 
-extension Rover {
-    
-    public func trackEvent(name: String, attributes: Attributes? = nil) {
-        guard let eventsPlugin = resolve(EventsPlugin.self) else {
-            return
-        }
-        
-        eventsPlugin.trackEvent(name: name, attributes: attributes)
-    }
-    
-    public func flushEvents() {
-        guard let eventsPlugin = resolve(EventsPlugin.self) else {
-            return
-        }
-        
-        eventsPlugin.flushEvents()
-    }
-}
+//extension Rover {
+//    
+//    public func trackEvent(name: String, attributes: Attributes? = nil) {
+//        guard let eventsPlugin = resolve(EventsPlugin.self) else {
+//            return
+//        }
+//        
+//        eventsPlugin.trackEvent(name: name, attributes: attributes)
+//    }
+//    
+//    public func flushEvents() {
+//        guard let eventsPlugin = resolve(EventsPlugin.self) else {
+//            return
+//        }
+//        
+//        eventsPlugin.flushEvents()
+//    }
+//}

@@ -17,8 +17,6 @@ public struct FrameworkContextPlugin {
     }
 }
 
-extension FrameworkContextPlugin: Plugin { }
-
 typealias FrameworkIdentifier = String
 typealias FrameworkVersion = String
 typealias FrameworkMap = [FrameworkIdentifier: FrameworkVersion]

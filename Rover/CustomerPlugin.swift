@@ -9,7 +9,7 @@
 import Foundation
 import RoverData
 
-public struct CustomerPlugin: Plugin {
+public struct CustomerPlugin {
     
     public var customerID: String?
     
@@ -31,9 +31,9 @@ extension CustomerPlugin: Authorizer {
     }
 }
 
-extension Rover {
-    
-    public func setCustomerID(_ customerID: String) {
-        register(CustomerPlugin.self) { _ in CustomerPlugin(customerID: customerID) }
-    }
-}
+//extension Rover {
+//    
+//    public func setCustomerID(_ customerID: String) {
+//        register(CustomerPlugin.self) { _ in CustomerPlugin(customerID: customerID) }
+//    }
+//}
