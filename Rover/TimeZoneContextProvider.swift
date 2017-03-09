@@ -1,5 +1,5 @@
 //
-//  TimeZoneContextPlugin.swift
+//  TimeZoneContextProvider.swift
 //  Rover
 //
 //  Created by Sean Rucker on 2017-02-16.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct TimeZoneContextPlugin {
+public struct TimeZoneContextProvider {
     
     var timeZone: TimeZoneType
     
@@ -21,7 +21,7 @@ public struct TimeZoneContextPlugin {
     }
 }
 
-extension TimeZoneContextPlugin: ContextProvider {
+extension TimeZoneContextProvider: ContextProvider {
     
     public func captureContext(_ context: Context) -> Context {
         var nextContext = context

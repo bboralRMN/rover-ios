@@ -10,30 +10,44 @@ import Foundation
 
 import RoverData
 
-protocol Plugin: class {
-    
-    associatedtype State
-    
-    var state: State { get }
-    
-    func register(dispatcher: Any)
-    
-    func reduce(state: State, action: String)
-}
-
-class HTTPPlugin: Plugin {
+struct HTTPPlugin: Plugin {
     
     typealias State = HTTPFactory
     
-    var state: State {
-        return HTTPFactory()
+    static var dependencies: [AnyPlugin.Type] {
+        return [AnyPlugin.Type]()
     }
     
-    func register(dispatcher: Any) {
+    static func register(dispatcher: Any) {
         
     }
     
-    func reduce(state: State, action: String) {
-        
+    static func reduce(state: HTTPFactory, action: Action, resolver: Resolver) -> HTTPFactory {
+        switch action {
+        case let a as AddAuthorizerAction:
+            var nextState = state
+            // TODO: Ensure an authorizer can only be added once
+            nextState.authorizers.append(a.authorizer)
+            return nextState
+        default:
+            return state
+        }
+    }
+}
+
+// MARK: Actions
+
+struct AddAuthorizerAction: Action {
+    
+    let authorizer: Authorizer
+}
+
+// MARK: Rover Extensions
+
+extension Rover {
+    
+    func addAuthorizer(_ authorizer: Authorizer) {
+        let action = AddAuthorizerAction(authorizer: authorizer)
+        reduce(action: action)
     }
 }

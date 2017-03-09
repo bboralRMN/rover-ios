@@ -1,5 +1,5 @@
 //
-//  ScreenContextPlugin.swift
+//  ScreenContextProvider.swift
 //  Rover
 //
 //  Created by Sean Rucker on 2017-02-16.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct ScreenContextPlugin {
+public struct ScreenContextProvider {
     
     var screenSize: CGSize
     
@@ -21,7 +21,7 @@ public struct ScreenContextPlugin {
     }
 }
 
-extension ScreenContextPlugin: ContextProvider {
+extension ScreenContextProvider: ContextProvider {
     
     public func captureContext(_ context: Context) -> Context {
         var nextContext = context

@@ -1,5 +1,5 @@
 //
-//  ReachabilityContextPlugin.swift
+//  ReachabilityContextProvider.swift
 //  Rover
 //
 //  Created by Sean Rucker on 2017-02-16.
@@ -9,7 +9,7 @@
 import Foundation
 import RoverLogger
 
-public struct ReachabilityContextPlugin {
+public struct ReachabilityContextProvider {
     
     var reachability: ReachabilityType?
     
@@ -22,7 +22,7 @@ public struct ReachabilityContextPlugin {
     }
 }
 
-extension ReachabilityContextPlugin: ContextProvider {
+extension ReachabilityContextProvider: ContextProvider {
     
     public func captureContext(_ context: Context) -> Context {
         guard let reachability = self.reachability else {

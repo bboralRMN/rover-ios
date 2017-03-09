@@ -1,5 +1,5 @@
 //
-//  FrameworkContextPlugin.swift
+//  FrameworkContextProvider.swift
 //  Rover
 //
 //  Created by Sean Rucker on 2017-02-16.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct FrameworkContextPlugin {
+public struct FrameworkContextProvider {
     
     var identifiers: [String]
     
@@ -21,7 +21,7 @@ typealias FrameworkIdentifier = String
 typealias FrameworkVersion = String
 typealias FrameworkMap = [FrameworkIdentifier: FrameworkVersion]
 
-extension FrameworkContextPlugin: ContextProvider {
+extension FrameworkContextProvider: ContextProvider {
     
     public func captureContext(_ context: Context) -> Context {
         let frameworks = context["frameworks"] as? FrameworkMap ?? FrameworkMap()

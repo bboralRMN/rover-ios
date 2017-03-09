@@ -1,5 +1,5 @@
 //
-//  TelephonyContextPluginTests.swift
+//  TelephonyContextProviderTests.swift
 //  Rover
 //
 //  Created by Sean Rucker on 2017-02-16.
@@ -10,7 +10,7 @@ import XCTest
 
 @testable import Rover
 
-class TelephonyContextPluginTests: XCTestCase {
+class TelephonyContextProviderTests: XCTestCase {
     
     struct TestCarrier: CarrierType {
         var carrierName: String?
@@ -23,7 +23,7 @@ class TelephonyContextPluginTests: XCTestCase {
     func testCapture() {
         let carrier = TestCarrier(carrierName: "Rogers")
         let telephonyNetworkInfo = TestTelephonyNetworkInfo(currentRadioAccessTechnology: "LTE")
-        let context = TelephonyContextPlugin(telephonyNetworkInfo: telephonyNetworkInfo, carrier: carrier).captureContext(Context())
+        let context = TelephonyContextProvider(telephonyNetworkInfo: telephonyNetworkInfo, carrier: carrier).captureContext(Context())
         
         XCTAssertEqual(context["carrierName"] as! String, "Rogers")
         XCTAssertEqual(context["radio"] as! String, "LTE")
@@ -31,14 +31,14 @@ class TelephonyContextPluginTests: XCTestCase {
     
     func testPrefixedRadio() {
         let telephonyNetworkInfo = TestTelephonyNetworkInfo(currentRadioAccessTechnology: "CTRadioAccessTechnologyLTE")
-        let context = TelephonyContextPlugin(telephonyNetworkInfo: telephonyNetworkInfo).captureContext(Context())
+        let context = TelephonyContextProvider(telephonyNetworkInfo: telephonyNetworkInfo).captureContext(Context())
         
         XCTAssertEqual(context["radio"] as! String, "LTE")
     }
     
     func testNoRadio() {
         let telephonyNetworkInfo = TestTelephonyNetworkInfo(currentRadioAccessTechnology: nil)
-        let context = TelephonyContextPlugin(telephonyNetworkInfo: telephonyNetworkInfo).captureContext(Context())
+        let context = TelephonyContextProvider(telephonyNetworkInfo: telephonyNetworkInfo).captureContext(Context())
         
         XCTAssertEqual(context["radio"] as! String, "None")
     }

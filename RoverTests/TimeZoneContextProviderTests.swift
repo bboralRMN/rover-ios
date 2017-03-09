@@ -1,5 +1,5 @@
 //
-//  TimeZoneContextPluginTests.swift
+//  TimeZoneContextProviderTests.swift
 //  Rover
 //
 //  Created by Sean Rucker on 2017-02-16.
@@ -10,7 +10,7 @@ import XCTest
 
 @testable import Rover
 
-class TimeZoneContextPluginTest: XCTestCase {
+class TimeZoneContextProviderTest: XCTestCase {
     
     func testCapture() {
         
@@ -19,7 +19,7 @@ class TimeZoneContextPluginTest: XCTestCase {
         }
         
         let timeZone = TestTimeZone(name: "America/Santiago")
-        let context = TimeZoneContextPlugin(timeZone: timeZone).captureContext(Context())
+        let context = TimeZoneContextProvider(timeZone: timeZone).captureContext(Context())
         
         XCTAssertEqual(context["timeZone"] as! String, "America/Santiago")
     }

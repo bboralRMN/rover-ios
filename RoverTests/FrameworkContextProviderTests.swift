@@ -1,5 +1,5 @@
 //
-//  FrameworkContextPluginTests.swift
+//  FrameworkContextProviderTests.swift
 //  Rover
 //
 //  Created by Sean Rucker on 2017-02-16.
@@ -10,12 +10,12 @@ import XCTest
 
 @testable import Rover
 
-class FrameworkContextPluginTests: XCTestCase {
+class FrameworkContextProviderTests: XCTestCase {
     
     func testCapturesCurrentFrameworks() {
         let identifiers = ["io.rover.Rover"]
         
-        let context = FrameworkContextPlugin(identifiers: identifiers).captureContext(Context())
+        let context = FrameworkContextProvider(identifiers: identifiers).captureContext(Context())
         let frameworks = context["frameworks"] as! Context
         
         XCTAssertEqual(frameworks.count, 1)
@@ -28,7 +28,7 @@ class FrameworkContextPluginTests: XCTestCase {
             "com.example.Giberish"
         ]
         
-        let context = FrameworkContextPlugin(identifiers: identifiers).captureContext(Context())
+        let context = FrameworkContextProvider(identifiers: identifiers).captureContext(Context())
         let frameworks = context["frameworks"] as! Context
         
         XCTAssertEqual(frameworks.count, 1)

@@ -1,5 +1,5 @@
 //
-//  ApplicationContextPluginTests.swift
+//  ApplicationContextProviderTests.swift
 //  Rover
 //
 //  Created by Sean Rucker on 2017-02-16.
@@ -10,7 +10,7 @@ import XCTest
 
 @testable import Rover
 
-class ApplicationContextPluginTests: XCTestCase {
+class ApplicationContextProviderTests: XCTestCase {
     
     struct TestBundle: BundleType {
         var infoDictionary: [String: Any]?
@@ -32,7 +32,7 @@ class ApplicationContextPluginTests: XCTestCase {
         ]
         
         let bundle = TestBundle(infoDictionary: infoDictionary, bundleIdentifier: "io.rover.Rover")
-        let context = ApplicationContextPlugin(bundle: bundle).captureContext(Context())
+        let context = ApplicationContextProvider(bundle: bundle).captureContext(Context())
         
         XCTAssertEqual(context["appName"] as! String, "Rover")
         XCTAssertEqual(context["appVersion"] as! String, "2.0.0")
@@ -52,7 +52,7 @@ class ApplicationContextPluginTests: XCTestCase {
         ]
         
         let bundle = TestBundle(infoDictionary: infoDictionary, localizedInfoDictionary: spanishInfoDictionary, bundleIdentifier: "io.rover.Rover")
-        let context = ApplicationContextPlugin(bundle: bundle).captureContext(Context())
+        let context = ApplicationContextProvider(bundle: bundle).captureContext(Context())
         
         XCTAssertEqual(context["appName"] as! String, "VagabundoContexto")
         XCTAssertEqual(context["appVersion"] as! String, "2.0.0")
@@ -64,7 +64,7 @@ class ApplicationContextPluginTests: XCTestCase {
         let infoDictionary = [String: Any]()
         let localizedInfoDictionary = [String: Any]()
         let bundle = TestBundle(infoDictionary: infoDictionary, localizedInfoDictionary: localizedInfoDictionary, bundleIdentifier: nil)
-        let context = ApplicationContextPlugin(bundle: bundle).captureContext(Context())
+        let context = ApplicationContextProvider(bundle: bundle).captureContext(Context())
         
         XCTAssertNil(context["appName"] as? String)
         XCTAssertNil(context["appVersion"] as? String)

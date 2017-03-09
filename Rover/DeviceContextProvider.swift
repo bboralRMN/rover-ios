@@ -1,5 +1,5 @@
 //
-//  DeviceContextPlugin.swift
+//  DeviceContextProvider.swift
 //  Rover
 //
 //  Created by Sean Rucker on 2017-02-16.
@@ -9,7 +9,7 @@
 import Foundation
 import RoverLogger
 
-public struct DeviceContextPlugin {
+public struct DeviceContextProvider {
     
     var systemInfo: SystemInfo
     
@@ -22,7 +22,7 @@ public struct DeviceContextPlugin {
     }
 }
 
-extension DeviceContextPlugin: ContextProvider {
+extension DeviceContextProvider: ContextProvider {
     
     func deviceModel() -> String? {
         var systemInfo = utsname()

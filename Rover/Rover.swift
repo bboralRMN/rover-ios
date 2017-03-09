@@ -7,70 +7,63 @@
 //
 
 import Foundation
+import RoverData
+import RoverLogger
 
 public class Rover {
     
     public static let shared = Rover()
     
-//    var plugins = PluginMap()
+    var pluginMap = PluginMap()
+    
+    var registeredPlugins = [PluginKey]()
 }
 
-//// MARK: Container
-//
-//public protocol Container {
-//    
-//    @discardableResult func register<T: Plugin>(_ pluginType: T.Type, factory: @escaping (Resolver, T?) -> T) -> PluginEntry<T>
-//    
-//    @discardableResult func register<T: Plugin>(_ pluginType: T.Type, name: String?, factory: @escaping (Resolver, T?) -> T) -> PluginEntry<T>
-//}
-//
-//extension Container {
-//    
-//    @discardableResult public func register<T: Plugin>(_ pluginType: T.Type, factory: @escaping (Resolver, T?) -> T) -> PluginEntry<T> {
-//        return register(pluginType, name: nil, factory: factory)
-//    }
-//}
-//
-//extension Rover: Container {
-//    
-//    @discardableResult public func register<T: Plugin>(_ pluginType: T.Type, name: String?, factory: @escaping (Resolver, T?) -> T) -> PluginEntry<T> {
-//        let key = PluginKey(factoryType: type(of: factory), name: nil)
-//        
-//        let prevEntry = plugins[key] as? PluginEntry<T>
-//        let entry = PluginEntry(pluginType: pluginType, factory: factory, prevResult: prevEntry?.prevResult)
-//        plugins[key] = entry
-//        return entry
-//    }
-//}
-//
-//// MARK: Resolver
-//
-//public protocol Resolver {
-//    
-//    func resolve<T: Plugin>(_ pluginType: T.Type) -> T?
-//    
-//    func resolve<T: Plugin>(_ pluginType: T.Type, name: String?) -> T?
-//}
-//
-//extension Resolver {
-//    
-//    public func resolve<T: Plugin>(_ pluginType: T.Type) -> T? {
-//        return resolve(pluginType, name: nil)
-//    }
-//}
-//
-//extension Rover: Resolver {
-//    
-//    public func resolve<T: Plugin>(_ pluginType: T.Type, name: String? = nil) -> T? {
-//        typealias Factory = (Resolver, T?) -> T
-//        let key = PluginKey(factoryType: Factory.self, name: name)
-//        
-//        guard let entry = plugins[key] as? PluginEntry<T>, let factory = entry.factory as? Factory else {
-//            return nil
-//        }
-//        
-//        let result = factory(self, entry.prevResult)
-//        plugins[key] = PluginEntry(pluginType: entry.pluginType, factory: entry.factory, prevResult: result)
-//        return result
-//    }
-//}
+extension Rover: Container {
+    
+    func register<T : Plugin>(_ pluginType: T.Type, initialState: T.State) {
+        let key = PluginKey(pluginType: pluginType, name: nil)
+        
+        guard !registeredPlugins.contains(key) else {
+            logger.error("Attempted to register plugin after it has already been registered: \(pluginType)")
+            return
+        }
+        
+        let isDependenciesMet = T.dependencies.reduce(true) { (result, pluginType) -> Bool in
+            let key = PluginKey(pluginType: pluginType, name: nil)
+            return result && registeredPlugins.contains(key)
+        }
+        
+        guard isDependenciesMet else {
+            logger.error("Unmet dependencies found while registering plugin: \(pluginType)")
+            return
+        }
+        
+        pluginMap[key] = initialState
+        registeredPlugins.append(key)
+    }
+}
+
+extension Rover: Reducer {
+    
+    func reduce(action: Action) {
+        pluginMap = registeredPlugins.reduce(pluginMap, { (map, key) -> PluginMap in
+            guard let state = map[key] else {
+                logger.error("Invalid state for plugin: \(key.pluginType)")
+                return map
+            }
+            
+            var nextPlugins = pluginMap
+            nextPlugins[key] = key.pluginType.reduce(state: state, action: action, resolver: self)
+            return nextPlugins
+        })
+    }
+}
+
+extension Rover: Resolver {
+    
+    func resolve<T: Plugin>(_ pluginType: T.Type, name: String?) -> T.State? {
+        let key = PluginKey(pluginType: pluginType, name: name)
+        return pluginMap[key] as? T.State
+    }
+}

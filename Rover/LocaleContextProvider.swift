@@ -1,5 +1,5 @@
 //
-//  LocaleContextPlugin.swift
+//  LocaleContextProvider.swift
 //  Rover
 //
 //  Created by Sean Rucker on 2017-02-16.
@@ -9,7 +9,7 @@
 import Foundation
 import RoverLogger
 
-public struct LocaleContextPlugin {
+public struct LocaleContextProvider {
     
     var locale: LocaleType
     
@@ -22,7 +22,7 @@ public struct LocaleContextPlugin {
     }
 }
 
-extension LocaleContextPlugin: ContextProvider {
+extension LocaleContextProvider: ContextProvider {
     
     public func captureContext(_ context: Context) -> Context {
         var nextContext = context

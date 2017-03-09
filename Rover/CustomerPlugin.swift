@@ -7,33 +7,27 @@
 //
 
 import Foundation
+
 import RoverData
 
-public struct CustomerPlugin {
+struct CustomerPlugin: Plugin {
     
-    public var customerID: String?
-    
-    public init(customerID: String? = nil) {
-        self.customerID = customerID
+    static var dependencies: [AnyPlugin.Type] {
+        return [AnyPlugin.Type]()
     }
-}
-
-extension CustomerPlugin: Authorizer {
     
-    public func authorize(_ request: URLRequest) -> URLRequest {
-        guard let customerID = customerID else {
-            return request
-        }
+    static func register(dispatcher: Any) {
         
-        var nextRequest = request
-        nextRequest.addValue(customerID, forHTTPHeaderField: "x-rover-customer-id")
-        return nextRequest
+    }
+    
+    static func reduce(state: Customer, action: Action, resolver: Resolver) -> Customer {
+        switch action {
+        case let action as SetCustomerIDAction:
+            var nextState = state
+            nextState.customerID = action.customerID
+            return nextState
+        default:
+            return state
+        }
     }
 }
-
-//extension Rover {
-//    
-//    public func setCustomerID(_ customerID: String) {
-//        register(CustomerPlugin.self) { _ in CustomerPlugin(customerID: customerID) }
-//    }
-//}

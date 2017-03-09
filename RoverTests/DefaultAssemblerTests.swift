@@ -18,11 +18,11 @@ class APITests: XCTestCase {
         let assembler = DefaultAssembler(accountToken: "giberish")
         assembler.assemble(container: rover)
         
-        let httpPlugin = rover.resolve(HTTPPlugin.self)!
-        XCTAssertEqual(httpPlugin.authorizers.count, 2)
+        let httpFactory = rover.resolve(HTTPPlugin.self)!
+        XCTAssertEqual(httpFactory.authorizers.count, 2)
         
-        let eventsPlugin = rover.resolve(EventsPlugin.self)!
-        XCTAssertEqual(eventsPlugin.contextProviders.count, 8)
+        let eventsManager = rover.resolve(EventsPlugin.self)!
+        XCTAssertEqual(eventsManager.contextProviders.count, 8)
     }
     
     func testEventsManagerRetainsQueue() {
@@ -31,14 +31,14 @@ class APITests: XCTestCase {
         let assembler = DefaultAssembler(accountToken: "giberish")
         assembler.assemble(container: rover)
         
-        let eventsPlugin = rover.resolve(EventsPlugin.self)!
-        eventsPlugin.trackEvent(name: "Test")
-        eventsPlugin.serialQueue.waitUntilAllOperationsAreFinished()
-        XCTAssertEqual(eventsPlugin.eventQueue.count, 1)
+        let eventsManager = rover.resolve(EventsPlugin.self)!
+        eventsManager.trackEvent(name: "Test")
+        eventsManager.serialQueue.waitUntilAllOperationsAreFinished()
+        XCTAssertEqual(eventsManager.eventQueue.count, 1)
         
         assembler.assemble(container: rover)
         
-        let eventsPlugin2 = rover.resolve(EventsPlugin.self)!
-        XCTAssertEqual(eventsPlugin2.eventQueue.count, 1)
+        let eventsManager2 = rover.resolve(EventsPlugin.self)!
+        XCTAssertEqual(eventsManager2.eventQueue.count, 1)
     }
 }

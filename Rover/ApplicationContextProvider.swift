@@ -1,5 +1,5 @@
 //
-//  ApplicationContextPlugin.swift
+//  ApplicationContextProvider.swift
 //  Rover
 //
 //  Created by Sean Rucker on 2017-02-16.
@@ -9,7 +9,7 @@
 import Foundation
 import RoverLogger
 
-public struct ApplicationContextPlugin {
+public struct ApplicationContextProvider {
     
     var bundle: BundleType
     
@@ -22,7 +22,7 @@ public struct ApplicationContextPlugin {
     }
 }
 
-extension ApplicationContextPlugin: ContextProvider {
+extension ApplicationContextProvider: ContextProvider {
     
     var info: [String: Any] {
         var info = [String: Any]()

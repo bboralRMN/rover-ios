@@ -1,5 +1,5 @@
 //
-//  TelephonyContextPlugin.swift
+//  TelephonyContextProvider.swift
 //  Rover
 //
 //  Created by Sean Rucker on 2017-02-16.
@@ -10,7 +10,7 @@ import Foundation
 import CoreTelephony
 import RoverLogger
 
-public struct TelephonyContextPlugin {
+public struct TelephonyContextProvider {
     
     var telephonyNetworkInfo: TelephonyNetworkInfoType
     
@@ -39,7 +39,7 @@ public struct TelephonyContextPlugin {
     }
 }
 
-extension TelephonyContextPlugin: ContextProvider {
+extension TelephonyContextProvider: ContextProvider {
     
     var radio: String? {
         var radio = telephonyNetworkInfo.currentRadioAccessTechnology

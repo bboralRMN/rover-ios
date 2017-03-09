@@ -1,5 +1,5 @@
 //
-//  ReachabilityContextPluginTests.swift
+//  ReachabilityContextProviderTests.swift
 //  Rover
 //
 //  Created by Sean Rucker on 2017-02-16.
@@ -10,7 +10,7 @@ import XCTest
 
 @testable import Rover
 
-class ReachabilityContextPluginTests: XCTestCase {
+class ReachabilityContextProviderTests: XCTestCase {
     
     func testCapture() {
         
@@ -20,7 +20,7 @@ class ReachabilityContextPluginTests: XCTestCase {
         }
         
         let reachability = TestReachability(isReachableViaWiFi: true, isReachableViaWWAN: false)
-        let context = ReachabilityContextPlugin(reachability: reachability).captureContext(Context())
+        let context = ReachabilityContextProvider(reachability: reachability).captureContext(Context())
         
         XCTAssertTrue(context["isWifiEnabled"] as! Bool)
         XCTAssertFalse(context["isCellularEnabled"] as! Bool)

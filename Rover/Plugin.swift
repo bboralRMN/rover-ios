@@ -1,56 +1,65 @@
-////
-////  PluginMap.swift
-////  Rover
-////
-////  Created by Sean Rucker on 2017-03-07.
-////  Copyright © 2017 Rover Labs Inc. All rights reserved.
-////
 //
-//import Foundation
+//  Plugin.swift
+//  Rover
 //
-//// MARK: PluginMap
+//  Created by Sean Rucker on 2017-03-07.
+//  Copyright © 2017 Rover Labs Inc. All rights reserved.
 //
-//typealias PluginMap = [PluginKey: PluginEntryType]
-//
-//// MARK: Plugin
-//
-//public protocol Plugin { }
-//
-//// MARK: Factory
-//
-//typealias Factory = Any
-//
-//// MARK: PluginKey
-//
-//struct PluginKey {
-//    
-//    var factoryType: Factory.Type
-//    
-//    var name: String?
-//}
-//
-//extension PluginKey: Hashable {
-//    
-//    var hashValue: Int {
-//        return String(describing: factoryType).hashValue ^ (name?.hashValue ?? 0)
-//    }
-//}
-//
-//func == (lhs: PluginKey, rhs: PluginKey) -> Bool {
-//    return lhs.factoryType == rhs.factoryType && lhs.name == rhs.name
-//}
-//
-//// MARK: PluginEntry
-//
-//protocol PluginEntryType { }
-//
-//public struct PluginEntry<T: Plugin> {
-//    
-//    let pluginType: T.Type
-//    
-//    let factory: Factory
-//    
-//    let prevResult: T?
-//}
-//
-//extension PluginEntry: PluginEntryType { }
+
+import Foundation
+
+import RoverLogger
+
+// MARK: Plugin
+
+protocol AnyPlugin {
+    
+    static var dependencies: [AnyPlugin.Type] { get }
+    
+    static func register(dispatcher: Any)
+    
+    static func reduce(state: Any, action: Action, resolver: Resolver) -> Any
+}
+
+protocol Plugin: AnyPlugin {
+    
+    associatedtype State
+    
+    static func reduce(state: State, action: Action, resolver: Resolver) -> State
+}
+
+extension Plugin {
+    
+    static func reduce(state: Any, action: Action, resolver: Resolver) -> Any {
+        guard let typedState = state as? State else {
+            logger.error("Attempt to reduce invalid state type: \(type(of: state))")
+            return state
+        }
+        
+        return reduce(state: typedState, action: action, resolver: resolver)
+    }
+}
+
+// MARK: PluginKey
+
+struct PluginKey {
+    
+    let pluginType: AnyPlugin.Type
+    
+    let name: String?
+}
+
+extension PluginKey: Hashable {
+    
+    var hashValue: Int {
+        return String(describing: pluginType).hashValue ^ (name?.hashValue ?? 0)
+    }
+}
+
+func == (lhs: PluginKey, rhs: PluginKey) -> Bool {
+    return lhs.pluginType == rhs.pluginType && lhs.name == rhs.name
+}
+
+// MARK: PluginMap
+
+typealias PluginMap = [PluginKey: Any]

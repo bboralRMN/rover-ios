@@ -1,5 +1,5 @@
 //
-//  DeviceContextPluginTests.swift
+//  DeviceContextProviderTests.swift
 //  Rover
 //
 //  Created by Sean Rucker on 2017-02-16.
@@ -10,7 +10,7 @@ import XCTest
 
 @testable import Rover
 
-class DeviceContextPluginTests: XCTestCase {
+class DeviceContextProviderTests: XCTestCase {
     
     struct MockSystemInfo: SystemInfo {
         var systemName: String
@@ -24,7 +24,7 @@ class DeviceContextPluginTests: XCTestCase {
     
     func testCapture() {
         let systemInfo = MockSystemInfo()
-        let context = DeviceContextPlugin(systemInfo: systemInfo).captureContext(Context())
+        let context = DeviceContextProvider(systemInfo: systemInfo).captureContext(Context())
         
         XCTAssertEqual(context["deviceManufacturer"] as! String, "Apple")
         XCTAssertEqual(context["osName"] as! String, "iOS")

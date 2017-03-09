@@ -1,5 +1,5 @@
 //
-//  LocaleContextPluginTests.swift
+//  LocaleContextProviderTests.swift
 //  Rover
 //
 //  Created by Sean Rucker on 2017-02-16.
@@ -10,7 +10,7 @@ import XCTest
 
 @testable import Rover
 
-class LocaleContextPluginTests: XCTestCase {
+class LocaleContextProviderTests: XCTestCase {
     
     struct TestLocale: LocaleType {
         var languageCode: String?
@@ -20,7 +20,7 @@ class LocaleContextPluginTests: XCTestCase {
     
     func testCapture() {
         let locale = TestLocale(languageCode: "zh", regionCode: "HK", scriptCode: "Hans")
-        let context = LocaleContextPlugin(locale: locale).captureContext(Context())
+        let context = LocaleContextProvider(locale: locale).captureContext(Context())
         
         XCTAssertEqual(context["localeLanguage"] as! String, "zh")
         XCTAssertEqual(context["localeRegion"] as! String, "HK")
@@ -29,7 +29,7 @@ class LocaleContextPluginTests: XCTestCase {
     
     func testNilValues() {
         let locale = TestLocale()
-        let context = LocaleContextPlugin(locale: locale).captureContext(Context())
+        let context = LocaleContextProvider(locale: locale).captureContext(Context())
         
         XCTAssertNil(context["localeLanguage"] as? String)
         XCTAssertNil(context["localeRegion"] as? String)
