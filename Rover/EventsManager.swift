@@ -180,9 +180,7 @@ public class EventsManager {
         eventQueue.remove(batch: batch)
     }
     
-    func persistEvents() {
-        // TODO: Persist eventQueue to file
-    }
+    func persistEvents() { }
     
     func sendEvents(minBatchSize: Int = 1) {
         guard uploadTask == nil else {

@@ -26,7 +26,6 @@ struct HTTPPlugin: Plugin {
         switch action {
         case let a as AddAuthorizerAction:
             var nextState = state
-            // TODO: Ensure an authorizer can only be added once
             nextState.authorizers.append(a.authorizer)
             return nextState
         default:
