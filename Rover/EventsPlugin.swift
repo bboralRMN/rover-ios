@@ -20,7 +20,7 @@ struct EventsPlugin: Plugin {
         
     }
     
-    static func reduce(state: EventsManager, action: Action, resolver: Resolver) -> EventsManager {
+    @discardableResult static func reduce(state: EventsManager, action: Action, resolver: Resolver) -> EventsManager {
         switch action {
         case let action as AddContextProviderAction:
             state.contextProviders.append(action.contextProvider)

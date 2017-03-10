@@ -53,9 +53,9 @@ extension Rover: Reducer {
                 return map
             }
             
-            var nextPlugins = pluginMap
-            nextPlugins[key] = key.pluginType.reduce(state: state, action: action, resolver: self)
-            return nextPlugins
+            var nextMap = map
+            nextMap[key] = key.pluginType.reduce(state: state, action: action, resolver: self)
+            return nextMap
         })
     }
 }
