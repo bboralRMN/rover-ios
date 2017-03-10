@@ -33,20 +33,3 @@ struct HTTPPlugin: Plugin {
         }
     }
 }
-
-// MARK: Actions
-
-struct AddAuthorizerAction: Action {
-    
-    let authorizer: Authorizer
-}
-
-// MARK: Rover Extensions
-
-extension Rover {
-    
-    func addAuthorizer(_ authorizer: Authorizer) {
-        let action = AddAuthorizerAction(authorizer: authorizer)
-        reduce(action: action)
-    }
-}

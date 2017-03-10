@@ -35,36 +35,3 @@ struct EventsPlugin: Plugin {
         return state
     }
 }
-
-// MARK: Actions
-
-struct AddContextProviderAction: Action {
-    
-    let contextProvider: ContextProvider
-}
-
-// MARK: Rover Extensions
-
-extension Rover {
-
-    public func addContextProvider(_ contextProvider: ContextProvider) {
-        let action = AddContextProviderAction(contextProvider: contextProvider)
-        reduce(action: action)
-    }
-    
-    public func trackEvent(name: String, attributes: Attributes? = nil) {
-        guard let eventsManager = resolve(EventsPlugin.self) else {
-            return
-        }
-        
-        eventsManager.trackEvent(name: name, attributes: attributes)
-    }
-
-    public func flushEvents() {
-        guard let eventsManager = resolve(EventsPlugin.self) else {
-            return
-        }
-        
-        eventsManager.flushEvents()
-    }
-}
