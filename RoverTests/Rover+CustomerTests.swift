@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import RoverData
 
 @testable import Rover
 
@@ -24,6 +25,21 @@ class Rover_CustomerTests: XCTestCase {
         rover.setCustomerID("giberish")
         customer = rover.resolve(CustomerPlugin.self)!
         XCTAssertEqual(customer.customerID, "giberish")
+    }
+    
+    func testUpdateCustomer() {
+        let rover = Rover()
+        let httpFactory = HTTPFactory()
+        rover.register(HTTPPlugin.self, initialState: httpFactory)
+        
+        let eventsManager = EventsManager(taskFactory: httpFactory)
+        rover.register(EventsPlugin.self, initialState: eventsManager)
+        XCTAssertEqual(eventsManager.eventQueue.count, 0)
+        
+        let update = CustomerUpdate.setFirstName(value: "Marie")
+        rover.updateCustomer([update])
+        eventsManager.serialQueue.waitUntilAllOperationsAreFinished()
+        XCTAssertEqual(eventsManager.eventQueue.count, 1)
     }
 }
 

@@ -20,4 +20,9 @@ extension Rover {
         
         addAuthorizer(authorizer)
     }
+    
+    public func updateCustomer(_ updates: [CustomerUpdate]) {
+        let attributes = ["updates": updates.map { $0.serialized }]
+        trackEvent(name: "Customer Update", attributes: attributes)
+    }
 }
