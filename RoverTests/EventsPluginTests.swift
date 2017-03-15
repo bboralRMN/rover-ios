@@ -58,11 +58,11 @@ class EventsPluginTests: XCTestCase {
     }    
 }
 
-fileprivate class MockEventsFactory: EventTaskFactory {
+fileprivate class MockEventsFactory: EventsTaskFactory {
     
     var trackEventsWasCalled = false
     
-    fileprivate func trackEventsTask(events: [EventInputType], completionHandler: ((TrackEventsResult) -> Void)?) -> HTTPTask {
+    fileprivate func trackEventsTask(events: [EventInput], completionHandler: ((TrackEventsResult) -> Void)?) -> HTTPTask {
         
         trackEventsWasCalled = true
         

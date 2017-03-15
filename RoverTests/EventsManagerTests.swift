@@ -261,7 +261,7 @@ class EventsManagerTests: XCTestCase {
 
 // MARK: MockTaskFactory
 
-class MockTaskFactory: EventTaskFactory {
+class MockTaskFactory: EventsTaskFactory {
     
     var result: TrackEventsResult
     
@@ -272,7 +272,7 @@ class MockTaskFactory: EventTaskFactory {
         self.delay = delay
     }
     
-    func trackEventsTask(events: [EventInputType], completionHandler: ((TrackEventsResult) -> Void)?) -> HTTPTask {
+    func trackEventsTask(events: [EventInput], completionHandler: ((TrackEventsResult) -> Void)?) -> HTTPTask {
         return MockTask(delay: delay) {
             completionHandler?(self.result)
         }

@@ -30,4 +30,4 @@ public struct Event {
     }
 }
 
-extension Event: EventInputType { }
+extension Event: EventInput { }

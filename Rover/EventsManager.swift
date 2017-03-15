@@ -27,7 +27,7 @@ public class EventsManager {
         return q
     }()
     
-    var taskFactory: EventTaskFactory
+    var taskFactory: EventsTaskFactory
     
     var contextProviders: [ContextProvider]
     
@@ -45,7 +45,7 @@ public class EventsManager {
     
     var timer: Timer?
     
-    public convenience init(taskFactory: EventTaskFactory,
+    public convenience init(taskFactory: EventsTaskFactory,
                             contextProviders: [ContextProvider]? = nil,
                             flushAt: Int? = nil,
                             flushInterval: Double? = nil,
@@ -62,7 +62,7 @@ public class EventsManager {
                   notificationCenter: nil)
     }
     
-    init(taskFactory: EventTaskFactory,
+    init(taskFactory: EventsTaskFactory,
          contextProviders: [ContextProvider]?,
          flushAt: Int?,
          flushInterval: Double?,
