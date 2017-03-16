@@ -12,10 +12,6 @@ import RoverData
 
 struct CustomerPlugin: Plugin {
     
-    static var dependencies: [AnyPlugin.Type] {
-        return [AnyPlugin.Type]()
-    }
-    
     static func register(dispatcher: Any) {
         
     }

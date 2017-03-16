@@ -12,7 +12,7 @@ struct EventsPlugin: Plugin {
     
     typealias State = EventsManager
     
-    static var dependencies: [AnyPlugin.Type] {
+    static var dependencies: [AnyPlugin.Type]? {
         return [HTTPPlugin.self]
     }
     

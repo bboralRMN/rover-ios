@@ -14,13 +14,19 @@ import RoverLogger
 
 protocol AnyPlugin {
     
-    static var dependencies: [AnyPlugin.Type] { get }
+    static var dependencies: [AnyPlugin.Type]? { get }
     
     static func register(dispatcher: Any)
     
     static func reduce(state: Any, action: Action, resolver: Resolver) -> Any
 }
 
+extension AnyPlugin {
+    
+    static var dependencies: [AnyPlugin.Type]? {
+        return nil
+    }
+}
 protocol Plugin: AnyPlugin {
     
     associatedtype State

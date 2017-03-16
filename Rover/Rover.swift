@@ -29,14 +29,16 @@ extension Rover: Container {
             return
         }
         
-        let isDependenciesMet = T.dependencies.reduce(true) { (result, pluginType) -> Bool in
-            let key = PluginKey(pluginType: pluginType, name: nil)
-            return result && registeredPlugins.contains(key)
-        }
-        
-        guard isDependenciesMet else {
-            logger.error("Unmet dependencies found while registering plugin: \(pluginType)")
-            return
+        if let dependencies = T.dependencies {
+            let isDependenciesMet = dependencies.reduce(true) { (result, pluginType) -> Bool in
+                let key = PluginKey(pluginType: pluginType, name: nil)
+                return result && registeredPlugins.contains(key)
+            }
+            
+            if !isDependenciesMet {
+                logger.error("Unmet dependencies found while registering plugin: \(pluginType)")
+                return
+            }
         }
         
         pluginMap[key] = initialState
