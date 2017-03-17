@@ -100,8 +100,8 @@ fileprivate struct StringPlugin: Plugin {
     
     typealias State = String
     
-    static var dependencies: [AnyPlugin.Type] {
-        return [AnyPlugin.Type]()
+    static func isChanged(by action: Action) -> Bool {
+        return false
     }
     
     static func register(dispatcher: Any) {
@@ -112,7 +112,6 @@ fileprivate struct StringPlugin: Plugin {
         reduceWasCalled = true
         var nextState = state
         let character = nextState.remove(at: state.index(before: state.endIndex))
-        print("SEANTEST \(character)\(nextState)")
         return "\(character)\(nextState)"
     }
 }
@@ -123,8 +122,12 @@ fileprivate struct IntPlugin: Plugin {
     
     typealias State = Int
     
-    static var dependencies: [AnyPlugin.Type] {
+    static var dependencies: [AnyPlugin.Type]? {
         return [StringPlugin.self]
+    }
+    
+    static func isChanged(by action: Action) -> Bool {
+        return false
     }
     
     static func register(dispatcher: Any) {
