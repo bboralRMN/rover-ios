@@ -18,6 +18,15 @@ struct HTTPPlugin: Plugin {
         
     }
     
+    static func isChanged(by action: Action) -> Bool {
+        switch action {
+        case _ as AddAuthorizerAction:
+            return true
+        default:
+            return false
+        }
+    }
+    
     static func reduce(state: HTTPFactory, action: Action, resolver: Resolver) -> HTTPFactory {
         switch action {
         case let a as AddAuthorizerAction:

@@ -20,6 +20,15 @@ struct EventsPlugin: Plugin {
         
     }
     
+    static func isChanged(by action: Action) -> Bool {
+        switch action {
+        case _ as AddContextProviderAction:
+            return true
+        default:
+            return false
+        }
+    }
+    
     @discardableResult static func reduce(state: EventsManager, action: Action, resolver: Resolver) -> EventsManager {
         switch action {
         case let action as AddContextProviderAction:
@@ -28,7 +37,7 @@ struct EventsPlugin: Plugin {
             break
         }
         
-        if let httpFactory = resolver.resolve(HTTPPlugin.self) {
+        if HTTPPlugin.isChanged(by: action), let httpFactory = resolver.resolve(HTTPPlugin.self) {
             state.taskFactory = httpFactory
         }
         

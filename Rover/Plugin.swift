@@ -18,6 +18,8 @@ protocol AnyPlugin {
     
     static func register(dispatcher: Any)
     
+    static func isChanged(by action: Action) -> Bool
+    
     static func reduce(state: Any, action: Action, resolver: Resolver) -> Any
 }
 

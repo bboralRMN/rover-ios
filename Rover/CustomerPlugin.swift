@@ -16,6 +16,15 @@ struct CustomerPlugin: Plugin {
         
     }
     
+    static func isChanged(by action: Action) -> Bool {
+        switch action {
+        case _ as SetCustomerIDAction:
+            return true
+        default:
+            return false
+        }
+    }
+    
     static func reduce(state: Customer, action: Action, resolver: Resolver) -> Customer {
         switch action {
         case let action as SetCustomerIDAction:
