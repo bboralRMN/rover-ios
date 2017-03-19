@@ -10,14 +10,14 @@ import Foundation
 
 protocol Resolver {
     
-    func resolve<T: Plugin>(_ pluginType: T.Type, name: String?) -> T.State?
+    func resolve<T: Service>(_ serviceType: T.Type, name: String?) -> T?
     
-    func resolve<T: Plugin>(_ pluginType: T.Type) -> T.State?
+    func resolve<T: Service>(_ serviceType: T.Type) -> T?
 }
 
 extension Resolver {
     
-    func resolve<T: Plugin>(_ pluginType: T.Type) -> T.State? {
-        return resolve(pluginType, name: nil)
+    func resolve<T: Service>(_ serviceType: T.Type) -> T? {
+        return resolve(serviceType, name: nil)
     }
 }

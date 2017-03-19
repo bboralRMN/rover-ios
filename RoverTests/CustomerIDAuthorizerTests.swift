@@ -16,7 +16,8 @@ class CustomerIDAuthorizerTests: XCTestCase {
         let authorizer = CustomerIDAuthorizer(customerID: "giberish")
         let url = URL(string: "http://example.com")!
         let request = URLRequest(url: url)
-        let result = authorizer.authorize(request)
-        XCTAssertEqual(result.allHTTPHeaderFields!["x-rover-customer-id"], "giberish")
+        let authorizedRequest = authorizer.authorize(request)
+        let header = authorizedRequest.value(forHTTPHeaderField: "x-rover-customer-id")
+        XCTAssertEqual(header, "giberish")
     }
 }

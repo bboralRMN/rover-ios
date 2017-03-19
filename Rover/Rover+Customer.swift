@@ -11,14 +11,12 @@ import Foundation
 extension Rover {
     
     public func setCustomerID(_ customerID: String) {
-        let action = SetCustomerIDAction(customerID: customerID)
-        reduce(action: action)
+        let action = IdentifyCustomerAction(customerID: customerID)
+        dispatch(action: action)
         
-        guard let authorizer = resolve(CustomerPlugin.self)?.authorizer else {
-            return
+        if let customer = resolve(Customer.self), let authorizer = customer.authorizer {
+            addAuthorizer(authorizer)
         }
-        
-        addAuthorizer(authorizer)
     }
     
     public func updateCustomer(_ updates: [CustomerUpdate]) {

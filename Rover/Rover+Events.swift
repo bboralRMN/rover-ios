@@ -12,11 +12,11 @@ extension Rover {
     
     public func addContextProvider(_ contextProvider: ContextProvider) {
         let action = AddContextProviderAction(contextProvider: contextProvider)
-        reduce(action: action)
+        dispatch(action: action)
     }
     
     public func trackEvent(name: String, attributes: Attributes? = nil) {
-        guard let eventsManager = resolve(EventsPlugin.self) else {
+        guard let eventsManager = resolve(EventsManager.self) else {
             return
         }
         
@@ -24,7 +24,7 @@ extension Rover {
     }
     
     public func flushEvents() {
-        guard let eventsManager = resolve(EventsPlugin.self) else {
+        guard let eventsManager = resolve(EventsManager.self) else {
             return
         }
         

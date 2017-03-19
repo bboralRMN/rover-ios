@@ -14,132 +14,147 @@ class RoverTests: XCTestCase {
     
     func testSavesRegistrationToMap() {
         let rover = Rover()
-        XCTAssertEqual(rover.pluginMap.count, 0)
+        XCTAssertEqual(rover.serviceMap.count, 0)
         
-        rover.register(StringPlugin.self, initialState: "giberish")
-        XCTAssertEqual(rover.pluginMap.count, 1)
+        let store = StringStore()
+        rover.register(String.self, store: store)
+        XCTAssertEqual(rover.serviceMap.count, 1)
         
-        let key = PluginKey(pluginType: StringPlugin.self, name: nil)
-        XCTAssertEqual(rover.pluginMap[key] as! String, "giberish")
+        let key = ServiceKey(serviceType: String.self, name: nil)
+        XCTAssertEqual(rover.serviceMap[key]?.currentState as! String, "giberish")
     }
     
     func testSavesRegistrationToArray() {
         let rover = Rover()
-        XCTAssertEqual(rover.registeredPlugins.count, 0)
+        XCTAssertEqual(rover.registeredServices.count, 0)
         
-        rover.register(StringPlugin.self, initialState: "giberish")
-        XCTAssertEqual(rover.registeredPlugins.count, 1)
+        let store = StringStore()
+        rover.register(String.self, store: store)
+        XCTAssertEqual(rover.registeredServices.count, 1)
         
-        let key = PluginKey(pluginType: StringPlugin.self, name: nil)
-        XCTAssertEqual(rover.registeredPlugins.first!, key)
+        let key = ServiceKey(serviceType: String.self, name: nil)
+        XCTAssertEqual(rover.registeredServices.first!, key)
     }
     
-    func testCantRegisterSamePluginTwice() {
+    func testCantRegisterSameServiceTwice() {
         let rover = Rover()
-        XCTAssertEqual(rover.pluginMap.count, 0)
+        XCTAssertEqual(rover.serviceMap.count, 0)
         
-        rover.register(StringPlugin.self, initialState: "giberish")
-        XCTAssertEqual(rover.pluginMap.count, 1)
+        let store = StringStore()
+        rover.register(String.self, store: store)
+        XCTAssertEqual(rover.serviceMap.count, 1)
         
-        rover.register(StringPlugin.self, initialState: "giberish")
-        XCTAssertEqual(rover.pluginMap.count, 1)
+        let anotherStore = StringStore()
+        rover.register(String.self, store: anotherStore)
+        XCTAssertEqual(rover.serviceMap.count, 1)
         
-        rover.register(IntPlugin.self, initialState: 1)
-        XCTAssertEqual(rover.pluginMap.count, 2)
+        rover.register(String.self, store: store, name: "foo")
+        XCTAssertEqual(rover.serviceMap.count, 2)
+        
+        let differentStore = IntStore()
+        rover.register(Int.self, store: differentStore)
+        XCTAssertEqual(rover.serviceMap.count, 3)
     }
     
-    func testCantRegisterWithUnmetDependencies() {
+    func testReturnsNilForMissingService() {
         let rover = Rover()
-        XCTAssertEqual(rover.pluginMap.count, 0)
-        
-        rover.register(IntPlugin.self, initialState: 1)
-        XCTAssertEqual(rover.pluginMap.count, 0)
-        
-        rover.register(StringPlugin.self, initialState: "giberish")
-        XCTAssertEqual(rover.pluginMap.count, 1)
-        
-        rover.register(IntPlugin.self, initialState: 1)
-        XCTAssertEqual(rover.pluginMap.count, 2)
-    }
-    
-    func testReturnsNilForMissingPlugin() {
-        let rover = Rover()
-        let state = rover.resolve(StringPlugin.self)
+        let state = rover.resolve(String.self)
         XCTAssertNil(state)
     }
     
-    func testReturnsStateForRegisteredPlugin() {
+    func testReturnsStateForRegisteredService() {
         let rover = Rover()
-        rover.register(StringPlugin.self, initialState: "giberish")
-        let state = rover.resolve(StringPlugin.self)
+        
+        let store = StringStore()
+        rover.register(String.self, store: store)
+        
+        let state = rover.resolve(String.self)
         XCTAssertEqual(state, "giberish")
     }
     
     func testReducesEachRegisteredPlugin() {
         let rover = Rover()
-        rover.register(StringPlugin.self, initialState: "giberish")
-        rover.register(IntPlugin.self, initialState: 1)
-        XCTAssertFalse(StringPlugin.reduceWasCalled)
-        XCTAssertFalse(IntPlugin.reduceWasCalled)
+        
+        let stringStore = StringStore()
+        rover.register(String.self, store: stringStore)
+        
+        let intStore = IntStore()
+        rover.register(Int.self, store: intStore)
+        
+        XCTAssertFalse(stringStore.reduceWasCalled)
+        XCTAssertFalse(intStore.reduceWasCalled)
         
         let action = MockAction()
-        rover.reduce(action: action)
-        XCTAssertTrue(StringPlugin.reduceWasCalled)
-        XCTAssertTrue(IntPlugin.reduceWasCalled)
+        rover.dispatch(action: action)
+        XCTAssertTrue(stringStore.reduceWasCalled)
+        XCTAssertTrue(intStore.reduceWasCalled)
         
-        let string = rover.resolve(StringPlugin.self)
-        let int = rover.resolve(IntPlugin.self)
+        let string = rover.resolve(String.self)
+        let int = rover.resolve(Int.self)
         XCTAssertEqual(string, "hgiberis")
         XCTAssertEqual(int, 2)
     }
 }
 
-fileprivate struct StringPlugin: Plugin {
+fileprivate struct MockAction: Action { }
+
+// MARK: StringStore
+
+fileprivate final class StringStore {
     
-    static var reduceWasCalled = false
+    var string = "giberish"
     
-    typealias State = String
+    var reduceWasCalled = false
+}
+
+extension StringStore: Store {
     
-    static func isChanged(by action: Action) -> Bool {
-        return false
+    var currentState: String? {
+        return string
     }
     
-    static func register(dispatcher: Any) {
-        
+    func register(resolver: Resolver, dispatcher: Dispatcher) -> StringStore {
+        return self
     }
     
-    static func reduce(state: String, action: Action, resolver: Resolver) -> String {
+    func reduce(action: Action, resolver: Resolver) -> StringStore {
+        let character = string.remove(at: string.index(before: string.endIndex))
+        string = "\(character)\(string)"
         reduceWasCalled = true
-        var nextState = state
-        let character = nextState.remove(at: state.index(before: state.endIndex))
-        return "\(character)\(nextState)"
+        return self
+    }
+    
+    func isChanged(by action: Action) -> Bool {
+        return false
     }
 }
 
-fileprivate struct IntPlugin: Plugin {
+// MARK: IntStore
+
+fileprivate final class IntStore {
     
-    static var reduceWasCalled = false
+    var int = 1
     
-    typealias State = Int
-    
-    static var dependencies: [AnyPlugin.Type]? {
-        return [StringPlugin.self]
-    }
-    
-    static func isChanged(by action: Action) -> Bool {
-        return false
-    }
-    
-    static func register(dispatcher: Any) {
-        
-    }
-    
-    static func reduce(state: Int, action: Action, resolver: Resolver) -> Int {
-        reduceWasCalled = true
-        return state + 1
-    }
+    var reduceWasCalled = false
 }
 
-fileprivate struct MockAction: Action {
+extension IntStore: Store {
     
+    var currentState: Int? {
+        return int
+    }
+    
+    func register(resolver: Resolver, dispatcher: Dispatcher) -> IntStore {
+        return self
+    }
+    
+    func reduce(action: Action, resolver: Resolver) -> IntStore {
+        int = int + 1
+        reduceWasCalled = true
+        return self
+    }
+    
+    func isChanged(by action: Action) -> Bool {
+        return false
+    }
 }

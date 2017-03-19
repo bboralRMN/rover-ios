@@ -1,5 +1,5 @@
 //
-//  Rover+HTTPTests.swift
+//  Rover+DataTests.swift
 //  Rover
 //
 //  Created by Sean Rucker on 2017-03-10.
@@ -11,19 +11,22 @@ import RoverData
 
 @testable import Rover
 
-class Rover_HTTPTests: XCTestCase {
+class Rover_DataTests: XCTestCase {
 
     func testAddAuthorizer() {
         let rover = Rover()
         
-        var factory = HTTPFactory()
-        rover.register(HTTPPlugin.self, initialState: factory)
-        factory = rover.resolve(HTTPPlugin.self)!
+        let store = DataStore()
+        rover.register(HTTPFactory.self, store: store)
+        
+        let factory = rover.resolve(HTTPFactory.self)!
         XCTAssertEqual(factory.authorizers.count, 0)
         
         let authorizer = DeviceIDAuthorizer()
         rover.addAuthorizer(authorizer)
-        factory = rover.resolve(HTTPPlugin.self)!
-        XCTAssertEqual(factory.authorizers.count, 1)
+        let nextFactory = rover.resolve(HTTPFactory.self)!
+        XCTAssertEqual(nextFactory.authorizers.count, 1)
     }
+    
+    // TODO: Test Sync
 }

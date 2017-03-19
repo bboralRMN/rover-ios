@@ -12,7 +12,7 @@ import RoverData
 
 protocol Assembler {
     
-    func assemble(container: Container)
+    func assemble(rover: Rover)
 }
 
 // MARK: DefaultAssembler
@@ -28,21 +28,23 @@ public struct DefaultAssembler {
 
 extension DefaultAssembler: Assembler {
 
-    func assemble(container: Container) {
-        let customer = Customer()
-        container.register(CustomerPlugin.self, initialState: customer)
+    func assemble(rover: Rover) {
+        rover.register(Customer.self, store: CustomerStore())
+        rover.register(HTTPFactory.self, store: DataStore())
+        rover.register(EventsManager.self, store: EventsStore())
         
         var authorizers: [Authorizer] = [
             AccountTokenAuthorizer(accountToken: accountToken),
             DeviceIDAuthorizer()
         ]
         
-        if let customerIDAuthorizer = customer.authorizer {
-            authorizers.append(customerIDAuthorizer)
+        if let customer = rover.resolve(Customer.self, name: nil), let authorizer = customer.authorizer {
+            authorizers.append(authorizer)
         }
-        
-        let httpFactory = HTTPFactory(authorizers: authorizers)
-        container.register(HTTPPlugin.self, initialState: httpFactory)
+
+        for authorizer in authorizers {
+            rover.addAuthorizer(authorizer)
+        }
         
         let frameworkIdentifiers = [
             "io.rover.Rover",
@@ -60,8 +62,9 @@ extension DefaultAssembler: Assembler {
             TimeZoneContextProvider(),
             ReachabilityContextProvider()
         ]
-        
-        let eventsManager = EventsManager(taskFactory: httpFactory, contextProviders: contextProviders)
-        container.register(EventsPlugin.self, initialState: eventsManager)
+
+        for contextProvider in contextProviders {
+            rover.addContextProvider(contextProvider)
+        }
     }
 }

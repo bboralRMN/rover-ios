@@ -12,26 +12,17 @@ import RoverData
 
 struct Customer {
     
-    var storage: CustomerIDStorage
+    let customerID: String?
     
-    public init() {
-        self.init(storage: nil)
-    }
-    
-    init(storage: CustomerIDStorage?) {
-        self.storage = storage ?? UserDefaults.standard
+    init(customerID: String? = nil) {
+        self.customerID = customerID
     }
 }
 
-extension Customer {
+extension Customer: Equatable {
     
-    var customerID: String? {
-        get {
-            return storage.customerID
-        }
-        set {
-            storage.customerID = newValue
-        }
+    static func == (lhs: Customer, rhs: Customer) -> Bool {
+        return lhs.customerID == rhs.customerID
     }
     
     var authorizer: Authorizer? {
@@ -40,22 +31,5 @@ extension Customer {
         }
         
         return CustomerIDAuthorizer(customerID: customerID)
-    }
-}
-
-protocol CustomerIDStorage {
-    
-    var customerID: String? { get set }
-}
-
-extension UserDefaults: CustomerIDStorage {
-    
-    var customerID: String? {
-        get {
-            return string(forKey: "io.rover.customerID")
-        }
-        set {
-            set(newValue, forKey: "io.rover.customerID")
-        }
     }
 }

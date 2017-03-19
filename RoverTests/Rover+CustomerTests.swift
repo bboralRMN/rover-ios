@@ -15,39 +15,95 @@ class Rover_CustomerTests: XCTestCase {
 
     func testSetCustomerID() {
         let rover = Rover()
-        let storage = MockStorage()
-        var customer = Customer(storage: storage)
-        rover.register(CustomerPlugin.self, initialState: customer)
         
-        customer = rover.resolve(CustomerPlugin.self)!
+        let dataStore = DataStore()
+        rover.register(HTTPFactory.self, store: dataStore)
+        
+        let localStorage = MockStorage()
+        let customerStore = CustomerStore(localStorage: localStorage)
+        rover.register(Customer.self, store: customerStore)
+        
+        let httpFactory = rover.resolve(HTTPFactory.self)!
+        XCTAssertEqual(httpFactory.authorizers.count, 0)
+        
+        let customer = rover.resolve(Customer.self)!
         XCTAssertNil(customer.customerID)
         
         rover.setCustomerID("giberish")
-        customer = rover.resolve(CustomerPlugin.self)!
-        XCTAssertEqual(customer.customerID, "giberish")
+        
+        let nextHTTPFactory = rover.resolve(HTTPFactory.self)!
+        XCTAssertEqual(nextHTTPFactory.authorizers.count, 1)
+        
+        let nextCustomer = rover.resolve(Customer.self)!
+        XCTAssertEqual(nextCustomer.customerID, "giberish")
     }
     
     func testUpdateCustomer() {
         let rover = Rover()
-        let httpFactory = HTTPFactory()
-        rover.register(HTTPPlugin.self, initialState: httpFactory)
         
-        let eventsManager = EventsManager(taskFactory: httpFactory)
-        rover.register(EventsPlugin.self, initialState: eventsManager)
-        XCTAssertEqual(eventsManager.eventQueue.count, 0)
+        let taskFactory = MockEventsTaskFactory()
+        let eventsManager = EventsManager(taskFactory: taskFactory, flushAt: 1)
+        let eventsStore = EventsStore { resolver, dispatcher in
+            return EventsStore(eventsManager: eventsManager)
+        }
+        rover.register(EventsManager.self, store: eventsStore)
         
         let update = CustomerUpdate.setFirstName(value: "Marie")
         rover.updateCustomer([update])
         eventsManager.serialQueue.waitUntilAllOperationsAreFinished()
-        XCTAssertEqual(eventsManager.eventQueue.count, 1)
+        
+        let event = taskFactory.firstEvent!
+        XCTAssertEqual(event.name, "Customer Update")
+        
+        let updates = event.attributes!["updates"] as! [[String: Any]]
+        let serialized = updates.first!
+        XCTAssertEqual(serialized["action"] as! String, "set")
+        XCTAssertEqual(serialized["key"] as! String, "firstName")
+        XCTAssertEqual(serialized["value"] as! String, "Marie")
     }
 }
 
-fileprivate struct MockStorage: CustomerIDStorage {
+fileprivate class MockStorage: LocalStorage {
     
     var customerID: String?
     
     init(customerID: String? = nil) {
         self.customerID = customerID
+    }
+    
+    func string(forKey defaultName: String) -> String? {
+        return customerID
+    }
+    
+    func set(_ value: Any?, forKey defaultName: String) {
+        customerID = value as? String
+    }
+}
+
+fileprivate class MockEventsTaskFactory: EventsTaskFactory {
+    
+    var firstEvent: EventInput?
+    
+    func trackEventsTask(events: [EventInput], completionHandler: ((TrackEventsResult) -> Void)?) -> HTTPTask {
+        firstEvent = events.first
+        
+        return MockTask {
+            completionHandler?(TrackEventsResult.success)
+        }
+    }
+}
+
+fileprivate class MockTask: HTTPTask {
+    
+    var block: (() -> Void)?
+    
+    init(block: (() -> Void)? = nil) {
+        self.block = block
+    }
+    
+    func cancel() { }
+    
+    func resume() {
+        block?()
     }
 }
