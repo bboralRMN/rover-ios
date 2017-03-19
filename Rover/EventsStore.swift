@@ -57,7 +57,9 @@ extension EventsStore: Store {
             break
         }
         
-        if let httpFactory = resolver.resolve(HTTPFactory.self)/*, httpFactory.isChanged(by: action)*/ {
+        // TODO: Only update this if it has changed
+        
+        if let httpFactory = resolver.resolve(HTTPFactory.self) {
             state.taskFactory = httpFactory
         }
         
