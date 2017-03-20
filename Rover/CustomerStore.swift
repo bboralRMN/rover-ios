@@ -8,6 +8,7 @@
 
 import Foundation
 import RoverData
+import RoverLogger
 
 struct CustomerStore {
     
@@ -37,8 +38,44 @@ extension CustomerStore: Store {
         switch action {
         case let action as IdentifyCustomerAction:
             self.localStorage.set(action.customerID, forKey: "io.rover.customerID")
-            let customer = Customer(customerID: action.customerID)
-            return CustomerStore(customer: customer, localStorage: localStorage)
+            
+            let nextCustomer = Customer(customerID: action.customerID,
+                                        firstName: customer?.firstName,
+                                        lastName: customer?.lastName,
+                                        email: customer?.email,
+                                        gender: customer?.gender,
+                                        age: customer?.age,
+                                        phoneNumber: customer?.phoneNumber,
+                                        tags: customer?.tags,
+                                        traits: customer?.traits)
+            
+            return CustomerStore(customer: nextCustomer, localStorage: localStorage)
+        case let action as SyncCompleteAction:
+            switch action.syncResult {
+            case .success(let customer):
+                if let customerID = self.customer?.customerID {
+                    guard customer.customerID == customerID else {
+                        logger.error("Unexpected customer ID found in SyncResult")
+                        return self
+                    }
+                } else {
+                    self.localStorage.set(customer.customerID, forKey: "io.rover.customerID")
+                }
+                
+                let nextCustomer = Customer(customerID: customer.customerID,
+                                            firstName: customer.firstName,
+                                            lastName: customer.lastName,
+                                            email: customer.email,
+                                            gender: customer.gender,
+                                            age: customer.age,
+                                            phoneNumber: customer.phoneNumber,
+                                            tags: customer.tags,
+                                            traits: customer.traits)
+                
+                return CustomerStore(customer: nextCustomer, localStorage: localStorage)
+            default:
+                return self
+            }
         default:
             return self
         }
