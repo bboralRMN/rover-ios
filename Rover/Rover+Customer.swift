@@ -23,4 +23,8 @@ extension Rover {
         let attributes = ["updates": updates.map { $0.serialized }]
         trackEvent(name: "Customer Update", attributes: attributes)
     }
+    
+    public func getCustomer() -> Customer? {
+        return resolve(Customer.self, name: nil)
+    }
 }

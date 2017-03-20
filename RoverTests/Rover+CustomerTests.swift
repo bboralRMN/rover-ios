@@ -61,6 +61,17 @@ class Rover_CustomerTests: XCTestCase {
         XCTAssertEqual(serialized["key"] as! String, "firstName")
         XCTAssertEqual(serialized["value"] as! String, "Marie")
     }
+    
+    func testGetCustomer() {
+        let rover = Rover()
+        
+        let localStorage = MockStorage(customerID: "giberish")
+        let customerStore = CustomerStore(localStorage: localStorage)
+        rover.register(Customer.self, store: customerStore)
+        
+        let customer = rover.getCustomer()
+        XCTAssertEqual(customer?.customerID, "giberish")
+    }
 }
 
 fileprivate class MockStorage: LocalStorage {

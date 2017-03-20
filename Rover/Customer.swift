@@ -9,25 +9,25 @@
 import Foundation
 import RoverData
 
-struct Customer {
+public struct Customer {
     
-    let customerID: String?
+    public let customerID: String?
     
-    let firstName: String?
+    public let firstName: String?
     
-    let lastName: String?
+    public let lastName: String?
     
-    let email: String?
+    public let email: String?
     
-    let gender: SyncResult.Gender?
+    public let gender: SyncResult.Gender?
     
-    var age: Int?
+    public let age: Int?
     
-    var phoneNumber: String?
+    public let phoneNumber: String?
     
-    var tags: [String]?
+    public let tags: [String]?
     
-    var traits: JSON?
+    public let traits: JSON?
     
     init(customerID: String? = nil,
          firstName: String? = nil,
