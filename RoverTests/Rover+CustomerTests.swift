@@ -16,7 +16,7 @@ class Rover_CustomerTests: XCTestCase {
     func testSetCustomerID() {
         let rover = Rover()
         
-        let dataStore = DataStore()
+        let dataStore = DataStore(accountToken: "giberish")
         rover.register(HTTPFactory.self, store: dataStore)
         
         let localStorage = MockStorage()
@@ -24,7 +24,7 @@ class Rover_CustomerTests: XCTestCase {
         rover.register(Customer.self, store: customerStore)
         
         let httpFactory = rover.resolve(HTTPFactory.self)!
-        XCTAssertEqual(httpFactory.authorizers.count, 0)
+        XCTAssertEqual(httpFactory.authHeaders.count, 2)
         
         let customer = rover.resolve(Customer.self)!
         XCTAssertNil(customer.customerID)
@@ -32,7 +32,7 @@ class Rover_CustomerTests: XCTestCase {
         rover.setCustomerID("giberish")
         
         let nextHTTPFactory = rover.resolve(HTTPFactory.self)!
-        XCTAssertEqual(nextHTTPFactory.authorizers.count, 1)
+        XCTAssertEqual(nextHTTPFactory.authHeaders.count, 3)
         
         let nextCustomer = rover.resolve(Customer.self)!
         XCTAssertEqual(nextCustomer.customerID, "giberish")

@@ -15,7 +15,7 @@ import RoverData
 class DataStoreTests: XCTestCase {
     
     func testRegister() {
-        let store = DataStore()
+        let store = DataStore(accountToken: "giberish")
         XCTAssertNil(store.currentState)
         
         let resolver = MockResolver()
@@ -27,31 +27,23 @@ class DataStoreTests: XCTestCase {
     func testNoOpAction() {
         let resolver = MockResolver()
         let dispatcher = MockDispatcher()
-        let store = DataStore().register(resolver: resolver, dispatcher: dispatcher)
-        XCTAssertEqual(store.currentState!.authorizers.count, 0)
+        let store = DataStore(accountToken: "giberish").register(resolver: resolver, dispatcher: dispatcher)
         
         let action = MockAction()
         let nextStore = store.reduce(action: action, resolver: resolver)
-        XCTAssertEqual(nextStore.currentState!.authorizers.count, 0)
+        XCTAssertEqual(store.currentState, nextStore.currentState)
     }
     
     func testAddAuthorizer() {
         let resolver = MockResolver()
         let dispatcher = MockDispatcher()
-        let store = DataStore().register(resolver: resolver, dispatcher: dispatcher)
-        XCTAssertEqual(store.currentState!.authorizers.count, 0)
+        let store = DataStore(accountToken: "giberish").register(resolver: resolver, dispatcher: dispatcher)
+        XCTAssertEqual(store.currentState!.authHeaders.count, 2)
         
-        let authorizer = MockAuthorizer()
-        let action = AddAuthorizerAction(authorizer: authorizer)
+        let authHeader = AuthHeader(headerField: "foo", value: "bar")
+        let action = AddAuthHeaderAction(authHeader: authHeader)
         let nextStore = store.reduce(action: action, resolver: resolver)
-        XCTAssertEqual(nextStore.currentState!.authorizers.count, 1)
-    }
-}
-
-fileprivate struct MockAuthorizer: Authorizer {
-    
-    fileprivate func authorize(_ request: URLRequest) -> URLRequest {
-        return request
+        XCTAssertEqual(nextStore.currentState!.authHeaders.count, 3)
     }
 }
 

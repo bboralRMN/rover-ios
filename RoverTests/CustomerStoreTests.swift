@@ -120,13 +120,6 @@ fileprivate class MockStorage: LocalStorage {
     }
 }
 
-fileprivate struct MockAuthorizer: Authorizer {
-    
-    fileprivate func authorize(_ request: URLRequest) -> URLRequest {
-        return request
-    }
-}
-
 fileprivate struct MockAction: Action { }
 
 fileprivate struct MockResolver: Resolver {

@@ -14,15 +14,11 @@ class CustomerTests: XCTestCase {
     
     func testAuthorizer() {
         let anonymousCustomer = Customer()
-        XCTAssertNil(anonymousCustomer.authorizer)
+        XCTAssertNil(anonymousCustomer.authHeader)
         
         let identifiedCustomer = Customer(customerID: "giberish")
-        XCTAssertNotNil(identifiedCustomer.authorizer)
-        
-        let url = URL(string: "http://example.com")!
-        let request = URLRequest(url: url)
-        let authorizedRequest = identifiedCustomer.authorizer!.authorize(request)
-        let header = authorizedRequest.value(forHTTPHeaderField: "x-rover-customer-id")
-        XCTAssertEqual(header, "giberish")
+        let authHeader = identifiedCustomer.authHeader!
+        XCTAssertEqual(authHeader.headerField, "x-rover-customer-id")
+        XCTAssertEqual(authHeader.value, "giberish")
     }
 }

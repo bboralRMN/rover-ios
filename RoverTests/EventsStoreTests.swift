@@ -58,8 +58,8 @@ class EventsStoreTests: XCTestCase {
         let registeredStore = store.register(resolver: resolver, dispatcher: dispatcher)
         XCTAssert(registeredStore.currentState!.taskFactory is MockEventsFactory)
         
-        let authorizer = DeviceIDAuthorizer()
-        let action = AddAuthorizerAction(authorizer: authorizer)
+        let authHeader = AuthHeader(headerField: "foo", value: "bar")
+        let action = AddAuthHeaderAction(authHeader: authHeader)
         let nextStore = registeredStore.reduce(action: action, resolver: resolver)
         XCTAssertTrue(nextStore.currentState!.taskFactory is HTTPFactory)
     }    

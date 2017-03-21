@@ -14,8 +14,8 @@ extension Rover {
         let action = IdentifyCustomerAction(customerID: customerID)
         dispatch(action: action)
         
-        if let customer = resolve(Customer.self), let authorizer = customer.authorizer {
-            addAuthorizer(authorizer)
+        if let customer = resolve(Customer.self), let authHeader = customer.authHeader {
+            addAuthHeader(authHeader)
         }
     }
     

@@ -13,8 +13,8 @@ import RoverLogger
 
 extension Rover {
     
-    func addAuthorizer(_ authorizer: Authorizer) {
-        let action = AddAuthorizerAction(authorizer: authorizer)
+    func addAuthHeader(_ authHeader: AuthHeader) {
+        let action = AddAuthHeaderAction(authHeader: authHeader)
         dispatch(action: action)
     }
     

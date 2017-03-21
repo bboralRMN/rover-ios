@@ -53,11 +53,10 @@ public struct Customer {
 
 extension Customer {
     
-    var authorizer: Authorizer? {
+    var authHeader: AuthHeader? {
         guard let customerID = customerID else {
             return nil
         }
-        
-        return CustomerIDAuthorizer(customerID: customerID)
+        return AuthHeader(headerField: "x-rover-customer-id", value: customerID)
     }
 }

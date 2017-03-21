@@ -30,21 +30,16 @@ extension DefaultAssembler: Assembler {
 
     func assemble(rover: Rover) {
         rover.register(Customer.self, store: CustomerStore())
-        rover.register(HTTPFactory.self, store: DataStore())
+        rover.register(HTTPFactory.self, store: DataStore(accountToken: accountToken))
         rover.register(EventsManager.self, store: EventsStore())
         
-        var authorizers: [Authorizer] = [
-            AccountTokenAuthorizer(accountToken: accountToken),
-            DeviceIDAuthorizer()
-        ]
+        // TODO: Move this into the register function of the CustomerStore
         
-        if let customer = rover.resolve(Customer.self, name: nil), let authorizer = customer.authorizer {
-            authorizers.append(authorizer)
+        if let customer = rover.resolve(Customer.self, name: nil), let authHeader = customer.authHeader {
+            rover.addAuthHeader(authHeader)
         }
-
-        for authorizer in authorizers {
-            rover.addAuthorizer(authorizer)
-        }
+        
+        // TODO: Move this into the register function of the EventsStore
         
         let frameworkIdentifiers = [
             "io.rover.Rover",

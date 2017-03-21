@@ -1,5 +1,5 @@
 //
-//  AddAuthorizerAction.swift
+//  AddAuthHeaderAction.swift
 //  Rover
 //
 //  Created by Sean Rucker on 2017-03-10.
@@ -10,7 +10,7 @@ import Foundation
 
 import RoverData
 
-struct AddAuthorizerAction: Action {
+struct AddAuthHeaderAction: Action {
     
-    let authorizer: Authorizer
+    let authHeader: AuthHeader
 }

@@ -15,21 +15,15 @@
 		DB240A6B1E6F1CB2002C7AC6 /* RoverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB240A6A1E6F1CB2002C7AC6 /* RoverTests.swift */; };
 		DB240A6D1E6F41E6002C7AC6 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB240A6C1E6F41E6002C7AC6 /* Store.swift */; };
 		DB240A6F1E6F421C002C7AC6 /* Assembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB240A6E1E6F421C002C7AC6 /* Assembler.swift */; };
-		DB5976DB1E71C24E00CCB49E /* AccountTokenAuthorizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5976DA1E71C24E00CCB49E /* AccountTokenAuthorizer.swift */; };
-		DB5976DD1E71C2AE00CCB49E /* DeviceTokenAuthorizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5976DC1E71C2AE00CCB49E /* DeviceTokenAuthorizer.swift */; };
 		DB5976E01E71CA7B00CCB49E /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5976DF1E71CA7B00CCB49E /* Customer.swift */; };
 		DB5976E31E71CAAC00CCB49E /* IdentifyCustomerAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5976E21E71CAAC00CCB49E /* IdentifyCustomerAction.swift */; };
-		DB5976E51E71CAD600CCB49E /* CustomerIDAuthorizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5976E41E71CAD600CCB49E /* CustomerIDAuthorizer.swift */; };
 		DB5976E71E71CAEE00CCB49E /* Rover+Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5976E61E71CAEE00CCB49E /* Rover+Customer.swift */; };
 		DB5976EA1E71CBA400CCB49E /* Resolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5976E91E71CBA400CCB49E /* Resolver.swift */; };
 		DB5976EC1E71CC1A00CCB49E /* Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5976EB1E71CC1A00CCB49E /* Container.swift */; };
 		DB5977371E72FA1A00CCB49E /* DataStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5977361E72FA1A00CCB49E /* DataStoreTests.swift */; };
-		DB59773A1E72FD2800CCB49E /* AccountTokenAuthorizerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5977391E72FD2800CCB49E /* AccountTokenAuthorizerTests.swift */; };
-		DB59773C1E72FDD800CCB49E /* DeviceTokenAuthorizerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB59773B1E72FDD800CCB49E /* DeviceTokenAuthorizerTests.swift */; };
 		DB59773F1E7324FE00CCB49E /* CustomerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB59773E1E7324FE00CCB49E /* CustomerTests.swift */; };
 		DB5977411E73449300CCB49E /* CustomerStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5977401E73449300CCB49E /* CustomerStoreTests.swift */; };
-		DB5977431E73460C00CCB49E /* CustomerIDAuthorizerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5977421E73460C00CCB49E /* CustomerIDAuthorizerTests.swift */; };
-		DB5977481E7346B600CCB49E /* AddAuthorizerAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5977471E7346B600CCB49E /* AddAuthorizerAction.swift */; };
+		DB5977481E7346B600CCB49E /* AddAuthHeaderAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5977471E7346B600CCB49E /* AddAuthHeaderAction.swift */; };
 		DB59774A1E7346D400CCB49E /* Rover+Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5977491E7346D400CCB49E /* Rover+Data.swift */; };
 		DB59774C1E7346FA00CCB49E /* Rover+DataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB59774B1E7346FA00CCB49E /* Rover+DataTests.swift */; };
 		DB59774E1E73474D00CCB49E /* Rover+CustomerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB59774D1E73474D00CCB49E /* Rover+CustomerTests.swift */; };
@@ -111,21 +105,15 @@
 		DB240A6A1E6F1CB2002C7AC6 /* RoverTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoverTests.swift; sourceTree = "<group>"; };
 		DB240A6C1E6F41E6002C7AC6 /* Store.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		DB240A6E1E6F421C002C7AC6 /* Assembler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assembler.swift; sourceTree = "<group>"; };
-		DB5976DA1E71C24E00CCB49E /* AccountTokenAuthorizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountTokenAuthorizer.swift; sourceTree = "<group>"; };
-		DB5976DC1E71C2AE00CCB49E /* DeviceTokenAuthorizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceTokenAuthorizer.swift; sourceTree = "<group>"; };
 		DB5976DF1E71CA7B00CCB49E /* Customer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
 		DB5976E21E71CAAC00CCB49E /* IdentifyCustomerAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdentifyCustomerAction.swift; sourceTree = "<group>"; };
-		DB5976E41E71CAD600CCB49E /* CustomerIDAuthorizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerIDAuthorizer.swift; sourceTree = "<group>"; };
 		DB5976E61E71CAEE00CCB49E /* Rover+Customer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Rover+Customer.swift"; sourceTree = "<group>"; };
 		DB5976E91E71CBA400CCB49E /* Resolver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Resolver.swift; sourceTree = "<group>"; };
 		DB5976EB1E71CC1A00CCB49E /* Container.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Container.swift; sourceTree = "<group>"; };
 		DB5977361E72FA1A00CCB49E /* DataStoreTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataStoreTests.swift; sourceTree = "<group>"; };
-		DB5977391E72FD2800CCB49E /* AccountTokenAuthorizerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountTokenAuthorizerTests.swift; sourceTree = "<group>"; };
-		DB59773B1E72FDD800CCB49E /* DeviceTokenAuthorizerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceTokenAuthorizerTests.swift; sourceTree = "<group>"; };
 		DB59773E1E7324FE00CCB49E /* CustomerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerTests.swift; sourceTree = "<group>"; };
 		DB5977401E73449300CCB49E /* CustomerStoreTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerStoreTests.swift; sourceTree = "<group>"; };
-		DB5977421E73460C00CCB49E /* CustomerIDAuthorizerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerIDAuthorizerTests.swift; sourceTree = "<group>"; };
-		DB5977471E7346B600CCB49E /* AddAuthorizerAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddAuthorizerAction.swift; sourceTree = "<group>"; };
+		DB5977471E7346B600CCB49E /* AddAuthHeaderAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddAuthHeaderAction.swift; sourceTree = "<group>"; };
 		DB5977491E7346D400CCB49E /* Rover+Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Rover+Data.swift"; sourceTree = "<group>"; };
 		DB59774B1E7346FA00CCB49E /* Rover+DataTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Rover+DataTests.swift"; sourceTree = "<group>"; };
 		DB59774D1E73474D00CCB49E /* Rover+CustomerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Rover+CustomerTests.swift"; sourceTree = "<group>"; };
@@ -271,7 +259,6 @@
 		DB240A631E6F0EA9002C7AC6 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				DB5977381E72FD1900CCB49E /* Authorizers */,
 				DB5977361E72FA1A00CCB49E /* DataStoreTests.swift */,
 				DB59774B1E7346FA00CCB49E /* Rover+DataTests.swift */,
 			);
@@ -282,7 +269,6 @@
 			isa = PBXGroup;
 			children = (
 				DB5977461E7346A600CCB49E /* Actions */,
-				DB5976E81E71CB4400CCB49E /* Authorizers */,
 				DBC5E5451E677C0F0030FE0C /* DataStore.swift */,
 				DB5977491E7346D400CCB49E /* Rover+Data.swift */,
 			);
@@ -295,7 +281,6 @@
 				DB5976E11E71CAA200CCB49E /* Actions */,
 				DB5976DF1E71CA7B00CCB49E /* Customer.swift */,
 				DB8E45791E6C970400E9D293 /* CustomerStore.swift */,
-				DB5976E41E71CAD600CCB49E /* CustomerIDAuthorizer.swift */,
 				DB5976E61E71CAEE00CCB49E /* Rover+Customer.swift */,
 				DB59775A1E75E34600CCB49E /* CustomerUpdate.swift */,
 			);
@@ -310,30 +295,11 @@
 			name = Actions;
 			sourceTree = "<group>";
 		};
-		DB5976E81E71CB4400CCB49E /* Authorizers */ = {
-			isa = PBXGroup;
-			children = (
-				DB5976DA1E71C24E00CCB49E /* AccountTokenAuthorizer.swift */,
-				DB5976DC1E71C2AE00CCB49E /* DeviceTokenAuthorizer.swift */,
-			);
-			name = Authorizers;
-			sourceTree = "<group>";
-		};
-		DB5977381E72FD1900CCB49E /* Authorizers */ = {
-			isa = PBXGroup;
-			children = (
-				DB5977391E72FD2800CCB49E /* AccountTokenAuthorizerTests.swift */,
-				DB59773B1E72FDD800CCB49E /* DeviceTokenAuthorizerTests.swift */,
-			);
-			name = Authorizers;
-			sourceTree = "<group>";
-		};
 		DB59773D1E7324DA00CCB49E /* Customer */ = {
 			isa = PBXGroup;
 			children = (
 				DB59773E1E7324FE00CCB49E /* CustomerTests.swift */,
 				DB5977401E73449300CCB49E /* CustomerStoreTests.swift */,
-				DB5977421E73460C00CCB49E /* CustomerIDAuthorizerTests.swift */,
 				DB59774D1E73474D00CCB49E /* Rover+CustomerTests.swift */,
 				DB59775C1E75E66800CCB49E /* CustomerUpdateTests.swift */,
 			);
@@ -343,7 +309,7 @@
 		DB5977461E7346A600CCB49E /* Actions */ = {
 			isa = PBXGroup;
 			children = (
-				DB5977471E7346B600CCB49E /* AddAuthorizerAction.swift */,
+				DB5977471E7346B600CCB49E /* AddAuthHeaderAction.swift */,
 				DB5977791E7C32EF00CCB49E /* SyncCompleteAction.swift */,
 			);
 			name = Actions;
@@ -561,7 +527,7 @@
 				DBC5E4F71E671F1C0030FE0C /* EventBatch.swift in Sources */,
 				DBC5E50C1E6721560030FE0C /* ApplicationContextProvider.swift in Sources */,
 				DB5976EC1E71CC1A00CCB49E /* Container.swift in Sources */,
-				DB5977481E7346B600CCB49E /* AddAuthorizerAction.swift in Sources */,
+				DB5977481E7346B600CCB49E /* AddAuthHeaderAction.swift in Sources */,
 				DB59777A1E7C32EF00CCB49E /* SyncCompleteAction.swift in Sources */,
 				DBC5E5061E67210E0030FE0C /* ContextProvider.swift in Sources */,
 				DB5977551E7347FA00CCB49E /* AddContextProviderAction.swift in Sources */,
@@ -574,7 +540,6 @@
 				DB5977571E73481000CCB49E /* Rover+Events.swift in Sources */,
 				DBB958FB1E525E3E003A30E7 /* Rover.swift in Sources */,
 				DBC5E4F31E671ED70030FE0C /* Attributes.swift in Sources */,
-				DB5976E51E71CAD600CCB49E /* CustomerIDAuthorizer.swift in Sources */,
 				DBC5E5181E6721E70030FE0C /* TimeZoneContextProvider.swift in Sources */,
 				DBC5E5041E6720FA0030FE0C /* Context.swift in Sources */,
 				DBC5E5101E6721810030FE0C /* FrameworkContextProvider.swift in Sources */,
@@ -582,14 +547,12 @@
 				DB8E457C1E6CB2A200E9D293 /* EventsStore.swift in Sources */,
 				DB59774A1E7346D400CCB49E /* Rover+Data.swift in Sources */,
 				DBC5E5121E6721950030FE0C /* LocaleContextProvider.swift in Sources */,
-				DB5976DB1E71C24E00CCB49E /* AccountTokenAuthorizer.swift in Sources */,
 				DBC5E4F91E671F320030FE0C /* EventQueue.swift in Sources */,
 				DB8E457A1E6C970400E9D293 /* CustomerStore.swift in Sources */,
 				DB59775B1E75E34600CCB49E /* CustomerUpdate.swift in Sources */,
 				DB5976E01E71CA7B00CCB49E /* Customer.swift in Sources */,
 				DBC5E5081E6721220030FE0C /* Reachability.swift in Sources */,
 				DB5976EA1E71CBA400CCB49E /* Resolver.swift in Sources */,
-				DB5976DD1E71C2AE00CCB49E /* DeviceTokenAuthorizer.swift in Sources */,
 				DB59777C1E7C833D00CCB49E /* Dispatcher.swift in Sources */,
 				DBC5E5161E6721CF0030FE0C /* TelephonyContextProvider.swift in Sources */,
 			);
@@ -607,9 +570,6 @@
 				DBC5E5261E6722B20030FE0C /* LocaleContextProviderTests.swift in Sources */,
 				DBC5E5241E67229D0030FE0C /* FrameworkContextProviderTests.swift in Sources */,
 				DBC5E5201E67224B0030FE0C /* ApplicationContextProviderTests.swift in Sources */,
-				DB59773A1E72FD2800CCB49E /* AccountTokenAuthorizerTests.swift in Sources */,
-				DB5977431E73460C00CCB49E /* CustomerIDAuthorizerTests.swift in Sources */,
-				DB59773C1E72FDD800CCB49E /* DeviceTokenAuthorizerTests.swift in Sources */,
 				DBC5E52C1E6723820030FE0C /* TimeZoneContextProviderTests.swift in Sources */,
 				DB59773F1E7324FE00CCB49E /* CustomerTests.swift in Sources */,
 				DB5977841E7F39A400CCB49E /* ServiceKeyTests.swift in Sources */,
