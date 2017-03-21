@@ -17,14 +17,14 @@ class Rover_DataTests: XCTestCase {
         let rover = Rover()
         
         let store = DataStore(accountToken: "giberish")
-        rover.register(HTTPFactory.self, store: store)
+        rover.register(HTTPService.self, store: store)
         
-        let factory = rover.resolve(HTTPFactory.self)!
+        let factory = rover.resolve(HTTPService.self)!
         XCTAssertEqual(factory.authHeaders.count, 2)
         
         let authHeader = AuthHeader(headerField: "foo", value: "bar")
         rover.addAuthHeader(authHeader)
-        let nextFactory = rover.resolve(HTTPFactory.self)!
+        let nextFactory = rover.resolve(HTTPService.self)!
         XCTAssertEqual(nextFactory.authHeaders.count, 3)
     }
     

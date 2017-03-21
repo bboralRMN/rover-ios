@@ -15,8 +15,8 @@ import RoverData
 class EventsManagerTests: XCTestCase {
     
     func testEventsAreAddedToQueue() {
-        let taskFactory = MockTaskFactory()
-        let eventsManager = EventsManager(taskFactory: taskFactory,
+        let uploadService = MockUploadService()
+        let eventsManager = EventsManager(uploadService: uploadService,
                                           flushAt: Int.max,
                                           flushInterval: 0.0,
                                           maxBatchSize: Int.max,
@@ -26,14 +26,14 @@ class EventsManagerTests: XCTestCase {
         eventsManager.serialQueue.waitUntilAllOperationsAreFinished()
         XCTAssertEqual(eventsManager.eventQueue.count, 1)
         
-        let batch = eventsManager.eventQueue.nextBatch(minSize: 1)
+        let batch = eventsManager.eventQueue.nextBatch(minSize: 1)!
         XCTAssertEqual(batch.count, 1)
         XCTAssertEqual(batch.first?.name, "Test")
     }
     
     func testEventsAreFlushedAutomatically() {
-        let taskFactory = MockTaskFactory()
-        let eventsManager = EventsManager(taskFactory: taskFactory,
+        let uploadService = MockUploadService()
+        let eventsManager = EventsManager(uploadService: uploadService,
                                           flushAt: 1,
                                           flushInterval: 0.0,
                                           maxBatchSize: Int.max,
@@ -45,8 +45,8 @@ class EventsManagerTests: XCTestCase {
     }
     
     func testEventsCanBeFlushedManually() {
-        let taskFactory = MockTaskFactory()
-        let eventsManager = EventsManager(taskFactory: taskFactory,
+        let uploadService = MockUploadService()
+        let eventsManager = EventsManager(uploadService: uploadService,
                                           flushAt: Int.max,
                                           flushInterval: 0.0,
                                           maxBatchSize: Int.max,
@@ -65,8 +65,8 @@ class EventsManagerTests: XCTestCase {
     }
     
     func testCaputuresCurrentUploadTask() {
-        let taskFactory = MockTaskFactory(delay: 100)
-        let eventsManager = EventsManager(taskFactory: taskFactory,
+        let uploadService = MockUploadService(delay: 100)
+        let eventsManager = EventsManager(uploadService: uploadService,
                                           flushAt: Int.max,
                                           flushInterval: 0.0,
                                           maxBatchSize: Int.max,
@@ -79,8 +79,8 @@ class EventsManagerTests: XCTestCase {
     }
     
     func testResetsCurrentUploadTask() {
-        let taskFactory = MockTaskFactory()
-        let eventsManager = EventsManager(taskFactory: taskFactory,
+        let uploadService = MockUploadService()
+        let eventsManager = EventsManager(uploadService: uploadService,
                                           flushAt: Int.max,
                                           flushInterval: 0.0,
                                           maxBatchSize: Int.max,
@@ -93,8 +93,8 @@ class EventsManagerTests: XCTestCase {
     }
     
     func testWontSendUntilFlushAt() {
-        let taskFactory = MockTaskFactory(delay: 100)
-        let eventsManager = EventsManager(taskFactory: taskFactory,
+        let uploadService = MockUploadService(delay: 100)
+        let eventsManager = EventsManager(uploadService: uploadService,
                                           flushAt: 2,
                                           flushInterval: 0.0,
                                           maxBatchSize: Int.max,
@@ -107,8 +107,8 @@ class EventsManagerTests: XCTestCase {
     
     func testRetriesUnsuccessfulUploads() {
         let result = TrackEventsResult.error(error: nil, shouldRetry: true)
-        let taskFactory = MockTaskFactory(result: result)
-        let eventsManager = EventsManager(taskFactory: taskFactory,
+        let uploadService = MockUploadService(result: result)
+        let eventsManager = EventsManager(uploadService: uploadService,
                                           flushAt: 1,
                                           flushInterval: 0.0,
                                           maxBatchSize: Int.max,
@@ -121,8 +121,8 @@ class EventsManagerTests: XCTestCase {
     }
     
     func testDispatchesEvents() {
-        let taskFactory = MockTaskFactory()
-        let eventsManager = EventsManager(taskFactory: taskFactory,
+        let uploadService = MockUploadService()
+        let eventsManager = EventsManager(uploadService: uploadService,
                                           flushAt: Int.max,
                                           flushInterval: 0.0,
                                           maxBatchSize: Int.max,
@@ -138,10 +138,10 @@ class EventsManagerTests: XCTestCase {
     }
     
     func testFlushesEventsOnEnteringBackground() {
-        let taskFactory = MockTaskFactory()
+        let uploadService = MockUploadService()
         let application = MockApplication()
         let notificationCenter = MockNotificationCenter()
-        let eventsManager = EventsManager(taskFactory: taskFactory,
+        let eventsManager = EventsManager(uploadService: uploadService,
                                           contextProviders: nil,
                                           flushAt: Int.max,
                                           flushInterval: 0.0,
@@ -162,10 +162,10 @@ class EventsManagerTests: XCTestCase {
     }
     
     func testEndsBackgroundTaskAfterSending() {
-        let taskFactory = MockTaskFactory()
+        let uploadService = MockUploadService()
         let application = MockApplication()
         let notificationCenter = MockNotificationCenter()
-        let eventsManager = EventsManager(taskFactory: taskFactory,
+        let eventsManager = EventsManager(uploadService: uploadService,
                                           contextProviders: nil,
                                           flushAt: Int.max,
                                           flushInterval: 0.0,
@@ -184,9 +184,9 @@ class EventsManagerTests: XCTestCase {
     }
     
     func testEndsBackgroundTasksWhenLessThanMinBatchSize() {
-        let taskFactory = MockTaskFactory()
+        let uploadService = MockUploadService()
         let application = MockApplication()
-        let eventsManager = EventsManager(taskFactory: taskFactory,
+        let eventsManager = EventsManager(uploadService: uploadService,
                                           contextProviders: nil,
                                           flushAt: Int.max,
                                           flushInterval: 0.0,
@@ -202,9 +202,9 @@ class EventsManagerTests: XCTestCase {
     }
     
     func testFlushesOverTimeWhenApplicationActive() {
-        let taskFactory = MockTaskFactory()
+        let uploadService = MockUploadService()
         let notificationCenter = MockNotificationCenter()
-        let eventsManager = EventsManager(taskFactory: taskFactory,
+        let eventsManager = EventsManager(uploadService: uploadService,
                                           contextProviders: nil,
                                           flushAt: Int.max,
                                           flushInterval: 0.1,
@@ -232,9 +232,9 @@ class EventsManagerTests: XCTestCase {
     }
     
     func testCancelsFlushTimerWhenResigningActive() {
-        let taskFactory = MockTaskFactory()
+        let uploadService = MockUploadService()
         let notificationCenter = MockNotificationCenter()
-        let eventsManager = EventsManager(taskFactory: taskFactory,
+        let eventsManager = EventsManager(uploadService: uploadService,
                                           contextProviders: nil,
                                           flushAt: Int.max,
                                           flushInterval: 0.1,
@@ -253,15 +253,15 @@ class EventsManagerTests: XCTestCase {
     }
     
     func testReassign() {
-        let taskFactory = MockTaskFactory()
-        let eventsManager = EventsManager(taskFactory: taskFactory)
+        let uploadService = MockUploadService()
+        let eventsManager = EventsManager(uploadService: uploadService)
         let _ = eventsManager
     }
 }
 
-// MARK: MockTaskFactory
+// MARK: MockUploadService
 
-class MockTaskFactory: EventsTaskFactory {
+fileprivate class MockUploadService: TrackEventsService {
     
     var result: TrackEventsResult
     
@@ -272,7 +272,10 @@ class MockTaskFactory: EventsTaskFactory {
         self.delay = delay
     }
     
-    func trackEventsTask(events: [EventInput], completionHandler: ((TrackEventsResult) -> Void)?) -> HTTPTask {
+    func trackEventsTask(operation: TrackEventsMutation,
+                         authHeaders: [AuthHeader]?,
+                         completionHandler: ((TrackEventsResult) -> Void)?) -> HTTPTask {
+        
         return MockTask(delay: delay) {
             completionHandler?(self.result)
         }

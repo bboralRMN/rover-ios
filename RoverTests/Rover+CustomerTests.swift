@@ -17,13 +17,13 @@ class Rover_CustomerTests: XCTestCase {
         let rover = Rover()
         
         let dataStore = DataStore(accountToken: "giberish")
-        rover.register(HTTPFactory.self, store: dataStore)
+        rover.register(HTTPService.self, store: dataStore)
         
         let localStorage = MockStorage()
         let customerStore = CustomerStore(localStorage: localStorage)
         rover.register(Customer.self, store: customerStore)
         
-        let httpFactory = rover.resolve(HTTPFactory.self)!
+        let httpFactory = rover.resolve(HTTPService.self)!
         XCTAssertEqual(httpFactory.authHeaders.count, 2)
         
         let customer = rover.resolve(Customer.self)!
@@ -31,8 +31,8 @@ class Rover_CustomerTests: XCTestCase {
         
         rover.setCustomerID("giberish")
         
-        let nextHTTPFactory = rover.resolve(HTTPFactory.self)!
-        XCTAssertEqual(nextHTTPFactory.authHeaders.count, 3)
+        let nextHTTPService = rover.resolve(HTTPService.self)!
+        XCTAssertEqual(nextHTTPService.authHeaders.count, 3)
         
         let nextCustomer = rover.resolve(Customer.self)!
         XCTAssertEqual(nextCustomer.customerID, "giberish")
@@ -41,8 +41,8 @@ class Rover_CustomerTests: XCTestCase {
     func testUpdateCustomer() {
         let rover = Rover()
         
-        let taskFactory = MockEventsTaskFactory()
-        let eventsManager = EventsManager(taskFactory: taskFactory, flushAt: 1)
+        let uploadService = MockUploadService()
+        let eventsManager = EventsManager(uploadService: uploadService, flushAt: 1)
         let eventsStore = EventsStore { resolver, dispatcher in
             return EventsStore(eventsManager: eventsManager)
         }
@@ -52,7 +52,7 @@ class Rover_CustomerTests: XCTestCase {
         rover.updateCustomer([update])
         eventsManager.serialQueue.waitUntilAllOperationsAreFinished()
         
-        let event = taskFactory.firstEvent!
+        let event = uploadService.firstEvent!
         XCTAssertEqual(event.name, "Customer Update")
         
         let updates = event.attributes!["updates"] as! [[String: Any]]
@@ -91,12 +91,15 @@ fileprivate class MockStorage: LocalStorage {
     }
 }
 
-fileprivate class MockEventsTaskFactory: EventsTaskFactory {
+fileprivate class MockUploadService: TrackEventsService {
     
-    var firstEvent: EventInput?
+    var firstEvent: TrackEventsMutation.Event?
     
-    func trackEventsTask(events: [EventInput], completionHandler: ((TrackEventsResult) -> Void)?) -> HTTPTask {
-        firstEvent = events.first
+    fileprivate func trackEventsTask(operation: TrackEventsMutation,
+                                     authHeaders: [AuthHeader]?,
+                                     completionHandler: ((TrackEventsResult) -> Void)?) -> HTTPTask {
+
+        firstEvent = operation.events.first
         
         return MockTask {
             completionHandler?(TrackEventsResult.success)

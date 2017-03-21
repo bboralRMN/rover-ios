@@ -19,12 +19,12 @@ extension Rover {
     }
     
     func sync() {
-        guard let httpFactory = resolve(HTTPFactory.self) else {
-            logger.error("Attempted to sync before HTTPFactory was registered")
+        guard let service = resolve(HTTPService.self) else {
+            logger.error("Attempted to sync before HTTPService was registered")
             return
         }
         
-        let task = httpFactory.syncTask { syncResult in
+        let task = service.syncTask { syncResult in
             let action = SyncCompleteAction(syncResult: syncResult)
             self.dispatch(action: action)
         }

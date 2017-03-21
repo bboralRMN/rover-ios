@@ -7,5 +7,47 @@
 //
 
 import Foundation
+import RoverData
 
-typealias EventBatch = [Event]
+struct EventBatch {
+    
+    let events: [Event]
+    
+    let authHeaders: [AuthHeader]?
+    
+    init(events: [Event]? = nil, authHeaders: [AuthHeader]? = nil) {
+        self.events = events ?? [Event]()
+        self.authHeaders = authHeaders
+    }
+}
+
+extension EventBatch {
+    
+    var count: Int {
+        return events.count
+    }
+    
+    var first: Event? {
+        return events.first
+    }
+    
+    var last: Event? {
+        return events.last
+    }
+    
+    var operation: TrackEventsMutation {
+        let events = self.events.map { event -> TrackEventsMutation.Event in
+            var attributes = event.attributes ?? JSON()
+            attributes["context"] = event.context
+            return TrackEventsMutation.Event(timestamp: event.timestamp,
+                                             name: event.name,
+                                             attributes: attributes)
+        }
+        
+        return TrackEventsMutation(events: events)
+    }
+    
+    func contains(_ event: Event) -> Bool {
+        return events.contains() { $0.eventId == event.eventId }
+    }
+}

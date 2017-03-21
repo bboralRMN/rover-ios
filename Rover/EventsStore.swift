@@ -35,12 +35,12 @@ extension EventsStore: Store {
             return registerHandler(resolver, dispatcher)
         }
         
-        guard let httpFactory = resolver.resolve(HTTPFactory.self) else {
-            logger.error("Attempted to register EventsStore before dependency HTTPFactory was registered")
+        guard let service = resolver.resolve(HTTPService.self) else {
+            logger.error("Attempted to register EventsStore before dependency HTTPService was registered")
             return self
         }
         
-        let eventsManager = EventsManager(taskFactory: httpFactory)
+        let eventsManager = EventsManager(uploadService: service)
         return EventsStore(eventsManager: eventsManager)
     }
     
@@ -59,8 +59,8 @@ extension EventsStore: Store {
         
         // TODO: Only update this if it has changed
         
-        if let httpFactory = resolver.resolve(HTTPFactory.self) {
-            state.taskFactory = httpFactory
+        if let service = resolver.resolve(HTTPService.self) {
+            state.uploadService = service
         }
         
         return EventsStore(eventsManager: state)

@@ -27,7 +27,7 @@ public class EventsManager {
         return q
     }()
     
-    var taskFactory: EventsTaskFactory
+    var uploadService: TrackEventsService
     
     var contextProviders: [ContextProvider]
     
@@ -45,14 +45,14 @@ public class EventsManager {
     
     var timer: Timer?
     
-    public convenience init(taskFactory: EventsTaskFactory,
+    public convenience init(uploadService: TrackEventsService,
                             contextProviders: [ContextProvider]? = nil,
                             flushAt: Int? = nil,
                             flushInterval: Double? = nil,
                             maxBatchSize: Int? = nil,
                             maxQueueSize: Int? = nil) {
         
-        self.init(taskFactory: taskFactory,
+        self.init(uploadService: uploadService,
                   contextProviders: contextProviders,
                   flushAt: flushAt,
                   flushInterval: flushInterval,
@@ -62,7 +62,7 @@ public class EventsManager {
                   notificationCenter: nil)
     }
     
-    init(taskFactory: EventsTaskFactory,
+    init(uploadService: TrackEventsService,
          contextProviders: [ContextProvider]?,
          flushAt: Int?,
          flushInterval: Double?,
@@ -71,7 +71,7 @@ public class EventsManager {
          application: ApplicationType?,
          notificationCenter: NotificationCenterType?) {
         
-        self.taskFactory = taskFactory
+        self.uploadService = uploadService
         self.contextProviders = contextProviders ?? [ContextProvider]()
         self.flushAt = flushAt ?? 20
         self.flushInterval = flushInterval ?? 30.0
@@ -94,11 +94,11 @@ public class EventsManager {
         }
     }
     
-    public func trackEvent(name: String, attributes: Attributes? = nil) {
+    public func trackEvent(name: String, attributes: Attributes? = nil, authHeaders: [AuthHeader]? = nil) {
         
         // Create the event on the current thread so the context and timestamp are more accurate
         let context = captureContext()
-        let event = Event(name: name, attributes: attributes, context: context)
+        let event = Event(name: name, attributes: attributes, context: context, authHeaders: authHeaders)
         
         serialQueue.addOperation {
             self.addEvent(event: event)
@@ -188,15 +188,13 @@ public class EventsManager {
             return
         }
         
-        let batch = eventQueue.nextBatch(minSize: minBatchSize)
-        
-        guard batch.count > 0 else {
+        guard let batch = eventQueue.nextBatch(minSize: minBatchSize) else {
             logger.debug("Nothing to send – less than \(minBatchSize) events in the queue")
             endBackgroundTask()
             return
         }
         
-        uploadTask = taskFactory.trackEventsTask(events: batch) { result in
+        uploadTask = uploadService.trackEventsTask(operation: batch.operation, authHeaders: batch.authHeaders) { result in
             self.serialQueue.addOperation {
                 switch result {
                 case let .error(_, shouldRetry):

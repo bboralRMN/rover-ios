@@ -30,7 +30,7 @@ extension DefaultAssembler: Assembler {
 
     func assemble(rover: Rover) {
         rover.register(Customer.self, store: CustomerStore())
-        rover.register(HTTPFactory.self, store: DataStore(accountToken: accountToken))
+        rover.register(HTTPService.self, store: DataStore(accountToken: accountToken))
         rover.register(EventsManager.self, store: EventsStore())
         
         // TODO: Move this into the register function of the CustomerStore

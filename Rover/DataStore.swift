@@ -16,24 +16,24 @@ struct DataStore {
     
     let deviceIdentifier: DeviceIdentifier
     
-    let httpFactory: HTTPFactory?
+    let service: HTTPService?
     
     typealias RegisterHandler = (Resolver, Dispatcher) -> DataStore
     
     let registerHandler: RegisterHandler?
     
-    init(accountToken: String, deviceIdentifier: DeviceIdentifier? = nil, httpFactory: HTTPFactory? = nil, registerHandler: RegisterHandler? = nil) {
+    init(accountToken: String, deviceIdentifier: DeviceIdentifier? = nil, service: HTTPService? = nil, registerHandler: RegisterHandler? = nil) {
         self.deviceIdentifier = deviceIdentifier ?? UIDevice.current
         self.accountToken = accountToken
-        self.httpFactory = httpFactory
+        self.service = service
         self.registerHandler = registerHandler
     }
 }
 
 extension DataStore: Store {
     
-    var currentState: HTTPFactory? {
-        return httpFactory
+    var currentState: HTTPService? {
+        return service
     }
     
     func register(resolver: Resolver, dispatcher: Dispatcher) -> DataStore {
@@ -50,11 +50,11 @@ extension DataStore: Store {
             logger.warn("Failed to obtain identifierForVendor")
         }
         
-        let httpFactory = HTTPFactory(authHeaders: authHeaders)
+        let service = HTTPService(authHeaders: authHeaders)
         
         return DataStore(accountToken: accountToken,
                          deviceIdentifier: deviceIdentifier,
-                         httpFactory: httpFactory,
+                         service: service,
                          registerHandler: registerHandler)
     }
     
@@ -64,14 +64,14 @@ extension DataStore: Store {
             var nextAuthHeaders = currentState?.authHeaders ?? [AuthHeader]()
             nextAuthHeaders.append(action.authHeader)
             
-            let httpFactory = HTTPFactory(baseURL: currentState?.baseURL,
-                                          session: currentState?.session,
-                                          path: currentState?.path,
-                                          authHeaders: nextAuthHeaders)
+            let service = HTTPService(baseURL: currentState?.baseURL,
+                                      session: currentState?.session,
+                                      path: currentState?.path,
+                                      authHeaders: nextAuthHeaders)
             
             return DataStore(accountToken: accountToken,
                              deviceIdentifier: deviceIdentifier,
-                             httpFactory: httpFactory,
+                             service: service,
                              registerHandler: registerHandler)
         default:
             return self

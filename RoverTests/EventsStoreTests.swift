@@ -46,28 +46,31 @@ class EventsStoreTests: XCTestCase {
         XCTAssertEqual(nextStore.currentState!.contextProviders.count, 1)
     }
     
-    func testAuthorizerActionUpdatesHTTPFactory() {
+    func testAuthorizerActionUpdatesHTTPService() {
         let store = EventsStore(eventsManager: nil) { resolver, dispatcher in
-            let taskFactory = MockEventsFactory()
-            let eventsManager = EventsManager(taskFactory: taskFactory)
+            let uploadService = MockUploadService()
+            let eventsManager = EventsManager(uploadService: uploadService)
             return EventsStore(eventsManager: eventsManager)
         }
         
         let resolver = MockResolver()
         let dispatcher = MockDispatcher()
         let registeredStore = store.register(resolver: resolver, dispatcher: dispatcher)
-        XCTAssert(registeredStore.currentState!.taskFactory is MockEventsFactory)
+        XCTAssert(registeredStore.currentState!.uploadService is MockUploadService)
         
         let authHeader = AuthHeader(headerField: "foo", value: "bar")
         let action = AddAuthHeaderAction(authHeader: authHeader)
         let nextStore = registeredStore.reduce(action: action, resolver: resolver)
-        XCTAssertTrue(nextStore.currentState!.taskFactory is HTTPFactory)
+        XCTAssertTrue(nextStore.currentState!.uploadService is HTTPService)
     }    
 }
 
-fileprivate class MockEventsFactory: EventsTaskFactory {
+fileprivate class MockUploadService: TrackEventsService {
     
-    func trackEventsTask(events: [EventInput], completionHandler: ((TrackEventsResult) -> Void)?) -> HTTPTask {
+    func trackEventsTask(operation: TrackEventsMutation,
+                         authHeaders: [AuthHeader]?,
+                         completionHandler: ((TrackEventsResult) -> Void)?) -> HTTPTask {
+        
         return MockTask(block: {
             completionHandler?(TrackEventsResult.success)
         })
@@ -94,7 +97,7 @@ fileprivate struct MockAction: Action { }
 fileprivate struct MockResolver: Resolver {
     
     func resolve<T : Service>(_ serviceType: T.Type, name: String?) -> T? {
-        return HTTPFactory() as? T
+        return HTTPService() as? T
     }
 }
 

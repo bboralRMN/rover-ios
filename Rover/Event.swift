@@ -10,24 +10,28 @@ import Foundation
 
 import RoverData
 
-public struct Event {
+struct Event {
     
-    // Auto-generated and should never change
     let eventId = UUID()
     
-    public let timestamp = Date()
+    let timestamp = Date()
     
-    public var name: String
+    let name: String
     
-    public var attributes: Attributes?
+    let attributes: Attributes?
     
-    public var context: Context?
+    let context: Context?
     
-    public init(name: String, attributes: Attributes? = nil, context: Context? = nil) {
+    let authHeaders: [AuthHeader]?
+    
+    init(name: String,
+         attributes: Attributes? = nil,
+         context: Context? = nil,
+         authHeaders: [AuthHeader]? = nil) {
+        
         self.name = name
         self.attributes = attributes
         self.context = context
+        self.authHeaders = authHeaders
     }
 }
-
-extension Event: EventInput { }

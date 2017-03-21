@@ -7,10 +7,14 @@
 //
 
 import Foundation
+import RoverData
 
 struct EventQueue {
-    var maxBatchSize: Int
-    var maxQueueSize: Int
+    
+    let maxBatchSize: Int
+    
+    let maxQueueSize: Int
+    
     var events = [Event]()
 }
 
@@ -35,15 +39,37 @@ extension EventQueue {
     
     mutating func remove(batch: EventBatch) {
         events = events.filter { event in
-            return !batch.contains() { $0.eventId == event.eventId }
+            return !batch.contains(event)
         }
     }
     
-    func nextBatch(minSize: Int) -> EventBatch {
+    func nextBatch(minSize: Int) -> EventBatch? {
         guard events.count > 0, events.count >= minSize else {
-            return EventBatch()
+            return nil
         }
         
-        return EventBatch(events.prefix(maxBatchSize))
+        let authHeaders = events.first?.authHeaders
+        var nextEvents = [Event]()
+        
+        for (offset, event) in events.enumerated() {
+            guard offset < maxBatchSize else {
+                break
+            }
+            
+            if let authHeaders = authHeaders {
+                guard let eventHeaders = event.authHeaders, eventHeaders == authHeaders else {
+                    break
+                }
+            } else {
+                guard event.authHeaders == nil else {
+                    break
+                }
+            }
+            
+            nextEvents.append(event)
+        }
+        
+        
+        return EventBatch(events: nextEvents, authHeaders: authHeaders)
     }
 }

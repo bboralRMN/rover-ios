@@ -39,6 +39,7 @@
 		DB5977821E7DAF6F00CCB49E /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5977811E7DAF6F00CCB49E /* Action.swift */; };
 		DB5977841E7F39A400CCB49E /* ServiceKeyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5977831E7F39A400CCB49E /* ServiceKeyTests.swift */; };
 		DB5977861E7F39C700CCB49E /* StoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5977851E7F39C700CCB49E /* StoreTests.swift */; };
+		DB5977901E81D3D500CCB49E /* EventBatchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB59778F1E81D3D500CCB49E /* EventBatchTests.swift */; };
 		DB8E457A1E6C970400E9D293 /* CustomerStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8E45791E6C970400E9D293 /* CustomerStore.swift */; };
 		DB8E457C1E6CB2A200E9D293 /* EventsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8E457B1E6CB2A200E9D293 /* EventsStore.swift */; };
 		DBB958FB1E525E3E003A30E7 /* Rover.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB958FA1E525E3E003A30E7 /* Rover.swift */; };
@@ -129,6 +130,7 @@
 		DB5977811E7DAF6F00CCB49E /* Action.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Action.swift; sourceTree = "<group>"; };
 		DB5977831E7F39A400CCB49E /* ServiceKeyTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceKeyTests.swift; sourceTree = "<group>"; };
 		DB5977851E7F39C700CCB49E /* StoreTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreTests.swift; sourceTree = "<group>"; };
+		DB59778F1E81D3D500CCB49E /* EventBatchTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventBatchTests.swift; sourceTree = "<group>"; };
 		DB8E45791E6C970400E9D293 /* CustomerStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerStore.swift; sourceTree = "<group>"; };
 		DB8E457B1E6CB2A200E9D293 /* EventsStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsStore.swift; sourceTree = "<group>"; };
 		DBB958FA1E525E3E003A30E7 /* Rover.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rover.swift; sourceTree = "<group>"; };
@@ -248,6 +250,7 @@
 			isa = PBXGroup;
 			children = (
 				DB240A531E6F0365002C7AC6 /* Context Providers */,
+				DB59778F1E81D3D500CCB49E /* EventBatchTests.swift */,
 				DBC5E4FF1E671F860030FE0C /* EventsManagerTests.swift */,
 				DB240A681E6F10B3002C7AC6 /* EventsStoreTests.swift */,
 				DBC5E4FD1E671F720030FE0C /* EventQueueTests.swift */,
@@ -577,6 +580,7 @@
 				DBC5E4EF1E662FA00030FE0C /* AssemblerTests.swift in Sources */,
 				DB59775D1E75E66800CCB49E /* CustomerUpdateTests.swift in Sources */,
 				DB59774C1E7346FA00CCB49E /* Rover+DataTests.swift in Sources */,
+				DB5977901E81D3D500CCB49E /* EventBatchTests.swift in Sources */,
 				DB240A691E6F10B3002C7AC6 /* EventsStoreTests.swift in Sources */,
 				DB5977501E73478D00CCB49E /* Rover+EventsTests.swift in Sources */,
 				DB59774E1E73474D00CCB49E /* Rover+CustomerTests.swift in Sources */,
