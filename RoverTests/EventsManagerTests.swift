@@ -22,7 +22,7 @@ class EventsManagerTests: XCTestCase {
                                           maxBatchSize: Int.max,
                                           maxQueueSize: Int.max)
         
-        eventsManager.trackEvent(name: "Test")
+        eventsManager.trackEvent(name: "Test", attributes: nil, authHeaders: nil)
         eventsManager.serialQueue.waitUntilAllOperationsAreFinished()
         XCTAssertEqual(eventsManager.eventQueue.count, 1)
         
@@ -39,7 +39,7 @@ class EventsManagerTests: XCTestCase {
                                           maxBatchSize: Int.max,
                                           maxQueueSize: Int.max)
         
-        eventsManager.trackEvent(name: "Test")
+        eventsManager.trackEvent(name: "Test", attributes: nil, authHeaders: nil)
         eventsManager.serialQueue.waitUntilAllOperationsAreFinished()
         XCTAssertEqual(eventsManager.eventQueue.count, 0)
     }
@@ -53,7 +53,7 @@ class EventsManagerTests: XCTestCase {
                                           maxQueueSize: Int.max)
         
         for _ in 1...50 {
-            eventsManager.trackEvent(name: "Test")
+            eventsManager.trackEvent(name: "Test", attributes: nil, authHeaders: nil)
         }
         
         eventsManager.serialQueue.waitUntilAllOperationsAreFinished()
@@ -72,7 +72,7 @@ class EventsManagerTests: XCTestCase {
                                           maxBatchSize: Int.max,
                                           maxQueueSize: Int.max)
         
-        eventsManager.trackEvent(name: "Test")
+        eventsManager.trackEvent(name: "Test", attributes: nil, authHeaders: nil)
         eventsManager.flushEvents()
         eventsManager.serialQueue.waitUntilAllOperationsAreFinished()
         XCTAssertNotNil(eventsManager.uploadTask)
@@ -86,7 +86,7 @@ class EventsManagerTests: XCTestCase {
                                           maxBatchSize: Int.max,
                                           maxQueueSize: Int.max)
         
-        eventsManager.trackEvent(name: "Test")
+        eventsManager.trackEvent(name: "Test", attributes: nil, authHeaders: nil)
         eventsManager.flushEvents()
         eventsManager.serialQueue.waitUntilAllOperationsAreFinished()
         XCTAssertNil(eventsManager.uploadTask)
@@ -100,7 +100,7 @@ class EventsManagerTests: XCTestCase {
                                           maxBatchSize: Int.max,
                                           maxQueueSize: Int.max)
         
-        eventsManager.trackEvent(name: "Test")
+        eventsManager.trackEvent(name: "Test", attributes: nil, authHeaders: nil)
         eventsManager.serialQueue.waitUntilAllOperationsAreFinished()
         XCTAssertNil(eventsManager.uploadTask)
     }
@@ -114,7 +114,7 @@ class EventsManagerTests: XCTestCase {
                                           maxBatchSize: Int.max,
                                           maxQueueSize: Int.max)
         
-        eventsManager.trackEvent(name: "Test")
+        eventsManager.trackEvent(name: "Test", attributes: nil, authHeaders: nil)
         eventsManager.flushEvents()
         eventsManager.serialQueue.waitUntilAllOperationsAreFinished()
         XCTAssertEqual(eventsManager.eventQueue.count, 1)
@@ -133,7 +133,7 @@ class EventsManagerTests: XCTestCase {
             e.fulfill()
         }
         
-        eventsManager.trackEvent(name: "Test")
+        eventsManager.trackEvent(name: "Test", attributes: nil, authHeaders: nil)
         waitForExpectations(timeout: 0.1, handler: nil)
     }
     
@@ -150,7 +150,7 @@ class EventsManagerTests: XCTestCase {
                                           application: application,
                                           notificationCenter: notificationCenter)
         
-        eventsManager.trackEvent(name: "Test")
+        eventsManager.trackEvent(name: "Test", attributes: nil, authHeaders: nil)
         eventsManager.serialQueue.waitUntilAllOperationsAreFinished()
         XCTAssertEqual(eventsManager.eventQueue.count, 1)
         
@@ -174,7 +174,7 @@ class EventsManagerTests: XCTestCase {
                                           application: application,
                                           notificationCenter: notificationCenter)
         
-        eventsManager.trackEvent(name: "Test")
+        eventsManager.trackEvent(name: "Test", attributes: nil, authHeaders: nil)
         eventsManager.serialQueue.waitUntilAllOperationsAreFinished()
         
         notificationCenter.callBlock(name: Notification.Name.UIApplicationDidEnterBackground.rawValue)
@@ -196,7 +196,7 @@ class EventsManagerTests: XCTestCase {
                                           notificationCenter: nil)
         
         eventsManager.backgroundTask = 1
-        eventsManager.trackEvent(name: "Test")
+        eventsManager.trackEvent(name: "Test", attributes: nil, authHeaders: nil)
         eventsManager.serialQueue.waitUntilAllOperationsAreFinished()
         XCTAssertTrue(application.endWasCalled)
     }
@@ -213,7 +213,7 @@ class EventsManagerTests: XCTestCase {
                                           application: nil,
                                           notificationCenter: notificationCenter)
         
-        eventsManager.trackEvent(name: "Test")
+        eventsManager.trackEvent(name: "Test", attributes: nil, authHeaders: nil)
         eventsManager.serialQueue.waitUntilAllOperationsAreFinished()
         XCTAssertEqual(eventsManager.eventQueue.count, 1)
         

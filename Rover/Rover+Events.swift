@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import RoverData
 
 extension Rover {
     
@@ -16,11 +17,11 @@ extension Rover {
     }
     
     public func trackEvent(name: String, attributes: Attributes? = nil) {
-        guard let eventsManager = resolve(EventsManager.self) else {
+        guard let eventsManager = resolve(EventsManager.self), let httpService = resolve(HTTPService.self) else {
             return
         }
         
-        eventsManager.trackEvent(name: name, attributes: attributes)
+        eventsManager.trackEvent(name: name, attributes: attributes, authHeaders: httpService.authHeaders)
     }
     
     public func flushEvents() {

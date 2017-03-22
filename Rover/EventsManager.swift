@@ -94,7 +94,7 @@ public class EventsManager {
         }
     }
     
-    public func trackEvent(name: String, attributes: Attributes? = nil, authHeaders: [AuthHeader]? = nil) {
+    public func trackEvent(name: String, attributes: Attributes?, authHeaders: [AuthHeader]?) {
         
         // Create the event on the current thread so the context and timestamp are more accurate
         let context = captureContext()

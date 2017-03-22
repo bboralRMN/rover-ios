@@ -32,6 +32,7 @@ class Rover_EventsTests: XCTestCase {
     
     func testRoverTrackEvent() {
         let rover = Rover()
+        rover.register(HTTPService.self, store: DataStore(accountToken: "giberish"))
         
         let uploadService = MockUploadService()
         let eventsManager = EventsManager(uploadService: uploadService, flushAt: 1)
@@ -47,8 +48,34 @@ class Rover_EventsTests: XCTestCase {
         XCTAssertTrue(uploadService.trackEventsWasCalled)
     }
     
+    func testRoverTrackEventCapturesAuthHeaders() {
+        let rover = Rover()
+        
+        rover.register(HTTPService.self, store: DataStore(accountToken: "giberish"))
+        rover.register(EventsManager.self, store: EventsStore())
+        
+        rover.trackEvent(name: "Test")
+        
+        let eventsManager = rover.resolve(EventsManager.self)!
+        eventsManager.serialQueue.waitUntilAllOperationsAreFinished()
+        
+        let event = eventsManager.eventQueue.events[0]
+        XCTAssertEqual(event.authHeaders!.count, 2)
+        
+        let authHeader = AuthHeader(headerField: "foo", value: "bar")
+        rover.addAuthHeader(authHeader)
+        rover.trackEvent(name: "Test")
+        eventsManager.serialQueue.waitUntilAllOperationsAreFinished()
+        
+        let nextEvent = eventsManager.eventQueue.events[1]
+        XCTAssertEqual(nextEvent.authHeaders!.count, 3)
+        XCTAssertEqual(nextEvent.authHeaders!.last!.headerField, "foo")
+        XCTAssertEqual(nextEvent.authHeaders!.last!.value, "bar")
+    }
+    
     func testRoverFlushEvents() {
         let rover = Rover()
+        rover.register(HTTPService.self, store: DataStore(accountToken: "giberish"))
         
         let uploadService = MockUploadService()
         let eventsManager = EventsManager(uploadService: uploadService)

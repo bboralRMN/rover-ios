@@ -40,6 +40,7 @@ class Rover_CustomerTests: XCTestCase {
     
     func testUpdateCustomer() {
         let rover = Rover()
+        rover.register(HTTPService.self, store: DataStore(accountToken: "giberish"))
         
         let uploadService = MockUploadService()
         let eventsManager = EventsManager(uploadService: uploadService, flushAt: 1)
