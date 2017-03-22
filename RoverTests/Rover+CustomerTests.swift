@@ -13,65 +13,75 @@ import RoverData
 
 class Rover_CustomerTests: XCTestCase {
 
-    func testSetCustomerID() {
+    func testSetCustomerIDUpatesCustomer() {
         let rover = Rover()
         
-        let dataStore = DataStore(accountToken: "giberish")
-        rover.register(HTTPService.self, store: dataStore)
-        
         let localStorage = MockStorage()
-        let customerStore = CustomerStore(localStorage: localStorage)
-        rover.register(Customer.self, store: customerStore)
+        let factory = CustomerFactory(localStorage: localStorage)
         
-        let httpFactory = rover.resolve(HTTPService.self)!
-        XCTAssertEqual(httpFactory.authHeaders.count, 2)
+        try! rover.register(Customer.self, factory: factory)
         
-        let customer = rover.resolve(Customer.self)!
-        XCTAssertNil(customer.customerID)
+        let initialState = rover.resolve(Customer.self)!
+        XCTAssertNil(initialState.customerID)
         
         rover.setCustomerID("giberish")
         
-        let nextHTTPService = rover.resolve(HTTPService.self)!
-        XCTAssertEqual(nextHTTPService.authHeaders.count, 3)
+        let nextState = rover.resolve(Customer.self)!
+        XCTAssertEqual(nextState.customerID, "giberish")
+    }
+    
+    func testSetCustomerIDAddsAuthHeader() {
+        let rover = Rover()
         
-        let nextCustomer = rover.resolve(Customer.self)!
-        XCTAssertEqual(nextCustomer.customerID, "giberish")
+        let localStorage = MockStorage()
+        let customerFactory = CustomerFactory(localStorage: localStorage)
+        try! rover.register(Customer.self, factory: customerFactory)
+        
+        let httpFactory = HTTPServiceFactory(accountToken: "giberish")
+        try! rover.register(HTTPService.self, factory: httpFactory)
+        
+        let initialState = rover.resolve(HTTPService.self)!
+        XCTAssertEqual(initialState.authHeaders.count, 2)
+        
+        rover.setCustomerID("giberish")
+        
+        let nextState = rover.resolve(HTTPService.self)!
+        XCTAssertEqual(nextState.authHeaders.count, 3)
     }
     
     func testUpdateCustomer() {
         let rover = Rover()
-        rover.register(HTTPService.self, store: DataStore(accountToken: "giberish"))
         
-        let uploadService = MockUploadService()
-        let eventsManager = EventsManager(uploadService: uploadService, flushAt: 1)
-        let eventsStore = EventsStore { resolver, dispatcher in
-            return EventsStore(eventsManager: eventsManager)
-        }
-        rover.register(EventsManager.self, store: eventsStore)
+        let httpFactory = HTTPServiceFactory(accountToken: "giberish")
+        try! rover.register(HTTPService.self, factory: httpFactory)
+        
+        let eventsFactory = EventsManagerFactory()
+        try! rover.register(EventsManager.self, factory: eventsFactory)
         
         let update = CustomerUpdate.setFirstName(value: "Marie")
         rover.updateCustomer([update])
+        
+        let eventsManager = rover.resolve(EventsManager.self)!
         eventsManager.serialQueue.waitUntilAllOperationsAreFinished()
         
-        let event = uploadService.firstEvent!
+        let event = eventsManager.eventQueue.events[0]
         XCTAssertEqual(event.name, "Customer Update")
         
         let updates = event.attributes!["updates"] as! [[String: Any]]
-        let serialized = updates.first!
-        XCTAssertEqual(serialized["action"] as! String, "set")
-        XCTAssertEqual(serialized["key"] as! String, "firstName")
-        XCTAssertEqual(serialized["value"] as! String, "Marie")
+        XCTAssertEqual(updates[0]["action"] as! String, "set")
+        XCTAssertEqual(updates[0]["key"] as! String, "firstName")
+        XCTAssertEqual(updates[0]["value"] as! String, "Marie")
     }
     
     func testGetCustomer() {
         let rover = Rover()
         
         let localStorage = MockStorage(customerID: "giberish")
-        let customerStore = CustomerStore(localStorage: localStorage)
-        rover.register(Customer.self, store: customerStore)
+        let factory = CustomerFactory(localStorage: localStorage)
+        try! rover.register(Customer.self, factory: factory)
         
-        let customer = rover.getCustomer()
-        XCTAssertEqual(customer?.customerID, "giberish")
+        let customer = rover.getCustomer()!
+        XCTAssertEqual(customer.customerID, "giberish")
     }
 }
 

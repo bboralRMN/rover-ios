@@ -12,12 +12,15 @@ import XCTest
 
 class RoverTests: XCTestCase {
     
+    func testAssemble() {
+        // TODO: Test this
+    }
+    
     func testSavesRegistrationToMap() {
         let rover = Rover()
         XCTAssertEqual(rover.serviceMap.count, 0)
         
-        let store = StringStore()
-        rover.register(String.self, store: store)
+        try! rover.register(String.self, factory: StringFactory())
         XCTAssertEqual(rover.serviceMap.count, 1)
         
         let key = ServiceKey(serviceType: String.self, name: nil)
@@ -28,8 +31,7 @@ class RoverTests: XCTestCase {
         let rover = Rover()
         XCTAssertEqual(rover.registeredServices.count, 0)
         
-        let store = StringStore()
-        rover.register(String.self, store: store)
+        try! rover.register(String.self, factory: StringFactory())
         XCTAssertEqual(rover.registeredServices.count, 1)
         
         let key = ServiceKey(serviceType: String.self, name: nil)
@@ -40,19 +42,27 @@ class RoverTests: XCTestCase {
         let rover = Rover()
         XCTAssertEqual(rover.serviceMap.count, 0)
         
-        let store = StringStore()
-        rover.register(String.self, store: store)
+        try! rover.register(String.self, factory: StringFactory())
         XCTAssertEqual(rover.serviceMap.count, 1)
         
-        let anotherStore = StringStore()
-        rover.register(String.self, store: anotherStore)
+        do {
+            try rover.register(String.self, factory: StringFactory())
+            XCTFail()
+        } catch {
+            switch error {
+            case ServiceRegistrationError.alreadyRegistered:
+                break
+            default:
+                XCTFail()
+            }
+        }
+        
         XCTAssertEqual(rover.serviceMap.count, 1)
         
-        rover.register(String.self, store: store, name: "foo")
+        try! rover.register(String.self, factory: StringFactory(), name: "foo")
         XCTAssertEqual(rover.serviceMap.count, 2)
         
-        let differentStore = IntStore()
-        rover.register(Int.self, store: differentStore)
+        try! rover.register(Int.self, factory: IntFactory())
         XCTAssertEqual(rover.serviceMap.count, 3)
     }
     
@@ -65,8 +75,7 @@ class RoverTests: XCTestCase {
     func testReturnsStateForRegisteredService() {
         let rover = Rover()
         
-        let store = StringStore()
-        rover.register(String.self, store: store)
+        try! rover.register(String.self, factory: StringFactory())
         
         let state = rover.resolve(String.self)
         XCTAssertEqual(state, "giberish")
@@ -75,19 +84,20 @@ class RoverTests: XCTestCase {
     func testReducesEachRegisteredPlugin() {
         let rover = Rover()
         
-        let stringStore = StringStore()
-        rover.register(String.self, store: stringStore)
+        let stringFactory = StringFactory()
+        try! rover.register(String.self, factory: stringFactory)
         
-        let intStore = IntStore()
-        rover.register(Int.self, store: intStore)
+        let intFactory = IntFactory()
+        try! rover.register(Int.self, factory: intFactory)
         
-        XCTAssertFalse(stringStore.reduceWasCalled)
-        XCTAssertFalse(intStore.reduceWasCalled)
+        XCTAssertFalse(stringFactory.reduceWasCalled)
+        XCTAssertFalse(intFactory.reduceWasCalled)
         
         let action = MockAction()
         rover.dispatch(action: action)
-        XCTAssertTrue(stringStore.reduceWasCalled)
-        XCTAssertTrue(intStore.reduceWasCalled)
+        
+        XCTAssertTrue(stringFactory.reduceWasCalled)
+        XCTAssertTrue(intFactory.reduceWasCalled)
         
         let string = rover.resolve(String.self)
         let int = rover.resolve(Int.self)
@@ -98,63 +108,51 @@ class RoverTests: XCTestCase {
 
 fileprivate struct MockAction: Action { }
 
-// MARK: StringStore
+// MARK: StringFactory
 
-fileprivate final class StringStore {
-    
-    var string = "giberish"
+fileprivate final class StringFactory {
     
     var reduceWasCalled = false
 }
 
-extension StringStore: Store {
+extension StringFactory: ServiceFactory {
     
-    var currentState: String? {
-        return string
+    func register(resolver: Resolver, dispatcher: Dispatcher) throws -> String {
+        return "giberish"
     }
     
-    func register(resolver: Resolver, dispatcher: Dispatcher) -> StringStore {
-        return self
-    }
-    
-    func reduce(action: Action, resolver: Resolver) -> StringStore {
-        let character = string.remove(at: string.index(before: string.endIndex))
-        string = "\(character)\(string)"
+    func reduce(state: String, action: Action, resolver: Resolver) -> String {
         reduceWasCalled = true
-        return self
+        
+        var nextState = state
+        let character = nextState.remove(at: nextState.index(before: nextState.endIndex))
+        return "\(character)\(nextState)"
     }
     
-    func isChanged(by action: Action) -> Bool {
-        return false
+    func areEqual(a: String?, b: String?) -> Bool {
+        return a == b
     }
 }
 
-// MARK: IntStore
+// MARK: IntFactory
 
-fileprivate final class IntStore {
-    
-    var int = 1
+fileprivate final class IntFactory {
     
     var reduceWasCalled = false
 }
 
-extension IntStore: Store {
+extension IntFactory: ServiceFactory {
     
-    var currentState: Int? {
-        return int
+    func register(resolver: Resolver, dispatcher: Dispatcher) throws -> Int {
+        return 1
     }
     
-    func register(resolver: Resolver, dispatcher: Dispatcher) -> IntStore {
-        return self
-    }
-    
-    func reduce(action: Action, resolver: Resolver) -> IntStore {
-        int = int + 1
+    func reduce(state: Int, action: Action, resolver: Resolver) -> Int {
         reduceWasCalled = true
-        return self
+        return state + 1
     }
     
-    func isChanged(by action: Action) -> Bool {
-        return false
+    func areEqual(a: Int?, b: Int?) -> Bool {
+        return a == b
     }
 }

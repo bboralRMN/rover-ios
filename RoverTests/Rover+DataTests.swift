@@ -13,19 +13,20 @@ import RoverData
 
 class Rover_DataTests: XCTestCase {
 
-    func testAddAuthorizer() {
+    func testAddAuthHeader() {
         let rover = Rover()
         
-        let store = DataStore(accountToken: "giberish")
-        rover.register(HTTPService.self, store: store)
+        let httpFactory = HTTPServiceFactory(accountToken: "giberish")
+        try! rover.register(HTTPService.self, factory: httpFactory)
         
-        let factory = rover.resolve(HTTPService.self)!
-        XCTAssertEqual(factory.authHeaders.count, 2)
+        let initialState = rover.resolve(HTTPService.self)!
+        XCTAssertEqual(initialState.authHeaders.count, 2)
         
         let authHeader = AuthHeader(headerField: "foo", value: "bar")
         rover.addAuthHeader(authHeader)
-        let nextFactory = rover.resolve(HTTPService.self)!
-        XCTAssertEqual(nextFactory.authHeaders.count, 3)
+        
+        let nextState = rover.resolve(HTTPService.self)!
+        XCTAssertEqual(nextState.authHeaders.count, 3)
     }
     
     // TODO: Test Sync

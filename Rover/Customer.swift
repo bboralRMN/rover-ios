@@ -60,3 +60,25 @@ extension Customer {
         return AuthHeader(headerField: "x-rover-customer-id", value: customerID)
     }
 }
+
+extension Customer: Equatable {
+    
+    public static func == (lhs: Customer, rhs: Customer) -> Bool {
+        guard lhs.customerID == rhs.customerID && lhs.firstName == rhs.firstName && lhs.lastName == rhs.lastName && lhs.email == rhs.email && lhs.gender == rhs.gender && lhs.age == rhs.age && lhs.phoneNumber == rhs.phoneNumber else {
+            return false
+        }
+        
+        if let a = lhs.tags {
+            guard let b = rhs.tags, a == b else {
+                return false
+            }
+        } else {
+            guard rhs.tags == nil else {
+                return false
+            }
+        }
+        
+        // TODO: Compare traits
+        return true
+    }
+}

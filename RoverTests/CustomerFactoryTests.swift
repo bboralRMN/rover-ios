@@ -1,5 +1,5 @@
 //
-//  CustomerStoreTests.swift
+//  CustomerFactoryTests.swift
 //  Rover
 //
 //  Created by Sean Rucker on 2017-03-10.
@@ -11,55 +11,78 @@ import RoverData
 
 @testable import Rover
 
-class CustomerStoreTests: XCTestCase {
+class CustomerFactoryTests: XCTestCase {
     
     func testRegister() {
-        let store = CustomerStore()
-        XCTAssertNil(store.currentState)
+        let localStorage = MockStorage()
+        let factory = CustomerFactory(localStorage: localStorage)
         
         let resolver = MockResolver()
         let dispatcher = MockDispatcher()
-        let registeredStore = store.register(resolver: resolver, dispatcher: dispatcher)
-        XCTAssertNotNil(registeredStore.currentState)
+        let initialState = factory.register(resolver: resolver, dispatcher: dispatcher)
+        
+        XCTAssertNil(initialState.customerID)
     }
     
     func testRegisterWithStoredCustomerID() {
         let localStorage = MockStorage(customerID: "giberish")
+        let factory = CustomerFactory(localStorage: localStorage)
+        
         let resolver = MockResolver()
         let dispatcher = MockDispatcher()
-        let store = CustomerStore(localStorage: localStorage).register(resolver: resolver, dispatcher: dispatcher)
-        XCTAssertEqual(store.currentState!.customerID, "giberish")
+        let initialState = factory.register(resolver: resolver, dispatcher: dispatcher)
         
+        XCTAssertEqual(initialState.customerID, "giberish")
     }
     
     func testNoOpAction() {
+        let localStorage = MockStorage()
+        let factory = CustomerFactory(localStorage: localStorage)
+        
         let resolver = MockResolver()
         let dispatcher = MockDispatcher()
-        let store = CustomerStore().register(resolver: resolver, dispatcher: dispatcher)
+        let initialState = factory.register(resolver: resolver, dispatcher: dispatcher)
         
         let action = MockAction()
-        let _ = store.reduce(action: action, resolver: resolver)
-//        XCTAssertEqual(store.currentState!, nextStore.currentState!)
+        let nextState = factory.reduce(state: initialState, action: action, resolver: resolver)
+        
+        XCTAssert(factory.areEqual(a: initialState, b: nextState))
     }
     
     func testIdentifyCustomer() {
         let localStorage = MockStorage()
+        let factory = CustomerFactory(localStorage: localStorage)
+        
         let resolver = MockResolver()
         let dispatcher = MockDispatcher()
-        let store = CustomerStore(localStorage: localStorage).register(resolver: resolver, dispatcher: dispatcher)
-        XCTAssertNil(store.currentState!.customerID)
+        let initialState = factory.register(resolver: resolver, dispatcher: dispatcher)
+        
+        XCTAssertNil(initialState.customerID)
         
         let action = IdentifyCustomerAction(customerID: "giberish")
-        let nextStore = store.reduce(action: action, resolver: resolver)
-        XCTAssertEqual(nextStore.currentState!.customerID, "giberish")
+        let nextState = factory.reduce(state: initialState, action: action, resolver: resolver)
+        
+        XCTAssertEqual(nextState.customerID, "giberish")
         XCTAssertEqual(localStorage.customerID, "giberish")
     }
     
     func testSyncResult() {
         let localStorage = MockStorage()
+        let factory = CustomerFactory(localStorage: localStorage)
+        
         let resolver = MockResolver()
         let dispatcher = MockDispatcher()
-        let store = CustomerStore(localStorage: localStorage).register(resolver: resolver, dispatcher: dispatcher)
+        let initialState = factory.register(resolver: resolver, dispatcher: dispatcher)
+
+        XCTAssertNil(initialState.customerID)
+        XCTAssertNil(initialState.firstName)
+        XCTAssertNil(initialState.lastName)
+        XCTAssertNil(initialState.email)
+        XCTAssertNil(initialState.gender)
+        XCTAssertNil(initialState.age)
+        XCTAssertNil(initialState.phoneNumber)
+        XCTAssertNil(initialState.tags)
+        XCTAssertNil(initialState.traits)
         
         let customer = SyncResult.Customer(customerID: "80000516109",
                                            firstName: "Marie",
@@ -73,33 +96,37 @@ class CustomerStoreTests: XCTestCase {
         
         let syncResult = SyncResult.success(customer: customer)
         let action = SyncCompleteAction(syncResult: syncResult)
-        let nextStore = store.reduce(action: action, resolver: resolver)
-        let state = nextStore.currentState!
-        XCTAssertEqual(state.customerID, "80000516109")
-        XCTAssertEqual(state.firstName, "Marie")
-        XCTAssertEqual(state.lastName, "Avgeropoulos")
-        XCTAssertEqual(state.email, "marie.avgeropoulos@example.com")
-        XCTAssertEqual(state.gender, .female)
-        XCTAssertEqual(state.age, 30)
-        XCTAssertEqual(state.phoneNumber, "555-555-5555")
-        XCTAssertEqual(state.tags!, ["actress", "model", "musician"])
-        XCTAssertEqual(state.traits!["height"] as! Double, 1.65)
+        let nextState = factory.reduce(state: initialState, action: action, resolver: resolver)
+        
+        XCTAssertEqual(nextState.customerID, "80000516109")
+        XCTAssertEqual(nextState.firstName, "Marie")
+        XCTAssertEqual(nextState.lastName, "Avgeropoulos")
+        XCTAssertEqual(nextState.email, "marie.avgeropoulos@example.com")
+        XCTAssertEqual(nextState.gender, .female)
+        XCTAssertEqual(nextState.age, 30)
+        XCTAssertEqual(nextState.phoneNumber, "555-555-5555")
+        XCTAssertEqual(nextState.tags!, ["actress", "model", "musician"])
+        XCTAssertEqual(nextState.traits!["height"] as! Double, 1.65)
     }
     
     func testMismatchedCustomerIDSyncResult() {
         let localStorage = MockStorage(customerID: "foo")
+        let factory = CustomerFactory(localStorage: localStorage)
+        
         let resolver = MockResolver()
         let dispatcher = MockDispatcher()
-        let store = CustomerStore(localStorage: localStorage).register(resolver: resolver, dispatcher: dispatcher)
-        XCTAssertEqual(store.currentState!.customerID, "foo")
-        XCTAssertNil(store.currentState!.firstName)
+        let initialState = factory.register(resolver: resolver, dispatcher: dispatcher)
+
+        XCTAssertEqual(initialState.customerID, "foo")
+        XCTAssertNil(initialState.firstName)
         
         let customer = SyncResult.Customer(customerID: "bar", firstName: "Marie")
         let syncResult = SyncResult.success(customer: customer)
         let action = SyncCompleteAction(syncResult: syncResult)
-        let nextStore = store.reduce(action: action, resolver: resolver)
-        XCTAssertEqual(nextStore.currentState!.customerID, "foo")
-        XCTAssertNil(nextStore.currentState!.firstName)
+        let nextState = factory.reduce(state: initialState, action: action, resolver: resolver)
+        
+        XCTAssertEqual(nextState.customerID, "foo")
+        XCTAssertNil(nextState.firstName)
     }
 }
 

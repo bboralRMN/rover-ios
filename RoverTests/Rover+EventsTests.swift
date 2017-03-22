@@ -16,13 +16,13 @@ class Rover_EventsTests: XCTestCase {
     func testRoverAddContextProvider() {
         let rover = Rover()
         
-        let uploadService = MockUploadService()
-        let eventsManager = EventsManager(uploadService: uploadService)
-        let store = EventsStore(eventsManager: nil) { resolver, dispatcher in
-            return EventsStore(eventsManager: eventsManager)
-        }
+        let httpFactory = HTTPServiceFactory(accountToken: "giberish")
+        try! rover.register(HTTPService.self, factory: httpFactory)
         
-        rover.register(EventsManager.self, store: store)
+        let eventsFactory = EventsManagerFactory()
+        try! rover.register(EventsManager.self, factory: eventsFactory)
+        
+        let eventsManager = rover.resolve(EventsManager.self)!
         XCTAssertEqual(eventsManager.contextProviders.count, 0)
         
         let contextProvider = MockContextProvider()
@@ -32,27 +32,30 @@ class Rover_EventsTests: XCTestCase {
     
     func testRoverTrackEvent() {
         let rover = Rover()
-        rover.register(HTTPService.self, store: DataStore(accountToken: "giberish"))
         
-        let uploadService = MockUploadService()
-        let eventsManager = EventsManager(uploadService: uploadService, flushAt: 1)
-        let store = EventsStore(eventsManager: nil) { resolver, dispatcher in
-            return EventsStore(eventsManager: eventsManager)
-        }
-
-        rover.register(EventsManager.self, store: store)
-        XCTAssertFalse(uploadService.trackEventsWasCalled)
+        let httpFactory = HTTPServiceFactory(accountToken: "giberish")
+        try! rover.register(HTTPService.self, factory: httpFactory)
+        
+        let eventsFactory = EventsManagerFactory()
+        try! rover.register(EventsManager.self, factory: eventsFactory)
+        
+        let eventsManager = rover.resolve(EventsManager.self)!
+        XCTAssertEqual(eventsManager.eventQueue.count, 0)
         
         rover.trackEvent(name: "Test")
+        
         eventsManager.serialQueue.waitUntilAllOperationsAreFinished()
-        XCTAssertTrue(uploadService.trackEventsWasCalled)
+        XCTAssertEqual(eventsManager.eventQueue.count, 1)
     }
     
     func testRoverTrackEventCapturesAuthHeaders() {
         let rover = Rover()
         
-        rover.register(HTTPService.self, store: DataStore(accountToken: "giberish"))
-        rover.register(EventsManager.self, store: EventsStore())
+        let httpFactory = HTTPServiceFactory(accountToken: "giberish")
+        try! rover.register(HTTPService.self, factory: httpFactory)
+        
+        let eventsFactory = EventsManagerFactory()
+        try! rover.register(EventsManager.self, factory: eventsFactory)
         
         rover.trackEvent(name: "Test")
         
@@ -75,44 +78,57 @@ class Rover_EventsTests: XCTestCase {
     
     func testRoverFlushEvents() {
         let rover = Rover()
-        rover.register(HTTPService.self, store: DataStore(accountToken: "giberish"))
         
-        let uploadService = MockUploadService()
-        let eventsManager = EventsManager(uploadService: uploadService)
-        let store = EventsStore(eventsManager: nil) { resolver, dispatcher in
-            return EventsStore(eventsManager: eventsManager)
-        }
+        let session = MockSession()
+        let httpFactory = HTTPServiceFactory(accountToken: "giberish", session: session)
+        try! rover.register(HTTPService.self, factory: httpFactory)
         
-        rover.register(EventsManager.self, store: store)
+        let eventsFactory = EventsManagerFactory()
+        try! rover.register(EventsManager.self, factory: eventsFactory)
+
+        let eventsManager = rover.resolve(EventsManager.self)!
         XCTAssertEqual(eventsManager.eventQueue.count, 0)
         
         rover.trackEvent(name: "Test")
+        
         eventsManager.serialQueue.waitUntilAllOperationsAreFinished()
         XCTAssertEqual(eventsManager.eventQueue.count, 1)
         
         rover.flushEvents()
+        
         eventsManager.serialQueue.waitUntilAllOperationsAreFinished()
         XCTAssertEqual(eventsManager.eventQueue.count, 0)
-        XCTAssertTrue(uploadService.trackEventsWasCalled)
     }
 }
 
-fileprivate class MockUploadService: TrackEventsService {
+// MARK: MockContextProvider
+
+fileprivate struct MockContextProvider: ContextProvider {
     
-    var trackEventsWasCalled = false
+    fileprivate func captureContext(_ context: Context) -> Context {
+        return Context()
+    }
+}
+
+// MARK: MockSession
+
+fileprivate class MockSession: HTTPSession {
     
-    func trackEventsTask(operation: TrackEventsMutation,
-                         authHeaders: [AuthHeader]?,
-                         completionHandler: ((TrackEventsResult) -> Void)?) -> HTTPTask {
+    func uploadTask(with request: URLRequest,
+                    from bodyData: Data?,
+                    completionHandler: @escaping UploadTaskHandler) -> HTTPTask {
         
-        trackEventsWasCalled = true
-        return MockTask(block: {
-            completionHandler?(TrackEventsResult.success)
-        })
+        return MockTask() {
+            let url = URL(string: "http://example.com")!
+            let response = HTTPURLResponse(url: url, statusCode: 200, httpVersion: nil, headerFields: nil)!
+            completionHandler(nil, response, nil)
+        }
     }
 }
 
-fileprivate struct MockTask: HTTPTask {
+// MARK: MockTask
+
+fileprivate class MockTask: HTTPTask {
     
     var block: (() -> Void)?
     
@@ -124,12 +140,5 @@ fileprivate struct MockTask: HTTPTask {
     
     func resume() {
         block?()
-    }
-}
-
-fileprivate struct MockContextProvider: ContextProvider {
-    
-    fileprivate func captureContext(_ context: Context) -> Context {
-        return Context()
     }
 }
