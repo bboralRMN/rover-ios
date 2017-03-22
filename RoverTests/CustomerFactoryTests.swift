@@ -19,7 +19,7 @@ class CustomerFactoryTests: XCTestCase {
         
         let resolver = MockResolver()
         let dispatcher = MockDispatcher()
-        let initialState = factory.register(resolver: resolver, dispatcher: dispatcher)
+        let initialState = try! factory.register(resolver: resolver, dispatcher: dispatcher)
         
         XCTAssertNil(initialState.customerID)
     }
@@ -30,7 +30,7 @@ class CustomerFactoryTests: XCTestCase {
         
         let resolver = MockResolver()
         let dispatcher = MockDispatcher()
-        let initialState = factory.register(resolver: resolver, dispatcher: dispatcher)
+        let initialState = try! factory.register(resolver: resolver, dispatcher: dispatcher)
         
         XCTAssertEqual(initialState.customerID, "giberish")
     }
@@ -41,7 +41,7 @@ class CustomerFactoryTests: XCTestCase {
         
         let resolver = MockResolver()
         let dispatcher = MockDispatcher()
-        let initialState = factory.register(resolver: resolver, dispatcher: dispatcher)
+        let initialState = try! factory.register(resolver: resolver, dispatcher: dispatcher)
         
         let action = MockAction()
         let nextState = factory.reduce(state: initialState, action: action, resolver: resolver)
@@ -55,7 +55,7 @@ class CustomerFactoryTests: XCTestCase {
         
         let resolver = MockResolver()
         let dispatcher = MockDispatcher()
-        let initialState = factory.register(resolver: resolver, dispatcher: dispatcher)
+        let initialState = try! factory.register(resolver: resolver, dispatcher: dispatcher)
         
         XCTAssertNil(initialState.customerID)
         
@@ -72,7 +72,7 @@ class CustomerFactoryTests: XCTestCase {
         
         let resolver = MockResolver()
         let dispatcher = MockDispatcher()
-        let initialState = factory.register(resolver: resolver, dispatcher: dispatcher)
+        let initialState = try! factory.register(resolver: resolver, dispatcher: dispatcher)
 
         XCTAssertNil(initialState.customerID)
         XCTAssertNil(initialState.firstName)
@@ -115,7 +115,7 @@ class CustomerFactoryTests: XCTestCase {
         
         let resolver = MockResolver()
         let dispatcher = MockDispatcher()
-        let initialState = factory.register(resolver: resolver, dispatcher: dispatcher)
+        let initialState = try! factory.register(resolver: resolver, dispatcher: dispatcher)
 
         XCTAssertEqual(initialState.customerID, "foo")
         XCTAssertNil(initialState.firstName)
@@ -129,6 +129,8 @@ class CustomerFactoryTests: XCTestCase {
         XCTAssertNil(nextState.firstName)
     }
 }
+
+// MARK: MockStorage
 
 fileprivate class MockStorage: LocalStorage {
     
@@ -147,14 +149,28 @@ fileprivate class MockStorage: LocalStorage {
     }
 }
 
+// MARK: MockAction
+
 fileprivate struct MockAction: Action { }
+
+// MARK: MockResolver
 
 fileprivate struct MockResolver: Resolver {
     
+    let serviceMap = ServiceMap()
+    
+    let httpService: HTTPService?
+    
+    init(httpService: HTTPService? = HTTPService()) {
+        self.httpService = httpService
+    }
+    
     func resolve<T : Service>(_ serviceType: T.Type, name: String?) -> T? {
-        return nil
+        return httpService as? T
     }
 }
+
+// MARK: MockDispatcher
 
 fileprivate struct MockDispatcher: Dispatcher {
     

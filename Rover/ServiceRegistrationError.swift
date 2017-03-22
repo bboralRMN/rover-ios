@@ -21,7 +21,7 @@ extension ServiceRegistrationError: LocalizedError {
         case let .alreadyRegistered(serviceKey):
             return "\(serviceKey) has already been registered"
         case let .unmetDependency(serviceType, dependencyType):
-            return "Failed to register \(serviceType) service due to unmet dependency \(dependencyType)"
+            return "Failed to register \(serviceType) due to unmet dependency \(dependencyType)"
         case let .unexpectedCondition(description):
             return description
         }

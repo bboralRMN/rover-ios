@@ -16,6 +16,9 @@ class Rover_CustomerTests: XCTestCase {
     func testSetCustomerIDUpatesCustomer() {
         let rover = Rover()
         
+        let httpFactory = HTTPServiceFactory(accountToken: "giberish")
+        try! rover.register(HTTPService.self, factory: httpFactory)
+        
         let localStorage = MockStorage()
         let factory = CustomerFactory(localStorage: localStorage)
         
@@ -33,12 +36,12 @@ class Rover_CustomerTests: XCTestCase {
     func testSetCustomerIDAddsAuthHeader() {
         let rover = Rover()
         
+        let httpFactory = HTTPServiceFactory(accountToken: "giberish")
+        try! rover.register(HTTPService.self, factory: httpFactory)
+        
         let localStorage = MockStorage()
         let customerFactory = CustomerFactory(localStorage: localStorage)
         try! rover.register(Customer.self, factory: customerFactory)
-        
-        let httpFactory = HTTPServiceFactory(accountToken: "giberish")
-        try! rover.register(HTTPService.self, factory: httpFactory)
         
         let initialState = rover.resolve(HTTPService.self)!
         XCTAssertEqual(initialState.authHeaders.count, 2)
@@ -75,6 +78,9 @@ class Rover_CustomerTests: XCTestCase {
     
     func testGetCustomer() {
         let rover = Rover()
+        
+        let httpFactory = HTTPServiceFactory(accountToken: "giberish")
+        try! rover.register(HTTPService.self, factory: httpFactory)
         
         let localStorage = MockStorage(customerID: "giberish")
         let factory = CustomerFactory(localStorage: localStorage)

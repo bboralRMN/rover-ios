@@ -118,6 +118,8 @@ fileprivate struct MockAction: Action { }
 
 fileprivate struct MockResolver: Resolver {
     
+    let serviceMap = ServiceMap()
+    
     let httpService: HTTPService?
     
     init(httpService: HTTPService? = HTTPService()) {

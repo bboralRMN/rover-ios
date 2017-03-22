@@ -21,9 +21,20 @@ struct CustomerFactory {
 
 extension CustomerFactory: ServiceFactory {
     
-    func register(resolver: Resolver, dispatcher: Dispatcher) -> Customer {
+    func register(resolver: Resolver, dispatcher: Dispatcher) throws -> Customer {
+        guard let _ = resolver.resolve(HTTPService.self) else {
+            throw ServiceRegistrationError.unmetDependency(serviceType: Customer.self, dependencyType: HTTPService.self)
+        }
+        
         let customerID = localStorage.string(forKey: "io.rover.customerID")
-        return Customer(customerID: customerID)
+        let customer = Customer(customerID: customerID)
+        
+        if let authHeader = customer.authHeader {
+            let action = AddAuthHeaderAction(authHeader: authHeader)
+            dispatcher.dispatch(action: action)
+        }
+        
+        return customer
     }
     
     func reduce(state: Customer, action: Action, resolver: Resolver) -> Customer {

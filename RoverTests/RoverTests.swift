@@ -8,28 +8,33 @@
 
 import XCTest
 import RoverData
+import RoverLogger
 
 @testable import Rover
 
 class RoverTests: XCTestCase {
     
     func testAssemble() {
+        UserDefaults.standard.set("80000516109", forKey: "io.rover.customerID")
+        
         Rover.assemble(accountToken: "giberish")
         
         let httpService = Rover.shared.resolve(HTTPService.self)!
         let authHeaders = httpService.authHeaders
-        XCTAssertEqual(authHeaders.count, 2)
+        XCTAssertEqual(authHeaders.count, 3)
         XCTAssertEqual(authHeaders[0].headerField, "x-rover-account-token")
         XCTAssertEqual(authHeaders[0].value, "giberish")
         XCTAssertEqual(authHeaders[1].headerField, "x-rover-device-id")
         XCTAssertEqual(authHeaders[1].value, UIDevice.current.identifierForVendor!.uuidString)
+        XCTAssertEqual(authHeaders[2].headerField, "x-rover-customer-id")
+        XCTAssertEqual(authHeaders[2].value, "80000516109")
         
         let eventsManager = Rover.shared.resolve(EventsManager.self)!
         XCTAssertEqual(eventsManager.uploadService as! HTTPService, httpService)
         XCTAssertEqual(eventsManager.contextProviders.count, 8)
         
-        let customer = Rover.shared.resolve(Customer.self)
-        XCTAssertNotNil(customer)
+        let customer = Rover.shared.resolve(Customer.self)!
+        XCTAssertEqual(customer.customerID, "80000516109")
     }
     
     func testSavesRegistrationToMap() {

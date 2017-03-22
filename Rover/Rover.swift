@@ -20,17 +20,11 @@ public class Rover {
         let rover = Rover()
         
         do {
-            try rover.register(Customer.self, factory: CustomerFactory())
             try rover.register(HTTPService.self, factory: HTTPServiceFactory(accountToken: accountToken))
             try rover.register(EventsManager.self, factory: EventsManagerFactory())
+            try rover.register(Customer.self, factory: CustomerFactory())
         } catch {
             logger.error(error.localizedDescription)
-        }
-        
-        // TODO: Move this into the register function of the CustomerStore
-        
-        if let customer = rover.resolve(Customer.self), let authHeader = customer.authHeader {
-            rover.addAuthHeader(authHeader)
         }
         
         shared = rover
@@ -72,7 +66,13 @@ extension Rover: Dispatcher {
                 return serviceMap
             }
             
-            let nextState = store.factory.reduce(state: currentState, action: action, resolver: self)
+            struct LocalResolver: Resolver {
+                let serviceMap: ServiceMap
+            }
+            
+            let localResolver = LocalResolver(serviceMap: serviceMap)
+            
+            let nextState = store.factory.reduce(state: currentState, action: action, resolver: localResolver)
             let areEqual = store.factory.areEqual(a: store.currentState, b: nextState)
             let nextStore = ServiceStore(factory: store.factory, currentState: nextState, hasChanged: !areEqual)
             
@@ -83,11 +83,4 @@ extension Rover: Dispatcher {
     }
 }
 
-extension Rover: Resolver {
-    
-    func resolve<T: Service>(_ serviceType: T.Type, name: String?) -> T? {
-        let serviceKey = ServiceKey(serviceType: serviceType, name: name)
-        let store = serviceMap[serviceKey]
-        return store?.currentState as? T
-    }
-}
+extension Rover: Resolver { }

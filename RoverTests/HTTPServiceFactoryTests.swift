@@ -117,9 +117,7 @@ fileprivate struct MockAction: Action { }
 
 fileprivate struct MockResolver: Resolver {
     
-    func resolve<T : Service>(_ serviceType: T.Type, name: String?) -> T? {
-        return nil
-    }
+    let serviceMap = ServiceMap()
 }
 
 fileprivate struct MockDispatcher: Dispatcher {

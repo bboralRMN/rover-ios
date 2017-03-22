@@ -10,14 +10,22 @@ import Foundation
 
 protocol Resolver {
     
-    func resolve<T: Service>(_ serviceType: T.Type, name: String?) -> T?
+    var serviceMap: ServiceMap { get }
     
     func resolve<T: Service>(_ serviceType: T.Type) -> T?
+    
+    func resolve<T: Service>(_ serviceType: T.Type, name: String?) -> T?
 }
 
 extension Resolver {
     
     func resolve<T: Service>(_ serviceType: T.Type) -> T? {
         return resolve(serviceType, name: nil)
+    }
+    
+    func resolve<T: Service>(_ serviceType: T.Type, name: String?) -> T? {
+        let serviceKey = ServiceKey(serviceType: serviceType, name: name)
+        let store = serviceMap[serviceKey]
+        return store?.currentState as? T
     }
 }

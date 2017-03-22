@@ -58,7 +58,7 @@ extension EventsManagerFactory: ServiceFactory {
     
     func register(resolver: Resolver, dispatcher: Dispatcher) throws -> EventsManager {
         guard let httpService = resolver.resolve(HTTPService.self) else {
-            throw ServiceRegistrationError.unmetDependency(serviceType: HTTPService.self, dependencyType: HTTPService.self)
+            throw ServiceRegistrationError.unmetDependency(serviceType: EventsManager.self, dependencyType: HTTPService.self)
         }
         
         return EventsManager(uploadService: httpService,
