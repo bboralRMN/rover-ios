@@ -24,6 +24,26 @@ class EventsManagerFactoryTests: XCTestCase {
         XCTAssertEqual(initialState.uploadService as! HTTPService, httpService)
     }
     
+    func testConfigureEventsManager() {
+        let resolver = MockResolver()
+        let dispatcher = MockDispatcher()
+        let contextProvider = MockContextProvider()
+        
+        let factory = EventsManagerFactory(contextProviders: [contextProvider],
+                                           flushAt: 3,
+                                           flushInterval: 3.3,
+                                           maxBatchSize: 33,
+                                           maxQueueSize: 333)
+        
+        let initialState = try! factory.register(resolver: resolver, dispatcher: dispatcher)
+        
+        XCTAssertEqual(initialState.contextProviders.count, 1)
+        XCTAssertEqual(initialState.flushAt, 3)
+        XCTAssertEqual(initialState.flushInterval, 3.3)
+        XCTAssertEqual(initialState.eventQueue.maxBatchSize, 33)
+        XCTAssertEqual(initialState.eventQueue.maxQueueSize, 333)
+    }
+    
     func testUnmetDependency() {
         let resolver = MockResolver(httpService: nil)
         let dispatcher = MockDispatcher()
@@ -59,14 +79,14 @@ class EventsManagerFactoryTests: XCTestCase {
         let factory = EventsManagerFactory()
         let initialState = try! factory.register(resolver: resolver, dispatcher: dispatcher)
 
-        XCTAssertEqual(initialState.contextProviders.count, 0)
+        XCTAssertEqual(initialState.contextProviders.count, 8)
         
         let contextProvider = MockContextProvider()
         let action = AddContextProviderAction(contextProvider: contextProvider)
         let nextState = factory.reduce(state: initialState, action: action, resolver: resolver)
         
         XCTAssert(nextState === initialState)
-        XCTAssertEqual(nextState.contextProviders.count, 1)
+        XCTAssertEqual(nextState.contextProviders.count, 9)
     }
     
     func testAuthorizerActionUpdatesHTTPService() {

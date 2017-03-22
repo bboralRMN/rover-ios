@@ -23,11 +23,11 @@ class Rover_EventsTests: XCTestCase {
         try! rover.register(EventsManager.self, factory: eventsFactory)
         
         let eventsManager = rover.resolve(EventsManager.self)!
-        XCTAssertEqual(eventsManager.contextProviders.count, 0)
+        XCTAssertEqual(eventsManager.contextProviders.count, 8)
         
         let contextProvider = MockContextProvider()
         rover.addContextProvider(contextProvider)
-        XCTAssertEqual(eventsManager.contextProviders.count, 1)
+        XCTAssertEqual(eventsManager.contextProviders.count, 9)
     }
     
     func testRoverTrackEvent() {

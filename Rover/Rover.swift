@@ -32,29 +32,6 @@ public class Rover {
         if let customer = rover.resolve(Customer.self), let authHeader = customer.authHeader {
             rover.addAuthHeader(authHeader)
         }
-        
-        // TODO: Move this into the register function of the EventsStore
-        
-        let frameworkIdentifiers = [
-            "io.rover.Rover",
-            "io.rover.RoverData",
-            "io.rover.RoverLogger"
-        ]
-        
-        let contextProviders: [ContextProvider] = [
-            ApplicationContextProvider(),
-            DeviceContextProvider(),
-            FrameworkContextProvider(identifiers: frameworkIdentifiers),
-            LocaleContextProvider(),
-            ScreenContextProvider(),
-            TelephonyContextProvider(),
-            TimeZoneContextProvider(),
-            ReachabilityContextProvider()
-        ]
-        
-        for contextProvider in contextProviders {
-            rover.addContextProvider(contextProvider)
-        }
     }
     
     var serviceMap = ServiceMap()
