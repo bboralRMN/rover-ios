@@ -32,6 +32,8 @@ public class Rover {
         if let customer = rover.resolve(Customer.self), let authHeader = customer.authHeader {
             rover.addAuthHeader(authHeader)
         }
+        
+        shared = rover
     }
     
     var serviceMap = ServiceMap()
