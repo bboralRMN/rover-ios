@@ -37,11 +37,10 @@ extension EventBatch {
     
     var operation: TrackEventsMutation {
         let events = self.events.map { event -> TrackEventsMutation.Event in
-            var attributes = event.attributes ?? JSON()
-            attributes["context"] = event.context
             return TrackEventsMutation.Event(timestamp: event.timestamp,
                                              name: event.name,
-                                             attributes: attributes)
+                                             attributes: event.attributes,
+                                             context: event.context)
         }
         
         return TrackEventsMutation(events: events)

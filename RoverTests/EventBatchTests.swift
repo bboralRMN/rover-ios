@@ -39,10 +39,8 @@ class EventBatchTests: XCTestCase {
                 XCTAssertEqual(event.attributes![key] as! String, value as! String)
             }
             
-            let context = event.attributes!["context"] as! JSON
-            
             for (key, value) in original.context! {
-                XCTAssertEqual(context[key] as! String, value as! String)
+                XCTAssertEqual(event.context![key] as! String, value as! String)
             }
         }
     }
@@ -64,14 +62,3 @@ class EventBatchTests: XCTestCase {
         XCTAssertFalse(batch.contains(otherEvent))
     }
 }
-
-
-//var operation: TrackEventsMutation {
-//    let events = self.events.map { event in
-//        return TrackEventsMutation.Event(timestamp: event.timestamp,
-//                                         name: event.name,
-//                                         attributes: event.attributes)
-//    }
-//    
-//    return TrackEventsMutation(events: events)
-//}
