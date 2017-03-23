@@ -29,9 +29,9 @@ class RoverTests: XCTestCase {
         XCTAssertEqual(authHeaders[2].headerField, "x-rover-customer-id")
         XCTAssertEqual(authHeaders[2].value, "80000516109")
         
-        let eventsManager = Rover.shared.resolve(EventsManager.self)!
-        XCTAssertEqual(eventsManager.uploadService as! HTTPService, httpService)
-        XCTAssertEqual(eventsManager.contextProviders.count, 8)
+        let eventsService = Rover.shared.resolve(EventsService.self)!
+        XCTAssertEqual(eventsService.uploadService as! HTTPService, httpService)
+        XCTAssertEqual(eventsService.contextProviders.count, 8)
         
         let customer = Rover.shared.resolve(Customer.self)!
         XCTAssertEqual(customer.customerID, "80000516109")

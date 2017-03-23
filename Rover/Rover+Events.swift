@@ -17,18 +17,18 @@ extension Rover {
     }
     
     public func trackEvent(name: String, attributes: Attributes? = nil) {
-        guard let eventsManager = resolve(EventsManager.self), let httpService = resolve(HTTPService.self) else {
+        guard let eventsService = resolve(EventsService.self), let httpService = resolve(HTTPService.self) else {
             return
         }
         
-        eventsManager.trackEvent(name: name, attributes: attributes, authHeaders: httpService.authHeaders)
+        eventsService.trackEvent(name: name, attributes: attributes, authHeaders: httpService.authHeaders)
     }
     
     public func flushEvents() {
-        guard let eventsManager = resolve(EventsManager.self) else {
+        guard let eventsService = resolve(EventsService.self) else {
             return
         }
         
-        eventsManager.flushEvents()
+        eventsService.flushEvents()
     }
 }

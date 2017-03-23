@@ -1,5 +1,5 @@
 //
-//  EventsManagerFactory.swift
+//  EventsServiceFactory.swift
 //  Rover
 //
 //  Created by Sean Rucker on 2017-03-05.
@@ -10,7 +10,7 @@ import Foundation
 import RoverData
 import RoverLogger
 
-struct EventsManagerFactory {
+struct EventsServiceFactory {
 
     let contextProviders: [ContextProvider]?
     
@@ -54,14 +54,14 @@ struct EventsManagerFactory {
     }
 }
 
-extension EventsManagerFactory: ServiceFactory {
+extension EventsServiceFactory: ServiceFactory {
     
-    func register(resolver: Resolver, dispatcher: Dispatcher) throws -> EventsManager {
+    func register(resolver: Resolver, dispatcher: Dispatcher) throws -> EventsService {
         guard let httpService = resolver.resolve(HTTPService.self) else {
-            throw ServiceRegistrationError.unmetDependency(serviceType: EventsManager.self, dependencyType: HTTPService.self)
+            throw ServiceRegistrationError.unmetDependency(serviceType: EventsService.self, dependencyType: HTTPService.self)
         }
         
-        return EventsManager(uploadService: httpService,
+        return EventsService(uploadService: httpService,
                              contextProviders: contextProviders,
                              flushAt: flushAt,
                              flushInterval: flushInterval,
@@ -69,7 +69,7 @@ extension EventsManagerFactory: ServiceFactory {
                              maxQueueSize: maxQueueSize)
     }
     
-    func reduce(state: EventsManager, action: Action, resolver: Resolver) -> EventsManager {
+    func reduce(state: EventsService, action: Action, resolver: Resolver) -> EventsService {
         switch action {
         case let action as AddContextProviderAction:
             state.contextProviders.append(action.contextProvider)
@@ -86,7 +86,7 @@ extension EventsManagerFactory: ServiceFactory {
         return state
     }
     
-    func areEqual(a: EventsManager?, b: EventsManager?) -> Bool {
+    func areEqual(a: EventsService?, b: EventsService?) -> Bool {
         return a === b
     }
 }

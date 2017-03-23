@@ -1,5 +1,5 @@
 //
-//  EventsManager.swift
+//  EventsService.swift
 //  Rover
 //
 //  Created by Sean Rucker on 2017-02-03.
@@ -17,9 +17,9 @@ extension Notification.Name {
     static let didTrackEvent = Notification.Name("io.rover.didTrackEvent")
 }
 
-// MARK: EventsManager
+// MARK: EventsService
 
-public class EventsManager {
+public class EventsService {
     
     let serialQueue: OperationQueue = {
         let q = OperationQueue()

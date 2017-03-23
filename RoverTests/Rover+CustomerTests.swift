@@ -58,16 +58,16 @@ class Rover_CustomerTests: XCTestCase {
         let httpFactory = HTTPServiceFactory(accountToken: "giberish")
         try! rover.register(HTTPService.self, factory: httpFactory)
         
-        let eventsFactory = EventsManagerFactory()
-        try! rover.register(EventsManager.self, factory: eventsFactory)
+        let eventsFactory = EventsServiceFactory()
+        try! rover.register(EventsService.self, factory: eventsFactory)
         
         let update = CustomerUpdate.setFirstName(value: "Marie")
         rover.updateCustomer([update])
         
-        let eventsManager = rover.resolve(EventsManager.self)!
-        eventsManager.serialQueue.waitUntilAllOperationsAreFinished()
+        let eventsService = rover.resolve(EventsService.self)!
+        eventsService.serialQueue.waitUntilAllOperationsAreFinished()
         
-        let event = eventsManager.eventQueue.events[0]
+        let event = eventsService.eventQueue.events[0]
         XCTAssertEqual(event.name, "Customer Update")
         
         let updates = event.attributes!["updates"] as! [[String: Any]]

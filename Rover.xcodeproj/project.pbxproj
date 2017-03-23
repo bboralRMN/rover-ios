@@ -42,13 +42,13 @@
 		DB5977941E82B9B900CCB49E /* ServiceRegistrationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5977931E82B9B900CCB49E /* ServiceRegistrationError.swift */; };
 		DB5977981E830F2400CCB49E /* ServiceRegistrationErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5977971E830F2400CCB49E /* ServiceRegistrationErrorTests.swift */; };
 		DB8E457A1E6C970400E9D293 /* CustomerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8E45791E6C970400E9D293 /* CustomerFactory.swift */; };
-		DB8E457C1E6CB2A200E9D293 /* EventsManagerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8E457B1E6CB2A200E9D293 /* EventsManagerFactory.swift */; };
+		DB8E457C1E6CB2A200E9D293 /* EventsServiceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8E457B1E6CB2A200E9D293 /* EventsServiceFactory.swift */; };
 		DBB958FB1E525E3E003A30E7 /* Rover.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB958FA1E525E3E003A30E7 /* Rover.swift */; };
 		DBC5E4F31E671ED70030FE0C /* Attributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC5E4F21E671ED70030FE0C /* Attributes.swift */; };
 		DBC5E4F51E671EEB0030FE0C /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC5E4F41E671EEB0030FE0C /* Event.swift */; };
 		DBC5E4F71E671F1C0030FE0C /* EventBatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC5E4F61E671F1C0030FE0C /* EventBatch.swift */; };
 		DBC5E4F91E671F320030FE0C /* EventQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC5E4F81E671F320030FE0C /* EventQueue.swift */; };
-		DBC5E4FB1E671F480030FE0C /* EventsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC5E4FA1E671F480030FE0C /* EventsManager.swift */; };
+		DBC5E4FB1E671F480030FE0C /* EventsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC5E4FA1E671F480030FE0C /* EventsService.swift */; };
 		DBC5E4FE1E671F720030FE0C /* EventQueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC5E4FD1E671F720030FE0C /* EventQueueTests.swift */; };
 		DBC5E5001E671F860030FE0C /* EventsManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC5E4FF1E671F860030FE0C /* EventsManagerTests.swift */; };
 		DBC5E5041E6720FA0030FE0C /* Context.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC5E5031E6720FA0030FE0C /* Context.swift */; };
@@ -133,13 +133,13 @@
 		DB5977931E82B9B900CCB49E /* ServiceRegistrationError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceRegistrationError.swift; sourceTree = "<group>"; };
 		DB5977971E830F2400CCB49E /* ServiceRegistrationErrorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceRegistrationErrorTests.swift; sourceTree = "<group>"; };
 		DB8E45791E6C970400E9D293 /* CustomerFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerFactory.swift; sourceTree = "<group>"; };
-		DB8E457B1E6CB2A200E9D293 /* EventsManagerFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsManagerFactory.swift; sourceTree = "<group>"; };
+		DB8E457B1E6CB2A200E9D293 /* EventsServiceFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsServiceFactory.swift; sourceTree = "<group>"; };
 		DBB958FA1E525E3E003A30E7 /* Rover.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rover.swift; sourceTree = "<group>"; };
 		DBC5E4F21E671ED70030FE0C /* Attributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Attributes.swift; sourceTree = "<group>"; };
 		DBC5E4F41E671EEB0030FE0C /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		DBC5E4F61E671F1C0030FE0C /* EventBatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventBatch.swift; sourceTree = "<group>"; };
 		DBC5E4F81E671F320030FE0C /* EventQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventQueue.swift; sourceTree = "<group>"; };
-		DBC5E4FA1E671F480030FE0C /* EventsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsManager.swift; sourceTree = "<group>"; };
+		DBC5E4FA1E671F480030FE0C /* EventsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsService.swift; sourceTree = "<group>"; };
 		DBC5E4FD1E671F720030FE0C /* EventQueueTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventQueueTests.swift; sourceTree = "<group>"; };
 		DBC5E4FF1E671F860030FE0C /* EventsManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsManagerTests.swift; sourceTree = "<group>"; };
 		DBC5E5031E6720FA0030FE0C /* Context.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Context.swift; sourceTree = "<group>"; };
@@ -336,8 +336,8 @@
 				DBC5E5051E67210E0030FE0C /* ContextProvider.swift */,
 				DBC5E4F41E671EEB0030FE0C /* Event.swift */,
 				DBC5E4F61E671F1C0030FE0C /* EventBatch.swift */,
-				DBC5E4FA1E671F480030FE0C /* EventsManager.swift */,
-				DB8E457B1E6CB2A200E9D293 /* EventsManagerFactory.swift */,
+				DBC5E4FA1E671F480030FE0C /* EventsService.swift */,
+				DB8E457B1E6CB2A200E9D293 /* EventsServiceFactory.swift */,
 				DBC5E4F81E671F320030FE0C /* EventQueue.swift */,
 				DB5977561E73481000CCB49E /* Rover+Events.swift */,
 			);
@@ -521,7 +521,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DBC5E4FB1E671F480030FE0C /* EventsManager.swift in Sources */,
+				DBC5E4FB1E671F480030FE0C /* EventsService.swift in Sources */,
 				DBC5E50E1E6721680030FE0C /* DeviceContextProvider.swift in Sources */,
 				DB59777E1E7DAF0000CCB49E /* ServiceKey.swift in Sources */,
 				DBC5E4F51E671EEB0030FE0C /* Event.swift in Sources */,
@@ -548,7 +548,7 @@
 				DBC5E5041E6720FA0030FE0C /* Context.swift in Sources */,
 				DBC5E5101E6721810030FE0C /* FrameworkContextProvider.swift in Sources */,
 				DB5977941E82B9B900CCB49E /* ServiceRegistrationError.swift in Sources */,
-				DB8E457C1E6CB2A200E9D293 /* EventsManagerFactory.swift in Sources */,
+				DB8E457C1E6CB2A200E9D293 /* EventsServiceFactory.swift in Sources */,
 				DB59774A1E7346D400CCB49E /* Rover+Data.swift in Sources */,
 				DBC5E5121E6721950030FE0C /* LocaleContextProvider.swift in Sources */,
 				DBC5E4F91E671F320030FE0C /* EventQueue.swift in Sources */,

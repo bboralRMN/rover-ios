@@ -19,15 +19,15 @@ class Rover_EventsTests: XCTestCase {
         let httpFactory = HTTPServiceFactory(accountToken: "giberish")
         try! rover.register(HTTPService.self, factory: httpFactory)
         
-        let eventsFactory = EventsManagerFactory()
-        try! rover.register(EventsManager.self, factory: eventsFactory)
+        let eventsFactory = EventsServiceFactory()
+        try! rover.register(EventsService.self, factory: eventsFactory)
         
-        let eventsManager = rover.resolve(EventsManager.self)!
-        XCTAssertEqual(eventsManager.contextProviders.count, 8)
+        let eventsService = rover.resolve(EventsService.self)!
+        XCTAssertEqual(eventsService.contextProviders.count, 8)
         
         let contextProvider = MockContextProvider()
         rover.addContextProvider(contextProvider)
-        XCTAssertEqual(eventsManager.contextProviders.count, 9)
+        XCTAssertEqual(eventsService.contextProviders.count, 9)
     }
     
     func testRoverTrackEvent() {
@@ -36,16 +36,16 @@ class Rover_EventsTests: XCTestCase {
         let httpFactory = HTTPServiceFactory(accountToken: "giberish")
         try! rover.register(HTTPService.self, factory: httpFactory)
         
-        let eventsFactory = EventsManagerFactory()
-        try! rover.register(EventsManager.self, factory: eventsFactory)
+        let eventsFactory = EventsServiceFactory()
+        try! rover.register(EventsService.self, factory: eventsFactory)
         
-        let eventsManager = rover.resolve(EventsManager.self)!
-        XCTAssertEqual(eventsManager.eventQueue.count, 0)
+        let eventsService = rover.resolve(EventsService.self)!
+        XCTAssertEqual(eventsService.eventQueue.count, 0)
         
         rover.trackEvent(name: "Test")
         
-        eventsManager.serialQueue.waitUntilAllOperationsAreFinished()
-        XCTAssertEqual(eventsManager.eventQueue.count, 1)
+        eventsService.serialQueue.waitUntilAllOperationsAreFinished()
+        XCTAssertEqual(eventsService.eventQueue.count, 1)
     }
     
     func testRoverTrackEventCapturesAuthHeaders() {
@@ -54,23 +54,23 @@ class Rover_EventsTests: XCTestCase {
         let httpFactory = HTTPServiceFactory(accountToken: "giberish")
         try! rover.register(HTTPService.self, factory: httpFactory)
         
-        let eventsFactory = EventsManagerFactory()
-        try! rover.register(EventsManager.self, factory: eventsFactory)
+        let eventsFactory = EventsServiceFactory()
+        try! rover.register(EventsService.self, factory: eventsFactory)
         
         rover.trackEvent(name: "Test")
         
-        let eventsManager = rover.resolve(EventsManager.self)!
-        eventsManager.serialQueue.waitUntilAllOperationsAreFinished()
+        let eventsService = rover.resolve(EventsService.self)!
+        eventsService.serialQueue.waitUntilAllOperationsAreFinished()
         
-        let event = eventsManager.eventQueue.events[0]
+        let event = eventsService.eventQueue.events[0]
         XCTAssertEqual(event.authHeaders!.count, 2)
         
         let authHeader = AuthHeader(headerField: "foo", value: "bar")
         rover.addAuthHeader(authHeader)
         rover.trackEvent(name: "Test")
-        eventsManager.serialQueue.waitUntilAllOperationsAreFinished()
+        eventsService.serialQueue.waitUntilAllOperationsAreFinished()
         
-        let nextEvent = eventsManager.eventQueue.events[1]
+        let nextEvent = eventsService.eventQueue.events[1]
         XCTAssertEqual(nextEvent.authHeaders!.count, 3)
         XCTAssertEqual(nextEvent.authHeaders!.last!.headerField, "foo")
         XCTAssertEqual(nextEvent.authHeaders!.last!.value, "bar")
@@ -83,21 +83,21 @@ class Rover_EventsTests: XCTestCase {
         let httpFactory = HTTPServiceFactory(accountToken: "giberish", session: session)
         try! rover.register(HTTPService.self, factory: httpFactory)
         
-        let eventsFactory = EventsManagerFactory()
-        try! rover.register(EventsManager.self, factory: eventsFactory)
+        let eventsFactory = EventsServiceFactory()
+        try! rover.register(EventsService.self, factory: eventsFactory)
 
-        let eventsManager = rover.resolve(EventsManager.self)!
-        XCTAssertEqual(eventsManager.eventQueue.count, 0)
+        let eventsService = rover.resolve(EventsService.self)!
+        XCTAssertEqual(eventsService.eventQueue.count, 0)
         
         rover.trackEvent(name: "Test")
         
-        eventsManager.serialQueue.waitUntilAllOperationsAreFinished()
-        XCTAssertEqual(eventsManager.eventQueue.count, 1)
+        eventsService.serialQueue.waitUntilAllOperationsAreFinished()
+        XCTAssertEqual(eventsService.eventQueue.count, 1)
         
         rover.flushEvents()
         
-        eventsManager.serialQueue.waitUntilAllOperationsAreFinished()
-        XCTAssertEqual(eventsManager.eventQueue.count, 0)
+        eventsService.serialQueue.waitUntilAllOperationsAreFinished()
+        XCTAssertEqual(eventsService.eventQueue.count, 0)
     }
 }
 

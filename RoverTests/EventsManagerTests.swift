@@ -1,5 +1,5 @@
 //
-//  EventsManagerTests.swift
+//  EventsServiceTests.swift
 //  Rover
 //
 //  Created by Sean Rucker on 2017-02-16.
@@ -12,128 +12,128 @@ import RoverData
 
 @testable import Rover
 
-class EventsManagerTests: XCTestCase {
+class EventsServiceTests: XCTestCase {
     
     func testEventsAreAddedToQueue() {
         let uploadService = MockUploadService()
-        let eventsManager = EventsManager(uploadService: uploadService,
+        let eventsService = EventsService(uploadService: uploadService,
                                           flushAt: Int.max,
                                           flushInterval: 0.0,
                                           maxBatchSize: Int.max,
                                           maxQueueSize: Int.max)
         
-        eventsManager.trackEvent(name: "Test", attributes: nil, authHeaders: nil)
-        eventsManager.serialQueue.waitUntilAllOperationsAreFinished()
-        XCTAssertEqual(eventsManager.eventQueue.count, 1)
+        eventsService.trackEvent(name: "Test", attributes: nil, authHeaders: nil)
+        eventsService.serialQueue.waitUntilAllOperationsAreFinished()
+        XCTAssertEqual(eventsService.eventQueue.count, 1)
         
-        let batch = eventsManager.eventQueue.nextBatch(minSize: 1)!
+        let batch = eventsService.eventQueue.nextBatch(minSize: 1)!
         XCTAssertEqual(batch.count, 1)
         XCTAssertEqual(batch.first?.name, "Test")
     }
     
     func testEventsAreFlushedAutomatically() {
         let uploadService = MockUploadService()
-        let eventsManager = EventsManager(uploadService: uploadService,
+        let eventsService = EventsService(uploadService: uploadService,
                                           flushAt: 1,
                                           flushInterval: 0.0,
                                           maxBatchSize: Int.max,
                                           maxQueueSize: Int.max)
         
-        eventsManager.trackEvent(name: "Test", attributes: nil, authHeaders: nil)
-        eventsManager.serialQueue.waitUntilAllOperationsAreFinished()
-        XCTAssertEqual(eventsManager.eventQueue.count, 0)
+        eventsService.trackEvent(name: "Test", attributes: nil, authHeaders: nil)
+        eventsService.serialQueue.waitUntilAllOperationsAreFinished()
+        XCTAssertEqual(eventsService.eventQueue.count, 0)
     }
     
     func testEventsCanBeFlushedManually() {
         let uploadService = MockUploadService()
-        let eventsManager = EventsManager(uploadService: uploadService,
+        let eventsService = EventsService(uploadService: uploadService,
                                           flushAt: Int.max,
                                           flushInterval: 0.0,
                                           maxBatchSize: Int.max,
                                           maxQueueSize: Int.max)
         
         for _ in 1...50 {
-            eventsManager.trackEvent(name: "Test", attributes: nil, authHeaders: nil)
+            eventsService.trackEvent(name: "Test", attributes: nil, authHeaders: nil)
         }
         
-        eventsManager.serialQueue.waitUntilAllOperationsAreFinished()
-        XCTAssertEqual(eventsManager.eventQueue.count, 50)
+        eventsService.serialQueue.waitUntilAllOperationsAreFinished()
+        XCTAssertEqual(eventsService.eventQueue.count, 50)
         
-        eventsManager.flushEvents()
-        eventsManager.serialQueue.waitUntilAllOperationsAreFinished()
-        XCTAssertEqual(eventsManager.eventQueue.count, 0)
+        eventsService.flushEvents()
+        eventsService.serialQueue.waitUntilAllOperationsAreFinished()
+        XCTAssertEqual(eventsService.eventQueue.count, 0)
     }
     
     func testCaputuresCurrentUploadTask() {
         let uploadService = MockUploadService(delay: 100)
-        let eventsManager = EventsManager(uploadService: uploadService,
+        let eventsService = EventsService(uploadService: uploadService,
                                           flushAt: Int.max,
                                           flushInterval: 0.0,
                                           maxBatchSize: Int.max,
                                           maxQueueSize: Int.max)
         
-        eventsManager.trackEvent(name: "Test", attributes: nil, authHeaders: nil)
-        eventsManager.flushEvents()
-        eventsManager.serialQueue.waitUntilAllOperationsAreFinished()
-        XCTAssertNotNil(eventsManager.uploadTask)
+        eventsService.trackEvent(name: "Test", attributes: nil, authHeaders: nil)
+        eventsService.flushEvents()
+        eventsService.serialQueue.waitUntilAllOperationsAreFinished()
+        XCTAssertNotNil(eventsService.uploadTask)
     }
     
     func testResetsCurrentUploadTask() {
         let uploadService = MockUploadService()
-        let eventsManager = EventsManager(uploadService: uploadService,
+        let eventsService = EventsService(uploadService: uploadService,
                                           flushAt: Int.max,
                                           flushInterval: 0.0,
                                           maxBatchSize: Int.max,
                                           maxQueueSize: Int.max)
         
-        eventsManager.trackEvent(name: "Test", attributes: nil, authHeaders: nil)
-        eventsManager.flushEvents()
-        eventsManager.serialQueue.waitUntilAllOperationsAreFinished()
-        XCTAssertNil(eventsManager.uploadTask)
+        eventsService.trackEvent(name: "Test", attributes: nil, authHeaders: nil)
+        eventsService.flushEvents()
+        eventsService.serialQueue.waitUntilAllOperationsAreFinished()
+        XCTAssertNil(eventsService.uploadTask)
     }
     
     func testWontSendUntilFlushAt() {
         let uploadService = MockUploadService(delay: 100)
-        let eventsManager = EventsManager(uploadService: uploadService,
+        let eventsService = EventsService(uploadService: uploadService,
                                           flushAt: 2,
                                           flushInterval: 0.0,
                                           maxBatchSize: Int.max,
                                           maxQueueSize: Int.max)
         
-        eventsManager.trackEvent(name: "Test", attributes: nil, authHeaders: nil)
-        eventsManager.serialQueue.waitUntilAllOperationsAreFinished()
-        XCTAssertNil(eventsManager.uploadTask)
+        eventsService.trackEvent(name: "Test", attributes: nil, authHeaders: nil)
+        eventsService.serialQueue.waitUntilAllOperationsAreFinished()
+        XCTAssertNil(eventsService.uploadTask)
     }
     
     func testRetriesUnsuccessfulUploads() {
         let result = TrackEventsResult.error(error: nil, shouldRetry: true)
         let uploadService = MockUploadService(result: result)
-        let eventsManager = EventsManager(uploadService: uploadService,
+        let eventsService = EventsService(uploadService: uploadService,
                                           flushAt: 1,
                                           flushInterval: 0.0,
                                           maxBatchSize: Int.max,
                                           maxQueueSize: Int.max)
         
-        eventsManager.trackEvent(name: "Test", attributes: nil, authHeaders: nil)
-        eventsManager.flushEvents()
-        eventsManager.serialQueue.waitUntilAllOperationsAreFinished()
-        XCTAssertEqual(eventsManager.eventQueue.count, 1)
+        eventsService.trackEvent(name: "Test", attributes: nil, authHeaders: nil)
+        eventsService.flushEvents()
+        eventsService.serialQueue.waitUntilAllOperationsAreFinished()
+        XCTAssertEqual(eventsService.eventQueue.count, 1)
     }
     
     func testDispatchesEvents() {
         let uploadService = MockUploadService()
-        let eventsManager = EventsManager(uploadService: uploadService,
+        let eventsService = EventsService(uploadService: uploadService,
                                           flushAt: Int.max,
                                           flushInterval: 0.0,
                                           maxBatchSize: Int.max,
                                           maxQueueSize: Int.max)
         
         let e = expectation(description: "Event manager dispatches didTrackEvent")
-        NotificationCenter.default.addObserver(forName: Notification.Name.didTrackEvent, object: eventsManager, queue: nil) { notification in
+        NotificationCenter.default.addObserver(forName: Notification.Name.didTrackEvent, object: eventsService, queue: nil) { notification in
             e.fulfill()
         }
         
-        eventsManager.trackEvent(name: "Test", attributes: nil, authHeaders: nil)
+        eventsService.trackEvent(name: "Test", attributes: nil, authHeaders: nil)
         waitForExpectations(timeout: 0.1, handler: nil)
     }
     
@@ -141,7 +141,7 @@ class EventsManagerTests: XCTestCase {
         let uploadService = MockUploadService()
         let application = MockApplication()
         let notificationCenter = MockNotificationCenter()
-        let eventsManager = EventsManager(uploadService: uploadService,
+        let eventsService = EventsService(uploadService: uploadService,
                                           contextProviders: nil,
                                           flushAt: Int.max,
                                           flushInterval: 0.0,
@@ -150,22 +150,22 @@ class EventsManagerTests: XCTestCase {
                                           application: application,
                                           notificationCenter: notificationCenter)
         
-        eventsManager.trackEvent(name: "Test", attributes: nil, authHeaders: nil)
-        eventsManager.serialQueue.waitUntilAllOperationsAreFinished()
-        XCTAssertEqual(eventsManager.eventQueue.count, 1)
+        eventsService.trackEvent(name: "Test", attributes: nil, authHeaders: nil)
+        eventsService.serialQueue.waitUntilAllOperationsAreFinished()
+        XCTAssertEqual(eventsService.eventQueue.count, 1)
         
         notificationCenter.callBlock(name: Notification.Name.UIApplicationDidEnterBackground.rawValue)
         XCTAssert(application.beginWasCalled)
         
-        eventsManager.serialQueue.waitUntilAllOperationsAreFinished()
-        XCTAssertEqual(eventsManager.eventQueue.count, 0)
+        eventsService.serialQueue.waitUntilAllOperationsAreFinished()
+        XCTAssertEqual(eventsService.eventQueue.count, 0)
     }
     
     func testEndsBackgroundTaskAfterSending() {
         let uploadService = MockUploadService()
         let application = MockApplication()
         let notificationCenter = MockNotificationCenter()
-        let eventsManager = EventsManager(uploadService: uploadService,
+        let eventsService = EventsService(uploadService: uploadService,
                                           contextProviders: nil,
                                           flushAt: Int.max,
                                           flushInterval: 0.0,
@@ -174,11 +174,11 @@ class EventsManagerTests: XCTestCase {
                                           application: application,
                                           notificationCenter: notificationCenter)
         
-        eventsManager.trackEvent(name: "Test", attributes: nil, authHeaders: nil)
-        eventsManager.serialQueue.waitUntilAllOperationsAreFinished()
+        eventsService.trackEvent(name: "Test", attributes: nil, authHeaders: nil)
+        eventsService.serialQueue.waitUntilAllOperationsAreFinished()
         
         notificationCenter.callBlock(name: Notification.Name.UIApplicationDidEnterBackground.rawValue)
-        eventsManager.serialQueue.waitUntilAllOperationsAreFinished()
+        eventsService.serialQueue.waitUntilAllOperationsAreFinished()
         
         XCTAssertTrue(application.endWasCalled)
     }
@@ -186,7 +186,7 @@ class EventsManagerTests: XCTestCase {
     func testEndsBackgroundTasksWhenLessThanMinBatchSize() {
         let uploadService = MockUploadService()
         let application = MockApplication()
-        let eventsManager = EventsManager(uploadService: uploadService,
+        let eventsService = EventsService(uploadService: uploadService,
                                           contextProviders: nil,
                                           flushAt: Int.max,
                                           flushInterval: 0.0,
@@ -195,16 +195,16 @@ class EventsManagerTests: XCTestCase {
                                           application: application,
                                           notificationCenter: nil)
         
-        eventsManager.backgroundTask = 1
-        eventsManager.trackEvent(name: "Test", attributes: nil, authHeaders: nil)
-        eventsManager.serialQueue.waitUntilAllOperationsAreFinished()
+        eventsService.backgroundTask = 1
+        eventsService.trackEvent(name: "Test", attributes: nil, authHeaders: nil)
+        eventsService.serialQueue.waitUntilAllOperationsAreFinished()
         XCTAssertTrue(application.endWasCalled)
     }
     
     func testFlushesOverTimeWhenApplicationActive() {
         let uploadService = MockUploadService()
         let notificationCenter = MockNotificationCenter()
-        let eventsManager = EventsManager(uploadService: uploadService,
+        let eventsService = EventsService(uploadService: uploadService,
                                           contextProviders: nil,
                                           flushAt: Int.max,
                                           flushInterval: 0.1,
@@ -213,18 +213,18 @@ class EventsManagerTests: XCTestCase {
                                           application: nil,
                                           notificationCenter: notificationCenter)
         
-        eventsManager.trackEvent(name: "Test", attributes: nil, authHeaders: nil)
-        eventsManager.serialQueue.waitUntilAllOperationsAreFinished()
-        XCTAssertEqual(eventsManager.eventQueue.count, 1)
+        eventsService.trackEvent(name: "Test", attributes: nil, authHeaders: nil)
+        eventsService.serialQueue.waitUntilAllOperationsAreFinished()
+        XCTAssertEqual(eventsService.eventQueue.count, 1)
         
-        XCTAssertNil(eventsManager.timer)
+        XCTAssertNil(eventsService.timer)
         notificationCenter.callBlock(name: Notification.Name.UIApplicationDidBecomeActive.rawValue)
-        XCTAssertNotNil(eventsManager.timer)
+        XCTAssertNotNil(eventsService.timer)
         
         let e = expectation(description: "Events are flushed")
         Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { _ in
-            eventsManager.serialQueue.waitUntilAllOperationsAreFinished()
-            XCTAssertEqual(eventsManager.eventQueue.count, 0)
+            eventsService.serialQueue.waitUntilAllOperationsAreFinished()
+            XCTAssertEqual(eventsService.eventQueue.count, 0)
             e.fulfill()
         }
         
@@ -234,7 +234,7 @@ class EventsManagerTests: XCTestCase {
     func testCancelsFlushTimerWhenResigningActive() {
         let uploadService = MockUploadService()
         let notificationCenter = MockNotificationCenter()
-        let eventsManager = EventsManager(uploadService: uploadService,
+        let eventsService = EventsService(uploadService: uploadService,
                                           contextProviders: nil,
                                           flushAt: Int.max,
                                           flushInterval: 0.1,
@@ -243,19 +243,19 @@ class EventsManagerTests: XCTestCase {
                                           application: nil,
                                           notificationCenter: notificationCenter)
         
-        XCTAssertNil(eventsManager.timer)
+        XCTAssertNil(eventsService.timer)
         
         notificationCenter.callBlock(name: Notification.Name.UIApplicationDidBecomeActive.rawValue)
-        XCTAssertNotNil(eventsManager.timer)
+        XCTAssertNotNil(eventsService.timer)
         
         notificationCenter.callBlock(name: Notification.Name.UIApplicationWillResignActive.rawValue)
-        XCTAssertNil(eventsManager.timer)
+        XCTAssertNil(eventsService.timer)
     }
     
     func testReassign() {
         let uploadService = MockUploadService()
-        let eventsManager = EventsManager(uploadService: uploadService)
-        let _ = eventsManager
+        let eventsService = EventsService(uploadService: uploadService)
+        let _ = eventsService
     }
 }
 

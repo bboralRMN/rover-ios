@@ -1,5 +1,5 @@
 //
-//  EventsManagerFactoryTests.swift
+//  EventsServiceFactoryTests.swift
 //  Rover
 //
 //  Created by Sean Rucker on 2017-03-07.
@@ -11,25 +11,25 @@ import RoverData
 
 @testable import Rover
 
-class EventsManagerFactoryTests: XCTestCase {
+class EventsServiceFactoryTests: XCTestCase {
     
     func testRegister() {
         let url = URL(string: "http://example.com")!
         let httpService = HTTPService(baseURL: url)
         let resolver = MockResolver(httpService: httpService)
         let dispatcher = MockDispatcher()
-        let factory = EventsManagerFactory()
+        let factory = EventsServiceFactory()
         let initialState = try! factory.register(resolver: resolver, dispatcher: dispatcher)
         
         XCTAssertEqual(initialState.uploadService as! HTTPService, httpService)
     }
     
-    func testConfigureEventsManager() {
+    func testConfigureEventsService() {
         let resolver = MockResolver()
         let dispatcher = MockDispatcher()
         let contextProvider = MockContextProvider()
         
-        let factory = EventsManagerFactory(contextProviders: [contextProvider],
+        let factory = EventsServiceFactory(contextProviders: [contextProvider],
                                            flushAt: 3,
                                            flushInterval: 3.3,
                                            maxBatchSize: 33,
@@ -49,7 +49,7 @@ class EventsManagerFactoryTests: XCTestCase {
         let dispatcher = MockDispatcher()
         
         do {
-            let _ = try EventsManagerFactory().register(resolver: resolver, dispatcher: dispatcher)
+            let _ = try EventsServiceFactory().register(resolver: resolver, dispatcher: dispatcher)
             XCTFail()
         } catch {
             switch error {
@@ -64,7 +64,7 @@ class EventsManagerFactoryTests: XCTestCase {
     func testNoOpAction() {
         let resolver = MockResolver()
         let dispatcher = MockDispatcher()
-        let factory = EventsManagerFactory()
+        let factory = EventsServiceFactory()
         let initialState = try! factory.register(resolver: resolver, dispatcher: dispatcher)
         
         let action = MockAction()
@@ -76,7 +76,7 @@ class EventsManagerFactoryTests: XCTestCase {
     func testAddContextProvider() {
         let resolver = MockResolver()
         let dispatcher = MockDispatcher()
-        let factory = EventsManagerFactory()
+        let factory = EventsServiceFactory()
         let initialState = try! factory.register(resolver: resolver, dispatcher: dispatcher)
 
         XCTAssertEqual(initialState.contextProviders.count, 8)
@@ -92,7 +92,7 @@ class EventsManagerFactoryTests: XCTestCase {
     func testAuthorizerActionUpdatesHTTPService() {
         let resolver = MockResolver()
         let dispatcher = MockDispatcher()
-        let factory = EventsManagerFactory()
+        let factory = EventsServiceFactory()
         let initialState = try! factory.register(resolver: resolver, dispatcher: dispatcher)
         
         let firstCount = (initialState.uploadService as! HTTPService).authHeaders.count
