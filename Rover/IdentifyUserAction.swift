@@ -1,5 +1,5 @@
 //
-//  IdentifyCustomerAction.swift
+//  IdentifyUserAction.swift
 //  Rover
 //
 //  Created by Sean Rucker on 2017-03-09.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct IdentifyCustomerAction: Action {
+struct IdentifyUserAction: Action {
     
-    let customerID: String
+    let userID: String
 }

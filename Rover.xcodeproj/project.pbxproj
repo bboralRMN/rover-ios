@@ -14,23 +14,23 @@
 		DB240A691E6F10B3002C7AC6 /* EventsServiceFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB240A681E6F10B3002C7AC6 /* EventsServiceFactoryTests.swift */; };
 		DB240A6B1E6F1CB2002C7AC6 /* RoverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB240A6A1E6F1CB2002C7AC6 /* RoverTests.swift */; };
 		DB240A6D1E6F41E6002C7AC6 /* ServiceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB240A6C1E6F41E6002C7AC6 /* ServiceFactory.swift */; };
-		DB5976E01E71CA7B00CCB49E /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5976DF1E71CA7B00CCB49E /* Customer.swift */; };
-		DB5976E31E71CAAC00CCB49E /* IdentifyCustomerAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5976E21E71CAAC00CCB49E /* IdentifyCustomerAction.swift */; };
-		DB5976E71E71CAEE00CCB49E /* Rover+Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5976E61E71CAEE00CCB49E /* Rover+Customer.swift */; };
+		DB5976E01E71CA7B00CCB49E /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5976DF1E71CA7B00CCB49E /* UserService.swift */; };
+		DB5976E31E71CAAC00CCB49E /* IdentifyUserAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5976E21E71CAAC00CCB49E /* IdentifyUserAction.swift */; };
+		DB5976E71E71CAEE00CCB49E /* Rover+User.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5976E61E71CAEE00CCB49E /* Rover+User.swift */; };
 		DB5976EA1E71CBA400CCB49E /* Resolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5976E91E71CBA400CCB49E /* Resolver.swift */; };
 		DB5976EC1E71CC1A00CCB49E /* Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5976EB1E71CC1A00CCB49E /* Container.swift */; };
 		DB5977371E72FA1A00CCB49E /* HTTPServiceFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5977361E72FA1A00CCB49E /* HTTPServiceFactoryTests.swift */; };
-		DB59773F1E7324FE00CCB49E /* CustomerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB59773E1E7324FE00CCB49E /* CustomerTests.swift */; };
-		DB5977411E73449300CCB49E /* CustomerFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5977401E73449300CCB49E /* CustomerFactoryTests.swift */; };
+		DB59773F1E7324FE00CCB49E /* UserServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB59773E1E7324FE00CCB49E /* UserServiceTests.swift */; };
+		DB5977411E73449300CCB49E /* UserServiceFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5977401E73449300CCB49E /* UserServiceFactoryTests.swift */; };
 		DB5977481E7346B600CCB49E /* AddAuthHeaderAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5977471E7346B600CCB49E /* AddAuthHeaderAction.swift */; };
 		DB59774A1E7346D400CCB49E /* Rover+Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5977491E7346D400CCB49E /* Rover+Data.swift */; };
 		DB59774C1E7346FA00CCB49E /* Rover+DataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB59774B1E7346FA00CCB49E /* Rover+DataTests.swift */; };
-		DB59774E1E73474D00CCB49E /* Rover+CustomerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB59774D1E73474D00CCB49E /* Rover+CustomerTests.swift */; };
+		DB59774E1E73474D00CCB49E /* Rover+UserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB59774D1E73474D00CCB49E /* Rover+UserTests.swift */; };
 		DB5977501E73478D00CCB49E /* Rover+EventsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB59774F1E73478D00CCB49E /* Rover+EventsTests.swift */; };
 		DB5977551E7347FA00CCB49E /* AddContextProviderAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5977541E7347FA00CCB49E /* AddContextProviderAction.swift */; };
 		DB5977571E73481000CCB49E /* Rover+Events.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5977561E73481000CCB49E /* Rover+Events.swift */; };
-		DB59775B1E75E34600CCB49E /* CustomerUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB59775A1E75E34600CCB49E /* CustomerUpdate.swift */; };
-		DB59775D1E75E66800CCB49E /* CustomerUpdateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB59775C1E75E66800CCB49E /* CustomerUpdateTests.swift */; };
+		DB59775B1E75E34600CCB49E /* UserUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB59775A1E75E34600CCB49E /* UserUpdate.swift */; };
+		DB59775D1E75E66800CCB49E /* UserUpdateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB59775C1E75E66800CCB49E /* UserUpdateTests.swift */; };
 		DB59777A1E7C32EF00CCB49E /* SyncCompleteAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5977791E7C32EF00CCB49E /* SyncCompleteAction.swift */; };
 		DB59777C1E7C833D00CCB49E /* Dispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB59777B1E7C833D00CCB49E /* Dispatcher.swift */; };
 		DB59777E1E7DAF0000CCB49E /* ServiceKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB59777D1E7DAF0000CCB49E /* ServiceKey.swift */; };
@@ -41,7 +41,7 @@
 		DB5977921E82AE4B00CCB49E /* ServiceStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5977911E82AE4B00CCB49E /* ServiceStore.swift */; };
 		DB5977941E82B9B900CCB49E /* ServiceRegistrationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5977931E82B9B900CCB49E /* ServiceRegistrationError.swift */; };
 		DB5977981E830F2400CCB49E /* ServiceRegistrationErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5977971E830F2400CCB49E /* ServiceRegistrationErrorTests.swift */; };
-		DB8E457A1E6C970400E9D293 /* CustomerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8E45791E6C970400E9D293 /* CustomerFactory.swift */; };
+		DB8E457A1E6C970400E9D293 /* UserServiceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8E45791E6C970400E9D293 /* UserServiceFactory.swift */; };
 		DB8E457C1E6CB2A200E9D293 /* EventsServiceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8E457B1E6CB2A200E9D293 /* EventsServiceFactory.swift */; };
 		DBB958FB1E525E3E003A30E7 /* Rover.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB958FA1E525E3E003A30E7 /* Rover.swift */; };
 		DBC5E4F31E671ED70030FE0C /* Attributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC5E4F21E671ED70030FE0C /* Attributes.swift */; };
@@ -105,23 +105,23 @@
 		DB240A681E6F10B3002C7AC6 /* EventsServiceFactoryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsServiceFactoryTests.swift; sourceTree = "<group>"; };
 		DB240A6A1E6F1CB2002C7AC6 /* RoverTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoverTests.swift; sourceTree = "<group>"; };
 		DB240A6C1E6F41E6002C7AC6 /* ServiceFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceFactory.swift; sourceTree = "<group>"; };
-		DB5976DF1E71CA7B00CCB49E /* Customer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
-		DB5976E21E71CAAC00CCB49E /* IdentifyCustomerAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdentifyCustomerAction.swift; sourceTree = "<group>"; };
-		DB5976E61E71CAEE00CCB49E /* Rover+Customer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Rover+Customer.swift"; sourceTree = "<group>"; };
+		DB5976DF1E71CA7B00CCB49E /* UserService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		DB5976E21E71CAAC00CCB49E /* IdentifyUserAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdentifyUserAction.swift; sourceTree = "<group>"; };
+		DB5976E61E71CAEE00CCB49E /* Rover+User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Rover+User.swift"; sourceTree = "<group>"; };
 		DB5976E91E71CBA400CCB49E /* Resolver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Resolver.swift; sourceTree = "<group>"; };
 		DB5976EB1E71CC1A00CCB49E /* Container.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Container.swift; sourceTree = "<group>"; };
 		DB5977361E72FA1A00CCB49E /* HTTPServiceFactoryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPServiceFactoryTests.swift; sourceTree = "<group>"; };
-		DB59773E1E7324FE00CCB49E /* CustomerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerTests.swift; sourceTree = "<group>"; };
-		DB5977401E73449300CCB49E /* CustomerFactoryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerFactoryTests.swift; sourceTree = "<group>"; };
+		DB59773E1E7324FE00CCB49E /* UserServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserServiceTests.swift; sourceTree = "<group>"; };
+		DB5977401E73449300CCB49E /* UserServiceFactoryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserServiceFactoryTests.swift; sourceTree = "<group>"; };
 		DB5977471E7346B600CCB49E /* AddAuthHeaderAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddAuthHeaderAction.swift; sourceTree = "<group>"; };
 		DB5977491E7346D400CCB49E /* Rover+Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Rover+Data.swift"; sourceTree = "<group>"; };
 		DB59774B1E7346FA00CCB49E /* Rover+DataTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Rover+DataTests.swift"; sourceTree = "<group>"; };
-		DB59774D1E73474D00CCB49E /* Rover+CustomerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Rover+CustomerTests.swift"; sourceTree = "<group>"; };
+		DB59774D1E73474D00CCB49E /* Rover+UserTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Rover+UserTests.swift"; sourceTree = "<group>"; };
 		DB59774F1E73478D00CCB49E /* Rover+EventsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Rover+EventsTests.swift"; sourceTree = "<group>"; };
 		DB5977541E7347FA00CCB49E /* AddContextProviderAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddContextProviderAction.swift; sourceTree = "<group>"; };
 		DB5977561E73481000CCB49E /* Rover+Events.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Rover+Events.swift"; sourceTree = "<group>"; };
-		DB59775A1E75E34600CCB49E /* CustomerUpdate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerUpdate.swift; sourceTree = "<group>"; };
-		DB59775C1E75E66800CCB49E /* CustomerUpdateTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerUpdateTests.swift; sourceTree = "<group>"; };
+		DB59775A1E75E34600CCB49E /* UserUpdate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserUpdate.swift; sourceTree = "<group>"; };
+		DB59775C1E75E66800CCB49E /* UserUpdateTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserUpdateTests.swift; sourceTree = "<group>"; };
 		DB5977791E7C32EF00CCB49E /* SyncCompleteAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyncCompleteAction.swift; sourceTree = "<group>"; };
 		DB59777B1E7C833D00CCB49E /* Dispatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dispatcher.swift; sourceTree = "<group>"; };
 		DB59777D1E7DAF0000CCB49E /* ServiceKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceKey.swift; sourceTree = "<group>"; };
@@ -132,7 +132,7 @@
 		DB5977911E82AE4B00CCB49E /* ServiceStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceStore.swift; sourceTree = "<group>"; };
 		DB5977931E82B9B900CCB49E /* ServiceRegistrationError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceRegistrationError.swift; sourceTree = "<group>"; };
 		DB5977971E830F2400CCB49E /* ServiceRegistrationErrorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceRegistrationErrorTests.swift; sourceTree = "<group>"; };
-		DB8E45791E6C970400E9D293 /* CustomerFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerFactory.swift; sourceTree = "<group>"; };
+		DB8E45791E6C970400E9D293 /* UserServiceFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserServiceFactory.swift; sourceTree = "<group>"; };
 		DB8E457B1E6CB2A200E9D293 /* EventsServiceFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsServiceFactory.swift; sourceTree = "<group>"; };
 		DBB958FA1E525E3E003A30E7 /* Rover.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rover.swift; sourceTree = "<group>"; };
 		DBC5E4F21E671ED70030FE0C /* Attributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Attributes.swift; sourceTree = "<group>"; };
@@ -278,35 +278,35 @@
 			name = Data;
 			sourceTree = "<group>";
 		};
-		DB5976DE1E71C42E00CCB49E /* Customer */ = {
+		DB5976DE1E71C42E00CCB49E /* User */ = {
 			isa = PBXGroup;
 			children = (
 				DB5976E11E71CAA200CCB49E /* Actions */,
-				DB5976DF1E71CA7B00CCB49E /* Customer.swift */,
-				DB8E45791E6C970400E9D293 /* CustomerFactory.swift */,
-				DB59775A1E75E34600CCB49E /* CustomerUpdate.swift */,
-				DB5976E61E71CAEE00CCB49E /* Rover+Customer.swift */,
+				DB5976DF1E71CA7B00CCB49E /* UserService.swift */,
+				DB8E45791E6C970400E9D293 /* UserServiceFactory.swift */,
+				DB59775A1E75E34600CCB49E /* UserUpdate.swift */,
+				DB5976E61E71CAEE00CCB49E /* Rover+User.swift */,
 			);
-			name = Customer;
+			name = User;
 			sourceTree = "<group>";
 		};
 		DB5976E11E71CAA200CCB49E /* Actions */ = {
 			isa = PBXGroup;
 			children = (
-				DB5976E21E71CAAC00CCB49E /* IdentifyCustomerAction.swift */,
+				DB5976E21E71CAAC00CCB49E /* IdentifyUserAction.swift */,
 			);
 			name = Actions;
 			sourceTree = "<group>";
 		};
-		DB59773D1E7324DA00CCB49E /* Customer */ = {
+		DB59773D1E7324DA00CCB49E /* User */ = {
 			isa = PBXGroup;
 			children = (
-				DB59773E1E7324FE00CCB49E /* CustomerTests.swift */,
-				DB5977401E73449300CCB49E /* CustomerFactoryTests.swift */,
-				DB59774D1E73474D00CCB49E /* Rover+CustomerTests.swift */,
-				DB59775C1E75E66800CCB49E /* CustomerUpdateTests.swift */,
+				DB59773E1E7324FE00CCB49E /* UserServiceTests.swift */,
+				DB5977401E73449300CCB49E /* UserServiceFactoryTests.swift */,
+				DB59774D1E73474D00CCB49E /* Rover+UserTests.swift */,
+				DB59775C1E75E66800CCB49E /* UserUpdateTests.swift */,
 			);
-			name = Customer;
+			name = User;
 			sourceTree = "<group>";
 		};
 		DB5977461E7346A600CCB49E /* Actions */ = {
@@ -374,11 +374,11 @@
 		DBE762BB1DE382CF00183297 /* Rover */ = {
 			isa = PBXGroup;
 			children = (
-				DB5976DE1E71C42E00CCB49E /* Customer */,
 				DB5976D91E71C23900CCB49E /* Data */,
 				DBC5E4F11E671EC00030FE0C /* Events */,
-				DB1CA33F1E56D38600E2DB23 /* Supporting Files */,
+				DB5976DE1E71C42E00CCB49E /* User */,
 				DBC5E54A1E686AA10030FE0C /* Vendor */,
+				DB1CA33F1E56D38600E2DB23 /* Supporting Files */,
 				DB5977811E7DAF6F00CCB49E /* Action.swift */,
 				DB5976EB1E71CC1A00CCB49E /* Container.swift */,
 				DB59777B1E7C833D00CCB49E /* Dispatcher.swift */,
@@ -396,9 +396,9 @@
 		DBE762C61DE382CF00183297 /* RoverTests */ = {
 			isa = PBXGroup;
 			children = (
-				DB59773D1E7324DA00CCB49E /* Customer */,
 				DB240A631E6F0EA9002C7AC6 /* Data */,
 				DB240A621E6F0EA1002C7AC6 /* Events */,
+				DB59773D1E7324DA00CCB49E /* User */,
 				DB1CA33E1E56D37C00E2DB23 /* Supporting Files */,
 				DB240A6A1E6F1CB2002C7AC6 /* RoverTests.swift */,
 				DB5977831E7F39A400CCB49E /* ServiceKeyTests.swift */,
@@ -526,7 +526,7 @@
 				DB59777E1E7DAF0000CCB49E /* ServiceKey.swift in Sources */,
 				DBC5E4F51E671EEB0030FE0C /* Event.swift in Sources */,
 				DBC5E5141E6721B80030FE0C /* ScreenContextProvider.swift in Sources */,
-				DB5976E71E71CAEE00CCB49E /* Rover+Customer.swift in Sources */,
+				DB5976E71E71CAEE00CCB49E /* Rover+User.swift in Sources */,
 				DBC5E4F71E671F1C0030FE0C /* EventBatch.swift in Sources */,
 				DBC5E50C1E6721560030FE0C /* ApplicationContextProvider.swift in Sources */,
 				DB5976EC1E71CC1A00CCB49E /* Container.swift in Sources */,
@@ -538,7 +538,7 @@
 				DBC5E51A1E6721F60030FE0C /* ReachabilityContextProvider.swift in Sources */,
 				DB5977801E7DAF0F00CCB49E /* Service.swift in Sources */,
 				DB240A6D1E6F41E6002C7AC6 /* ServiceFactory.swift in Sources */,
-				DB5976E31E71CAAC00CCB49E /* IdentifyCustomerAction.swift in Sources */,
+				DB5976E31E71CAAC00CCB49E /* IdentifyUserAction.swift in Sources */,
 				DBC5E5461E677C0F0030FE0C /* HTTPServiceFactory.swift in Sources */,
 				DB5977921E82AE4B00CCB49E /* ServiceStore.swift in Sources */,
 				DB5977571E73481000CCB49E /* Rover+Events.swift in Sources */,
@@ -552,9 +552,9 @@
 				DB59774A1E7346D400CCB49E /* Rover+Data.swift in Sources */,
 				DBC5E5121E6721950030FE0C /* LocaleContextProvider.swift in Sources */,
 				DBC5E4F91E671F320030FE0C /* EventQueue.swift in Sources */,
-				DB8E457A1E6C970400E9D293 /* CustomerFactory.swift in Sources */,
-				DB59775B1E75E34600CCB49E /* CustomerUpdate.swift in Sources */,
-				DB5976E01E71CA7B00CCB49E /* Customer.swift in Sources */,
+				DB8E457A1E6C970400E9D293 /* UserServiceFactory.swift in Sources */,
+				DB59775B1E75E34600CCB49E /* UserUpdate.swift in Sources */,
+				DB5976E01E71CA7B00CCB49E /* UserService.swift in Sources */,
 				DBC5E5081E6721220030FE0C /* Reachability.swift in Sources */,
 				DB5976EA1E71CBA400CCB49E /* Resolver.swift in Sources */,
 				DB59777C1E7C833D00CCB49E /* Dispatcher.swift in Sources */,
@@ -570,20 +570,20 @@
 				DBC5E5221E67226B0030FE0C /* DeviceContextProviderTests.swift in Sources */,
 				DB5977371E72FA1A00CCB49E /* HTTPServiceFactoryTests.swift in Sources */,
 				DBC5E5001E671F860030FE0C /* EventsServiceTests.swift in Sources */,
-				DB5977411E73449300CCB49E /* CustomerFactoryTests.swift in Sources */,
+				DB5977411E73449300CCB49E /* UserServiceFactoryTests.swift in Sources */,
 				DBC5E5261E6722B20030FE0C /* LocaleContextProviderTests.swift in Sources */,
 				DBC5E5241E67229D0030FE0C /* FrameworkContextProviderTests.swift in Sources */,
 				DBC5E5201E67224B0030FE0C /* ApplicationContextProviderTests.swift in Sources */,
 				DBC5E52C1E6723820030FE0C /* TimeZoneContextProviderTests.swift in Sources */,
-				DB59773F1E7324FE00CCB49E /* CustomerTests.swift in Sources */,
+				DB59773F1E7324FE00CCB49E /* UserServiceTests.swift in Sources */,
 				DB5977841E7F39A400CCB49E /* ServiceKeyTests.swift in Sources */,
 				DBC5E52A1E6723620030FE0C /* TelephonyContextProviderTests.swift in Sources */,
-				DB59775D1E75E66800CCB49E /* CustomerUpdateTests.swift in Sources */,
+				DB59775D1E75E66800CCB49E /* UserUpdateTests.swift in Sources */,
 				DB59774C1E7346FA00CCB49E /* Rover+DataTests.swift in Sources */,
 				DB5977901E81D3D500CCB49E /* EventBatchTests.swift in Sources */,
 				DB240A691E6F10B3002C7AC6 /* EventsServiceFactoryTests.swift in Sources */,
 				DB5977501E73478D00CCB49E /* Rover+EventsTests.swift in Sources */,
-				DB59774E1E73474D00CCB49E /* Rover+CustomerTests.swift in Sources */,
+				DB59774E1E73474D00CCB49E /* Rover+UserTests.swift in Sources */,
 				DBC5E52E1E67239C0030FE0C /* ReachabilityContextProviderTests.swift in Sources */,
 				DB5977981E830F2400CCB49E /* ServiceRegistrationErrorTests.swift in Sources */,
 				DBC5E5281E6723470030FE0C /* ScreenContextProviderTests.swift in Sources */,

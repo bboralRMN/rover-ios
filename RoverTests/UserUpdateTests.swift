@@ -1,5 +1,5 @@
 //
-//  CustomerUpdateTests.swift
+//  UserUpdateTests.swift
 //  Rover
 //
 //  Created by Sean Rucker on 2017-03-12.
@@ -10,10 +10,10 @@ import XCTest
 
 @testable import Rover
 
-class CustomerUpdateTests: XCTestCase {
+class UserUpdateTests: XCTestCase {
     
     func testSetFirstName() {
-        let update = CustomerUpdate.setFirstName(value: "Marie")
+        let update = UserUpdate.setFirstName(value: "Marie")
         let serialized = update.serialized
         
         XCTAssertEqual(serialized["action"] as! String, "set")
@@ -22,7 +22,7 @@ class CustomerUpdateTests: XCTestCase {
     }
     
     func testClearFirstName() {
-        let update = CustomerUpdate.clearFirstName
+        let update = UserUpdate.clearFirstName
         let serialized = update.serialized
         
         XCTAssertEqual(serialized["action"] as! String, "clear")
@@ -30,7 +30,7 @@ class CustomerUpdateTests: XCTestCase {
     }
     
     func testSetLastName() {
-        let update = CustomerUpdate.setLastName(value: "Avgeropoulos")
+        let update = UserUpdate.setLastName(value: "Avgeropoulos")
         let serialized = update.serialized
         
         XCTAssertEqual(serialized["action"] as! String, "set")
@@ -39,7 +39,7 @@ class CustomerUpdateTests: XCTestCase {
     }
     
     func testClearLastName() {
-        let update = CustomerUpdate.clearLastName
+        let update = UserUpdate.clearLastName
         let serialized = update.serialized
         
         XCTAssertEqual(serialized["action"] as! String, "clear")
@@ -47,7 +47,7 @@ class CustomerUpdateTests: XCTestCase {
     }
     
     func testSetEmail() {
-        let update = CustomerUpdate.setEmail(value: "marie.avgeropoulos@example.com")
+        let update = UserUpdate.setEmail(value: "marie.avgeropoulos@example.com")
         let serialized = update.serialized
         
         XCTAssertEqual(serialized["action"] as! String, "set")
@@ -56,7 +56,7 @@ class CustomerUpdateTests: XCTestCase {
     }
     
     func testClearEmail() {
-        let update = CustomerUpdate.clearEmail
+        let update = UserUpdate.clearEmail
         let serialized = update.serialized
         
         XCTAssertEqual(serialized["action"] as! String, "clear")
@@ -64,16 +64,16 @@ class CustomerUpdateTests: XCTestCase {
     }
     
     func testSetGender() {
-        let update = CustomerUpdate.setGender(value: .female)
+        let update = UserUpdate.setGender(value: .female)
         let serialized = update.serialized
         
         XCTAssertEqual(serialized["action"] as! String, "set")
         XCTAssertEqual(serialized["key"] as! String, "gender")
-        XCTAssertEqual(serialized["value"] as! String, CustomerUpdate.Gender.female.rawValue)
+        XCTAssertEqual(serialized["value"] as! String, UserUpdate.Gender.female.rawValue)
     }
     
     func testClearGender() {
-        let update = CustomerUpdate.clearGender
+        let update = UserUpdate.clearGender
         let serialized = update.serialized
         
         XCTAssertEqual(serialized["action"] as! String, "clear")
@@ -81,7 +81,7 @@ class CustomerUpdateTests: XCTestCase {
     }
     
     func testSetAge() {
-        let update = CustomerUpdate.setAge(value: 30)
+        let update = UserUpdate.setAge(value: 30)
         let serialized = update.serialized
         
         XCTAssertEqual(serialized["action"] as! String, "set")
@@ -90,7 +90,7 @@ class CustomerUpdateTests: XCTestCase {
     }
     
     func testClearAge() {
-        let update = CustomerUpdate.clearAge
+        let update = UserUpdate.clearAge
         let serialized = update.serialized
         
         XCTAssertEqual(serialized["action"] as! String, "clear")
@@ -98,7 +98,7 @@ class CustomerUpdateTests: XCTestCase {
     }
     
     func testSetPhoneNumber() {
-        let update = CustomerUpdate.setPhoneNumber(value: "555-555-5555")
+        let update = UserUpdate.setPhoneNumber(value: "555-555-5555")
         let serialized = update.serialized
         
         XCTAssertEqual(serialized["action"] as! String, "set")
@@ -107,7 +107,7 @@ class CustomerUpdateTests: XCTestCase {
     }
     
     func testClearPhoneNumber() {
-        let update = CustomerUpdate.clearPhoneNumber
+        let update = UserUpdate.clearPhoneNumber
         let serialized = update.serialized
         
         XCTAssertEqual(serialized["action"] as! String, "clear")
@@ -115,7 +115,7 @@ class CustomerUpdateTests: XCTestCase {
     }
     
     func testSetTags() {
-        let update = CustomerUpdate.setTags(value: ["actress", "model", "musician"])
+        let update = UserUpdate.setTags(value: ["actress", "model", "musician"])
         let serialized = update.serialized
         
         XCTAssertEqual(serialized["action"] as! String, "set")
@@ -124,7 +124,7 @@ class CustomerUpdateTests: XCTestCase {
     }
     
     func testClearTags() {
-        let update = CustomerUpdate.clearTags
+        let update = UserUpdate.clearTags
         let serialized = update.serialized
         
         XCTAssertEqual(serialized["action"] as! String, "clear")
@@ -132,7 +132,7 @@ class CustomerUpdateTests: XCTestCase {
     }
     
     func testAddTag() {
-        let update = CustomerUpdate.addTag(value: "actress")
+        let update = UserUpdate.addTag(value: "actress")
         let serialized = update.serialized
         
         XCTAssertEqual(serialized["action"] as! String, "add")
@@ -141,7 +141,7 @@ class CustomerUpdateTests: XCTestCase {
     }
     
     func testRemoveTag() {
-        let update = CustomerUpdate.removeTag(value: "model")
+        let update = UserUpdate.removeTag(value: "model")
         let serialized = update.serialized
         
         XCTAssertEqual(serialized["action"] as! String, "remove")
@@ -150,7 +150,7 @@ class CustomerUpdateTests: XCTestCase {
     }
     
     func testSetCustomValue() {
-        let update = CustomerUpdate.setCustomValue(key: "height", value: 1.65)
+        let update = UserUpdate.setCustomValue(key: "height", value: 1.65)
         let serialized = update.serialized
         
         XCTAssertEqual(serialized["action"] as! String, "set")
@@ -159,7 +159,7 @@ class CustomerUpdateTests: XCTestCase {
     }
     
     func testClearCustomValue() {
-        let update = CustomerUpdate.clearCustomValue(key: "foo")
+        let update = UserUpdate.clearCustomValue(key: "foo")
         let serialized = update.serialized
         
         XCTAssertEqual(serialized["action"] as! String, "clear")

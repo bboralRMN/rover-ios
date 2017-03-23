@@ -14,14 +14,14 @@ import RoverData
 class ServiceRegistrationErrorTests: XCTestCase {
     
     func testAlreadyRegisteredDescription() {
-        let serviceKey = ServiceKey(serviceType: Customer.self, name: nil)
+        let serviceKey = ServiceKey(serviceType: UserService.self, name: nil)
         let error = ServiceRegistrationError.alreadyRegistered(serviceKey: serviceKey)
-        XCTAssertEqual(error.localizedDescription, "Customer has already been registered")
+        XCTAssertEqual(error.localizedDescription, "UserService has already been registered")
     }
     
     func testUnmetDependencyDescription() {
-        let error = ServiceRegistrationError.unmetDependency(serviceType: Customer.self, dependencyType: HTTPService.self)
-        XCTAssertEqual(error.localizedDescription, "Failed to register Customer due to unmet dependency HTTPService")
+        let error = ServiceRegistrationError.unmetDependency(serviceType: UserService.self, dependencyType: HTTPService.self)
+        XCTAssertEqual(error.localizedDescription, "Failed to register UserService due to unmet dependency HTTPService")
     }
     
     func testUnexpectedErrorDescription() {

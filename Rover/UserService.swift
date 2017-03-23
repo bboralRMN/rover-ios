@@ -1,5 +1,5 @@
 //
-//  Customer.swift
+//  UserService.swift
 //  Rover
 //
 //  Created by Sean Rucker on 2017-03-09.
@@ -9,9 +9,9 @@
 import Foundation
 import RoverData
 
-public struct Customer {
+public struct UserService {
     
-    public let customerID: String?
+    public let userID: String?
     
     public let firstName: String?
     
@@ -29,7 +29,7 @@ public struct Customer {
     
     public let traits: JSON?
     
-    init(customerID: String? = nil,
+    init(userID: String? = nil,
          firstName: String? = nil,
          lastName: String? = nil,
          email: String? = nil,
@@ -39,7 +39,7 @@ public struct Customer {
          tags: [String]? = nil,
          traits: JSON? = nil) {
         
-        self.customerID = customerID
+        self.userID = userID
         self.firstName = firstName
         self.lastName = lastName
         self.email = email
@@ -51,20 +51,20 @@ public struct Customer {
     }
 }
 
-extension Customer {
+extension UserService {
     
     var authHeader: AuthHeader? {
-        guard let customerID = customerID else {
+        guard let userID = userID else {
             return nil
         }
-        return AuthHeader(headerField: "x-rover-customer-id", value: customerID)
+        return AuthHeader(headerField: "x-rover-user-id", value: userID)
     }
 }
 
-extension Customer: Equatable {
+extension UserService: Equatable {
     
-    public static func == (lhs: Customer, rhs: Customer) -> Bool {
-        guard lhs.customerID == rhs.customerID && lhs.firstName == rhs.firstName && lhs.lastName == rhs.lastName && lhs.email == rhs.email && lhs.gender == rhs.gender && lhs.age == rhs.age && lhs.phoneNumber == rhs.phoneNumber else {
+    public static func == (lhs: UserService, rhs: UserService) -> Bool {
+        guard lhs.userID == rhs.userID && lhs.firstName == rhs.firstName && lhs.lastName == rhs.lastName && lhs.email == rhs.email && lhs.gender == rhs.gender && lhs.age == rhs.age && lhs.phoneNumber == rhs.phoneNumber else {
             return false
         }
         

@@ -1,5 +1,5 @@
 //
-//  CustomerFactoryTests.swift
+//  UserServiceFactoryTests.swift
 //  Rover
 //
 //  Created by Sean Rucker on 2017-03-10.
@@ -11,33 +11,33 @@ import RoverData
 
 @testable import Rover
 
-class CustomerFactoryTests: XCTestCase {
+class UserServiceFactoryTests: XCTestCase {
     
     func testRegister() {
         let localStorage = MockStorage()
-        let factory = CustomerFactory(localStorage: localStorage)
+        let factory = UserServiceFactory(localStorage: localStorage)
         
         let resolver = MockResolver()
         let dispatcher = MockDispatcher()
         let initialState = try! factory.register(resolver: resolver, dispatcher: dispatcher)
         
-        XCTAssertNil(initialState.customerID)
+        XCTAssertNil(initialState.userID)
     }
     
-    func testRegisterWithStoredCustomerID() {
-        let localStorage = MockStorage(customerID: "giberish")
-        let factory = CustomerFactory(localStorage: localStorage)
+    func testRegisterWithStoredUserID() {
+        let localStorage = MockStorage(userID: "giberish")
+        let factory = UserServiceFactory(localStorage: localStorage)
         
         let resolver = MockResolver()
         let dispatcher = MockDispatcher()
         let initialState = try! factory.register(resolver: resolver, dispatcher: dispatcher)
         
-        XCTAssertEqual(initialState.customerID, "giberish")
+        XCTAssertEqual(initialState.userID, "giberish")
     }
     
     func testNoOpAction() {
         let localStorage = MockStorage()
-        let factory = CustomerFactory(localStorage: localStorage)
+        let factory = UserServiceFactory(localStorage: localStorage)
         
         let resolver = MockResolver()
         let dispatcher = MockDispatcher()
@@ -49,32 +49,32 @@ class CustomerFactoryTests: XCTestCase {
         XCTAssert(factory.areEqual(a: initialState, b: nextState))
     }
     
-    func testIdentifyCustomer() {
+    func testIdentifyUser() {
         let localStorage = MockStorage()
-        let factory = CustomerFactory(localStorage: localStorage)
+        let factory = UserServiceFactory(localStorage: localStorage)
         
         let resolver = MockResolver()
         let dispatcher = MockDispatcher()
         let initialState = try! factory.register(resolver: resolver, dispatcher: dispatcher)
         
-        XCTAssertNil(initialState.customerID)
+        XCTAssertNil(initialState.userID)
         
-        let action = IdentifyCustomerAction(customerID: "giberish")
+        let action = IdentifyUserAction(userID: "giberish")
         let nextState = factory.reduce(state: initialState, action: action, resolver: resolver)
         
-        XCTAssertEqual(nextState.customerID, "giberish")
-        XCTAssertEqual(localStorage.customerID, "giberish")
+        XCTAssertEqual(nextState.userID, "giberish")
+        XCTAssertEqual(localStorage.userID, "giberish")
     }
     
     func testSyncResult() {
         let localStorage = MockStorage()
-        let factory = CustomerFactory(localStorage: localStorage)
+        let factory = UserServiceFactory(localStorage: localStorage)
         
         let resolver = MockResolver()
         let dispatcher = MockDispatcher()
         let initialState = try! factory.register(resolver: resolver, dispatcher: dispatcher)
 
-        XCTAssertNil(initialState.customerID)
+        XCTAssertNil(initialState.userID)
         XCTAssertNil(initialState.firstName)
         XCTAssertNil(initialState.lastName)
         XCTAssertNil(initialState.email)
@@ -84,7 +84,7 @@ class CustomerFactoryTests: XCTestCase {
         XCTAssertNil(initialState.tags)
         XCTAssertNil(initialState.traits)
         
-        let customer = SyncResult.Customer(customerID: "80000516109",
+        let user = SyncResult.User(userID: "80000516109",
                                            firstName: "Marie",
                                            lastName: "Avgeropoulos",
                                            email: "marie.avgeropoulos@example.com",
@@ -94,11 +94,11 @@ class CustomerFactoryTests: XCTestCase {
                                            tags: ["actress", "model", "musician"],
                                            traits: ["height": 1.65])
         
-        let syncResult = SyncResult.success(customer: customer)
+        let syncResult = SyncResult.success(user: user)
         let action = SyncCompleteAction(syncResult: syncResult)
         let nextState = factory.reduce(state: initialState, action: action, resolver: resolver)
         
-        XCTAssertEqual(nextState.customerID, "80000516109")
+        XCTAssertEqual(nextState.userID, "80000516109")
         XCTAssertEqual(nextState.firstName, "Marie")
         XCTAssertEqual(nextState.lastName, "Avgeropoulos")
         XCTAssertEqual(nextState.email, "marie.avgeropoulos@example.com")
@@ -109,23 +109,23 @@ class CustomerFactoryTests: XCTestCase {
         XCTAssertEqual(nextState.traits!["height"] as! Double, 1.65)
     }
     
-    func testMismatchedCustomerIDSyncResult() {
-        let localStorage = MockStorage(customerID: "foo")
-        let factory = CustomerFactory(localStorage: localStorage)
+    func testMismatchedUserIDSyncResult() {
+        let localStorage = MockStorage(userID: "foo")
+        let factory = UserServiceFactory(localStorage: localStorage)
         
         let resolver = MockResolver()
         let dispatcher = MockDispatcher()
         let initialState = try! factory.register(resolver: resolver, dispatcher: dispatcher)
 
-        XCTAssertEqual(initialState.customerID, "foo")
+        XCTAssertEqual(initialState.userID, "foo")
         XCTAssertNil(initialState.firstName)
         
-        let customer = SyncResult.Customer(customerID: "bar", firstName: "Marie")
-        let syncResult = SyncResult.success(customer: customer)
+        let user = SyncResult.User(userID: "bar", firstName: "Marie")
+        let syncResult = SyncResult.success(user: user)
         let action = SyncCompleteAction(syncResult: syncResult)
         let nextState = factory.reduce(state: initialState, action: action, resolver: resolver)
         
-        XCTAssertEqual(nextState.customerID, "foo")
+        XCTAssertEqual(nextState.userID, "foo")
         XCTAssertNil(nextState.firstName)
     }
 }
@@ -134,18 +134,18 @@ class CustomerFactoryTests: XCTestCase {
 
 fileprivate class MockStorage: LocalStorage {
     
-    var customerID: String?
+    var userID: String?
     
-    init(customerID: String? = nil) {
-        self.customerID = customerID
+    init(userID: String? = nil) {
+        self.userID = userID
     }
     
     func string(forKey defaultName: String) -> String? {
-        return customerID
+        return userID
     }
     
     func set(_ value: Any?, forKey defaultName: String) {
-        customerID = value as? String
+        userID = value as? String
     }
 }
 

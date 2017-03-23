@@ -1,5 +1,5 @@
 //
-//  CustomerUpdate.swift
+//  UserUpdate.swift
 //  Rover
 //
 //  Created by Sean Rucker on 2017-03-12.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public enum CustomerUpdate {
+public enum UserUpdate {
     
     public enum Gender: String {
         case male, female

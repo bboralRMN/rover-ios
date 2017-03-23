@@ -22,7 +22,7 @@ public class Rover {
         do {
             try rover.register(HTTPService.self, factory: HTTPServiceFactory(accountToken: accountToken))
             try rover.register(EventsService.self, factory: EventsServiceFactory())
-            try rover.register(Customer.self, factory: CustomerFactory())
+            try rover.register(UserService.self, factory: UserServiceFactory())
         } catch {
             logger.error(error.localizedDescription)
         }
