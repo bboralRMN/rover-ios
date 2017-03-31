@@ -7,70 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		DB1CA3301E56C3D000E2DB23 /* RoverData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB1CA32C1E56C3D000E2DB23 /* RoverData.framework */; };
-		DB1CA3321E56C3D000E2DB23 /* RoverLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB1CA32E1E56C3D000E2DB23 /* RoverLogger.framework */; };
-		DB1CA33B1E56C73C00E2DB23 /* RoverData.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = DB1CA32C1E56C3D000E2DB23 /* RoverData.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		DB1CA33D1E56C73C00E2DB23 /* RoverLogger.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = DB1CA32E1E56C3D000E2DB23 /* RoverLogger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		DB240A691E6F10B3002C7AC6 /* EventsServiceFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB240A681E6F10B3002C7AC6 /* EventsServiceFactoryTests.swift */; };
 		DB240A6B1E6F1CB2002C7AC6 /* RoverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB240A6A1E6F1CB2002C7AC6 /* RoverTests.swift */; };
-		DB240A6D1E6F41E6002C7AC6 /* ServiceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB240A6C1E6F41E6002C7AC6 /* ServiceFactory.swift */; };
-		DB5976E01E71CA7B00CCB49E /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5976DF1E71CA7B00CCB49E /* UserService.swift */; };
-		DB5976E31E71CAAC00CCB49E /* IdentifyUserAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5976E21E71CAAC00CCB49E /* IdentifyUserAction.swift */; };
-		DB5976E71E71CAEE00CCB49E /* Rover+User.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5976E61E71CAEE00CCB49E /* Rover+User.swift */; };
-		DB5976EA1E71CBA400CCB49E /* Resolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5976E91E71CBA400CCB49E /* Resolver.swift */; };
-		DB5976EC1E71CC1A00CCB49E /* Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5976EB1E71CC1A00CCB49E /* Container.swift */; };
-		DB5977371E72FA1A00CCB49E /* HTTPServiceFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5977361E72FA1A00CCB49E /* HTTPServiceFactoryTests.swift */; };
-		DB59773F1E7324FE00CCB49E /* UserServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB59773E1E7324FE00CCB49E /* UserServiceTests.swift */; };
-		DB5977411E73449300CCB49E /* UserServiceFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5977401E73449300CCB49E /* UserServiceFactoryTests.swift */; };
-		DB5977481E7346B600CCB49E /* AddAuthHeaderAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5977471E7346B600CCB49E /* AddAuthHeaderAction.swift */; };
-		DB59774A1E7346D400CCB49E /* Rover+Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5977491E7346D400CCB49E /* Rover+Data.swift */; };
-		DB59774C1E7346FA00CCB49E /* Rover+DataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB59774B1E7346FA00CCB49E /* Rover+DataTests.swift */; };
-		DB59774E1E73474D00CCB49E /* Rover+UserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB59774D1E73474D00CCB49E /* Rover+UserTests.swift */; };
-		DB5977501E73478D00CCB49E /* Rover+EventsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB59774F1E73478D00CCB49E /* Rover+EventsTests.swift */; };
-		DB5977551E7347FA00CCB49E /* AddContextProviderAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5977541E7347FA00CCB49E /* AddContextProviderAction.swift */; };
-		DB5977571E73481000CCB49E /* Rover+Events.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5977561E73481000CCB49E /* Rover+Events.swift */; };
-		DB59775B1E75E34600CCB49E /* UserUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB59775A1E75E34600CCB49E /* UserUpdate.swift */; };
-		DB59775D1E75E66800CCB49E /* UserUpdateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB59775C1E75E66800CCB49E /* UserUpdateTests.swift */; };
-		DB59777A1E7C32EF00CCB49E /* SyncCompleteAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5977791E7C32EF00CCB49E /* SyncCompleteAction.swift */; };
-		DB59777C1E7C833D00CCB49E /* Dispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB59777B1E7C833D00CCB49E /* Dispatcher.swift */; };
-		DB59777E1E7DAF0000CCB49E /* ServiceKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB59777D1E7DAF0000CCB49E /* ServiceKey.swift */; };
-		DB5977801E7DAF0F00CCB49E /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB59777F1E7DAF0F00CCB49E /* Service.swift */; };
-		DB5977821E7DAF6F00CCB49E /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5977811E7DAF6F00CCB49E /* Action.swift */; };
-		DB5977841E7F39A400CCB49E /* ServiceKeyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5977831E7F39A400CCB49E /* ServiceKeyTests.swift */; };
-		DB5977901E81D3D500CCB49E /* EventBatchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB59778F1E81D3D500CCB49E /* EventBatchTests.swift */; };
-		DB5977921E82AE4B00CCB49E /* ServiceStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5977911E82AE4B00CCB49E /* ServiceStore.swift */; };
-		DB5977941E82B9B900CCB49E /* ServiceRegistrationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5977931E82B9B900CCB49E /* ServiceRegistrationError.swift */; };
-		DB5977981E830F2400CCB49E /* ServiceRegistrationErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5977971E830F2400CCB49E /* ServiceRegistrationErrorTests.swift */; };
-		DB8E457A1E6C970400E9D293 /* UserServiceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8E45791E6C970400E9D293 /* UserServiceFactory.swift */; };
-		DB8E457C1E6CB2A200E9D293 /* EventsServiceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8E457B1E6CB2A200E9D293 /* EventsServiceFactory.swift */; };
-		DBB958FB1E525E3E003A30E7 /* Rover.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB958FA1E525E3E003A30E7 /* Rover.swift */; };
-		DBC5E4F31E671ED70030FE0C /* Attributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC5E4F21E671ED70030FE0C /* Attributes.swift */; };
-		DBC5E4F51E671EEB0030FE0C /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC5E4F41E671EEB0030FE0C /* Event.swift */; };
-		DBC5E4F71E671F1C0030FE0C /* EventBatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC5E4F61E671F1C0030FE0C /* EventBatch.swift */; };
-		DBC5E4F91E671F320030FE0C /* EventQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC5E4F81E671F320030FE0C /* EventQueue.swift */; };
-		DBC5E4FB1E671F480030FE0C /* EventsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC5E4FA1E671F480030FE0C /* EventsService.swift */; };
-		DBC5E4FE1E671F720030FE0C /* EventQueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC5E4FD1E671F720030FE0C /* EventQueueTests.swift */; };
-		DBC5E5001E671F860030FE0C /* EventsServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC5E4FF1E671F860030FE0C /* EventsServiceTests.swift */; };
-		DBC5E5041E6720FA0030FE0C /* Context.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC5E5031E6720FA0030FE0C /* Context.swift */; };
-		DBC5E5061E67210E0030FE0C /* ContextProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC5E5051E67210E0030FE0C /* ContextProvider.swift */; };
-		DBC5E5081E6721220030FE0C /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC5E5071E6721220030FE0C /* Reachability.swift */; };
-		DBC5E50C1E6721560030FE0C /* ApplicationContextProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC5E50B1E6721560030FE0C /* ApplicationContextProvider.swift */; };
-		DBC5E50E1E6721680030FE0C /* DeviceContextProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC5E50D1E6721680030FE0C /* DeviceContextProvider.swift */; };
-		DBC5E5101E6721810030FE0C /* FrameworkContextProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC5E50F1E6721810030FE0C /* FrameworkContextProvider.swift */; };
-		DBC5E5121E6721950030FE0C /* LocaleContextProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC5E5111E6721950030FE0C /* LocaleContextProvider.swift */; };
-		DBC5E5141E6721B80030FE0C /* ScreenContextProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC5E5131E6721B80030FE0C /* ScreenContextProvider.swift */; };
-		DBC5E5161E6721CF0030FE0C /* TelephonyContextProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC5E5151E6721CF0030FE0C /* TelephonyContextProvider.swift */; };
-		DBC5E5181E6721E70030FE0C /* TimeZoneContextProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC5E5171E6721E70030FE0C /* TimeZoneContextProvider.swift */; };
-		DBC5E51A1E6721F60030FE0C /* ReachabilityContextProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC5E5191E6721F60030FE0C /* ReachabilityContextProvider.swift */; };
-		DBC5E5201E67224B0030FE0C /* ApplicationContextProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC5E51F1E67224B0030FE0C /* ApplicationContextProviderTests.swift */; };
-		DBC5E5221E67226B0030FE0C /* DeviceContextProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC5E5211E67226B0030FE0C /* DeviceContextProviderTests.swift */; };
-		DBC5E5241E67229D0030FE0C /* FrameworkContextProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC5E5231E67229D0030FE0C /* FrameworkContextProviderTests.swift */; };
-		DBC5E5261E6722B20030FE0C /* LocaleContextProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC5E5251E6722B20030FE0C /* LocaleContextProviderTests.swift */; };
-		DBC5E5281E6723470030FE0C /* ScreenContextProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC5E5271E6723470030FE0C /* ScreenContextProviderTests.swift */; };
-		DBC5E52A1E6723620030FE0C /* TelephonyContextProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC5E5291E6723620030FE0C /* TelephonyContextProviderTests.swift */; };
-		DBC5E52C1E6723820030FE0C /* TimeZoneContextProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC5E52B1E6723820030FE0C /* TimeZoneContextProviderTests.swift */; };
-		DBC5E52E1E67239C0030FE0C /* ReachabilityContextProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC5E52D1E67239C0030FE0C /* ReachabilityContextProviderTests.swift */; };
-		DBC5E5461E677C0F0030FE0C /* HTTPServiceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC5E5451E677C0F0030FE0C /* HTTPServiceFactory.swift */; };
 		DBE762C31DE382CF00183297 /* Rover.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBE762B91DE382CF00183297 /* Rover.framework */; };
 		DBE762CA1DE382CF00183297 /* Rover.h in Headers */ = {isa = PBXBuildFile; fileRef = DBE762BC1DE382CF00183297 /* Rover.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
@@ -92,76 +29,13 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				DB1CA33B1E56C73C00E2DB23 /* RoverData.framework in CopyFiles */,
-				DB1CA33D1E56C73C00E2DB23 /* RoverLogger.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		DB1CA32C1E56C3D000E2DB23 /* RoverData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RoverData.framework; path = Carthage/Build/iOS/RoverData.framework; sourceTree = "<group>"; };
-		DB1CA32E1E56C3D000E2DB23 /* RoverLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RoverLogger.framework; path = Carthage/Build/iOS/RoverLogger.framework; sourceTree = "<group>"; };
-		DB240A681E6F10B3002C7AC6 /* EventsServiceFactoryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsServiceFactoryTests.swift; sourceTree = "<group>"; };
 		DB240A6A1E6F1CB2002C7AC6 /* RoverTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoverTests.swift; sourceTree = "<group>"; };
-		DB240A6C1E6F41E6002C7AC6 /* ServiceFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceFactory.swift; sourceTree = "<group>"; };
-		DB5976DF1E71CA7B00CCB49E /* UserService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
-		DB5976E21E71CAAC00CCB49E /* IdentifyUserAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdentifyUserAction.swift; sourceTree = "<group>"; };
-		DB5976E61E71CAEE00CCB49E /* Rover+User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Rover+User.swift"; sourceTree = "<group>"; };
-		DB5976E91E71CBA400CCB49E /* Resolver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Resolver.swift; sourceTree = "<group>"; };
-		DB5976EB1E71CC1A00CCB49E /* Container.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Container.swift; sourceTree = "<group>"; };
-		DB5977361E72FA1A00CCB49E /* HTTPServiceFactoryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPServiceFactoryTests.swift; sourceTree = "<group>"; };
-		DB59773E1E7324FE00CCB49E /* UserServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserServiceTests.swift; sourceTree = "<group>"; };
-		DB5977401E73449300CCB49E /* UserServiceFactoryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserServiceFactoryTests.swift; sourceTree = "<group>"; };
-		DB5977471E7346B600CCB49E /* AddAuthHeaderAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddAuthHeaderAction.swift; sourceTree = "<group>"; };
-		DB5977491E7346D400CCB49E /* Rover+Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Rover+Data.swift"; sourceTree = "<group>"; };
-		DB59774B1E7346FA00CCB49E /* Rover+DataTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Rover+DataTests.swift"; sourceTree = "<group>"; };
-		DB59774D1E73474D00CCB49E /* Rover+UserTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Rover+UserTests.swift"; sourceTree = "<group>"; };
-		DB59774F1E73478D00CCB49E /* Rover+EventsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Rover+EventsTests.swift"; sourceTree = "<group>"; };
-		DB5977541E7347FA00CCB49E /* AddContextProviderAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddContextProviderAction.swift; sourceTree = "<group>"; };
-		DB5977561E73481000CCB49E /* Rover+Events.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Rover+Events.swift"; sourceTree = "<group>"; };
-		DB59775A1E75E34600CCB49E /* UserUpdate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserUpdate.swift; sourceTree = "<group>"; };
-		DB59775C1E75E66800CCB49E /* UserUpdateTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserUpdateTests.swift; sourceTree = "<group>"; };
-		DB5977791E7C32EF00CCB49E /* SyncCompleteAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyncCompleteAction.swift; sourceTree = "<group>"; };
-		DB59777B1E7C833D00CCB49E /* Dispatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dispatcher.swift; sourceTree = "<group>"; };
-		DB59777D1E7DAF0000CCB49E /* ServiceKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceKey.swift; sourceTree = "<group>"; };
-		DB59777F1E7DAF0F00CCB49E /* Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
-		DB5977811E7DAF6F00CCB49E /* Action.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Action.swift; sourceTree = "<group>"; };
-		DB5977831E7F39A400CCB49E /* ServiceKeyTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceKeyTests.swift; sourceTree = "<group>"; };
-		DB59778F1E81D3D500CCB49E /* EventBatchTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventBatchTests.swift; sourceTree = "<group>"; };
-		DB5977911E82AE4B00CCB49E /* ServiceStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceStore.swift; sourceTree = "<group>"; };
-		DB5977931E82B9B900CCB49E /* ServiceRegistrationError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceRegistrationError.swift; sourceTree = "<group>"; };
-		DB5977971E830F2400CCB49E /* ServiceRegistrationErrorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceRegistrationErrorTests.swift; sourceTree = "<group>"; };
-		DB8E45791E6C970400E9D293 /* UserServiceFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserServiceFactory.swift; sourceTree = "<group>"; };
-		DB8E457B1E6CB2A200E9D293 /* EventsServiceFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsServiceFactory.swift; sourceTree = "<group>"; };
-		DBB958FA1E525E3E003A30E7 /* Rover.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rover.swift; sourceTree = "<group>"; };
-		DBC5E4F21E671ED70030FE0C /* Attributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Attributes.swift; sourceTree = "<group>"; };
-		DBC5E4F41E671EEB0030FE0C /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
-		DBC5E4F61E671F1C0030FE0C /* EventBatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventBatch.swift; sourceTree = "<group>"; };
-		DBC5E4F81E671F320030FE0C /* EventQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventQueue.swift; sourceTree = "<group>"; };
-		DBC5E4FA1E671F480030FE0C /* EventsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsService.swift; sourceTree = "<group>"; };
-		DBC5E4FD1E671F720030FE0C /* EventQueueTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventQueueTests.swift; sourceTree = "<group>"; };
-		DBC5E4FF1E671F860030FE0C /* EventsServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsServiceTests.swift; sourceTree = "<group>"; };
-		DBC5E5031E6720FA0030FE0C /* Context.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Context.swift; sourceTree = "<group>"; };
-		DBC5E5051E67210E0030FE0C /* ContextProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContextProvider.swift; sourceTree = "<group>"; };
-		DBC5E5071E6721220030FE0C /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
-		DBC5E50B1E6721560030FE0C /* ApplicationContextProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationContextProvider.swift; sourceTree = "<group>"; };
-		DBC5E50D1E6721680030FE0C /* DeviceContextProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceContextProvider.swift; sourceTree = "<group>"; };
-		DBC5E50F1E6721810030FE0C /* FrameworkContextProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrameworkContextProvider.swift; sourceTree = "<group>"; };
-		DBC5E5111E6721950030FE0C /* LocaleContextProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocaleContextProvider.swift; sourceTree = "<group>"; };
-		DBC5E5131E6721B80030FE0C /* ScreenContextProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenContextProvider.swift; sourceTree = "<group>"; };
-		DBC5E5151E6721CF0030FE0C /* TelephonyContextProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TelephonyContextProvider.swift; sourceTree = "<group>"; };
-		DBC5E5171E6721E70030FE0C /* TimeZoneContextProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeZoneContextProvider.swift; sourceTree = "<group>"; };
-		DBC5E5191E6721F60030FE0C /* ReachabilityContextProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReachabilityContextProvider.swift; sourceTree = "<group>"; };
-		DBC5E51F1E67224B0030FE0C /* ApplicationContextProviderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationContextProviderTests.swift; sourceTree = "<group>"; };
-		DBC5E5211E67226B0030FE0C /* DeviceContextProviderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceContextProviderTests.swift; sourceTree = "<group>"; };
-		DBC5E5231E67229D0030FE0C /* FrameworkContextProviderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrameworkContextProviderTests.swift; sourceTree = "<group>"; };
-		DBC5E5251E6722B20030FE0C /* LocaleContextProviderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocaleContextProviderTests.swift; sourceTree = "<group>"; };
-		DBC5E5271E6723470030FE0C /* ScreenContextProviderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenContextProviderTests.swift; sourceTree = "<group>"; };
-		DBC5E5291E6723620030FE0C /* TelephonyContextProviderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TelephonyContextProviderTests.swift; sourceTree = "<group>"; };
-		DBC5E52B1E6723820030FE0C /* TimeZoneContextProviderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeZoneContextProviderTests.swift; sourceTree = "<group>"; };
-		DBC5E52D1E67239C0030FE0C /* ReachabilityContextProviderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReachabilityContextProviderTests.swift; sourceTree = "<group>"; };
-		DBC5E5451E677C0F0030FE0C /* HTTPServiceFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPServiceFactory.swift; sourceTree = "<group>"; };
 		DBE762B91DE382CF00183297 /* Rover.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Rover.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBE762BC1DE382CF00183297 /* Rover.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Rover.h; sourceTree = "<group>"; };
 		DBE762BD1DE382CF00183297 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -174,8 +48,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DB1CA3301E56C3D000E2DB23 /* RoverData.framework in Frameworks */,
-				DB1CA3321E56C3D000E2DB23 /* RoverLogger.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -193,8 +65,6 @@
 		DB1CA32A1E56C3D000E2DB23 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				DB1CA32C1E56C3D000E2DB23 /* RoverData.framework */,
-				DB1CA32E1E56C3D000E2DB23 /* RoverLogger.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -214,142 +84,6 @@
 				DBE762BD1DE382CF00183297 /* Info.plist */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		DB240A521E6EFE79002C7AC6 /* Context Providers */ = {
-			isa = PBXGroup;
-			children = (
-				DBC5E50B1E6721560030FE0C /* ApplicationContextProvider.swift */,
-				DBC5E50D1E6721680030FE0C /* DeviceContextProvider.swift */,
-				DBC5E50F1E6721810030FE0C /* FrameworkContextProvider.swift */,
-				DBC5E5111E6721950030FE0C /* LocaleContextProvider.swift */,
-				DBC5E5131E6721B80030FE0C /* ScreenContextProvider.swift */,
-				DBC5E5151E6721CF0030FE0C /* TelephonyContextProvider.swift */,
-				DBC5E5171E6721E70030FE0C /* TimeZoneContextProvider.swift */,
-				DBC5E5191E6721F60030FE0C /* ReachabilityContextProvider.swift */,
-			);
-			name = "Context Providers";
-			sourceTree = "<group>";
-		};
-		DB240A531E6F0365002C7AC6 /* Context Providers */ = {
-			isa = PBXGroup;
-			children = (
-				DBC5E51F1E67224B0030FE0C /* ApplicationContextProviderTests.swift */,
-				DBC5E5211E67226B0030FE0C /* DeviceContextProviderTests.swift */,
-				DBC5E5231E67229D0030FE0C /* FrameworkContextProviderTests.swift */,
-				DBC5E5251E6722B20030FE0C /* LocaleContextProviderTests.swift */,
-				DBC5E5271E6723470030FE0C /* ScreenContextProviderTests.swift */,
-				DBC5E5291E6723620030FE0C /* TelephonyContextProviderTests.swift */,
-				DBC5E52B1E6723820030FE0C /* TimeZoneContextProviderTests.swift */,
-				DBC5E52D1E67239C0030FE0C /* ReachabilityContextProviderTests.swift */,
-			);
-			name = "Context Providers";
-			sourceTree = "<group>";
-		};
-		DB240A621E6F0EA1002C7AC6 /* Events */ = {
-			isa = PBXGroup;
-			children = (
-				DB240A531E6F0365002C7AC6 /* Context Providers */,
-				DB59778F1E81D3D500CCB49E /* EventBatchTests.swift */,
-				DBC5E4FF1E671F860030FE0C /* EventsServiceTests.swift */,
-				DB240A681E6F10B3002C7AC6 /* EventsServiceFactoryTests.swift */,
-				DBC5E4FD1E671F720030FE0C /* EventQueueTests.swift */,
-				DB59774F1E73478D00CCB49E /* Rover+EventsTests.swift */,
-			);
-			name = Events;
-			sourceTree = "<group>";
-		};
-		DB240A631E6F0EA9002C7AC6 /* Data */ = {
-			isa = PBXGroup;
-			children = (
-				DB5977361E72FA1A00CCB49E /* HTTPServiceFactoryTests.swift */,
-				DB59774B1E7346FA00CCB49E /* Rover+DataTests.swift */,
-			);
-			name = Data;
-			sourceTree = "<group>";
-		};
-		DB5976D91E71C23900CCB49E /* Data */ = {
-			isa = PBXGroup;
-			children = (
-				DB5977461E7346A600CCB49E /* Actions */,
-				DBC5E5451E677C0F0030FE0C /* HTTPServiceFactory.swift */,
-				DB5977491E7346D400CCB49E /* Rover+Data.swift */,
-			);
-			name = Data;
-			sourceTree = "<group>";
-		};
-		DB5976DE1E71C42E00CCB49E /* User */ = {
-			isa = PBXGroup;
-			children = (
-				DB5976E11E71CAA200CCB49E /* Actions */,
-				DB5976DF1E71CA7B00CCB49E /* UserService.swift */,
-				DB8E45791E6C970400E9D293 /* UserServiceFactory.swift */,
-				DB59775A1E75E34600CCB49E /* UserUpdate.swift */,
-				DB5976E61E71CAEE00CCB49E /* Rover+User.swift */,
-			);
-			name = User;
-			sourceTree = "<group>";
-		};
-		DB5976E11E71CAA200CCB49E /* Actions */ = {
-			isa = PBXGroup;
-			children = (
-				DB5976E21E71CAAC00CCB49E /* IdentifyUserAction.swift */,
-			);
-			name = Actions;
-			sourceTree = "<group>";
-		};
-		DB59773D1E7324DA00CCB49E /* User */ = {
-			isa = PBXGroup;
-			children = (
-				DB59773E1E7324FE00CCB49E /* UserServiceTests.swift */,
-				DB5977401E73449300CCB49E /* UserServiceFactoryTests.swift */,
-				DB59774D1E73474D00CCB49E /* Rover+UserTests.swift */,
-				DB59775C1E75E66800CCB49E /* UserUpdateTests.swift */,
-			);
-			name = User;
-			sourceTree = "<group>";
-		};
-		DB5977461E7346A600CCB49E /* Actions */ = {
-			isa = PBXGroup;
-			children = (
-				DB5977471E7346B600CCB49E /* AddAuthHeaderAction.swift */,
-				DB5977791E7C32EF00CCB49E /* SyncCompleteAction.swift */,
-			);
-			name = Actions;
-			sourceTree = "<group>";
-		};
-		DB5977511E7347DC00CCB49E /* Actions */ = {
-			isa = PBXGroup;
-			children = (
-				DB5977541E7347FA00CCB49E /* AddContextProviderAction.swift */,
-			);
-			name = Actions;
-			sourceTree = "<group>";
-		};
-		DBC5E4F11E671EC00030FE0C /* Events */ = {
-			isa = PBXGroup;
-			children = (
-				DB5977511E7347DC00CCB49E /* Actions */,
-				DB240A521E6EFE79002C7AC6 /* Context Providers */,
-				DBC5E4F21E671ED70030FE0C /* Attributes.swift */,
-				DBC5E5031E6720FA0030FE0C /* Context.swift */,
-				DBC5E5051E67210E0030FE0C /* ContextProvider.swift */,
-				DBC5E4F41E671EEB0030FE0C /* Event.swift */,
-				DBC5E4F61E671F1C0030FE0C /* EventBatch.swift */,
-				DBC5E4FA1E671F480030FE0C /* EventsService.swift */,
-				DB8E457B1E6CB2A200E9D293 /* EventsServiceFactory.swift */,
-				DBC5E4F81E671F320030FE0C /* EventQueue.swift */,
-				DB5977561E73481000CCB49E /* Rover+Events.swift */,
-			);
-			name = Events;
-			sourceTree = "<group>";
-		};
-		DBC5E54A1E686AA10030FE0C /* Vendor */ = {
-			isa = PBXGroup;
-			children = (
-				DBC5E5071E6721220030FE0C /* Reachability.swift */,
-			);
-			name = Vendor;
 			sourceTree = "<group>";
 		};
 		DBE762AF1DE382CF00183297 = {
@@ -374,21 +108,7 @@
 		DBE762BB1DE382CF00183297 /* Rover */ = {
 			isa = PBXGroup;
 			children = (
-				DB5976D91E71C23900CCB49E /* Data */,
-				DBC5E4F11E671EC00030FE0C /* Events */,
-				DB5976DE1E71C42E00CCB49E /* User */,
-				DBC5E54A1E686AA10030FE0C /* Vendor */,
 				DB1CA33F1E56D38600E2DB23 /* Supporting Files */,
-				DB5977811E7DAF6F00CCB49E /* Action.swift */,
-				DB5976EB1E71CC1A00CCB49E /* Container.swift */,
-				DB59777B1E7C833D00CCB49E /* Dispatcher.swift */,
-				DB5976E91E71CBA400CCB49E /* Resolver.swift */,
-				DBB958FA1E525E3E003A30E7 /* Rover.swift */,
-				DB59777F1E7DAF0F00CCB49E /* Service.swift */,
-				DB59777D1E7DAF0000CCB49E /* ServiceKey.swift */,
-				DB240A6C1E6F41E6002C7AC6 /* ServiceFactory.swift */,
-				DB5977931E82B9B900CCB49E /* ServiceRegistrationError.swift */,
-				DB5977911E82AE4B00CCB49E /* ServiceStore.swift */,
 			);
 			path = Rover;
 			sourceTree = "<group>";
@@ -396,13 +116,8 @@
 		DBE762C61DE382CF00183297 /* RoverTests */ = {
 			isa = PBXGroup;
 			children = (
-				DB240A631E6F0EA9002C7AC6 /* Data */,
-				DB240A621E6F0EA1002C7AC6 /* Events */,
-				DB59773D1E7324DA00CCB49E /* User */,
 				DB1CA33E1E56D37C00E2DB23 /* Supporting Files */,
 				DB240A6A1E6F1CB2002C7AC6 /* RoverTests.swift */,
-				DB5977831E7F39A400CCB49E /* ServiceKeyTests.swift */,
-				DB5977971E830F2400CCB49E /* ServiceRegistrationErrorTests.swift */,
 			);
 			path = RoverTests;
 			sourceTree = "<group>";
@@ -465,7 +180,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0810;
-				LastUpgradeCheck = 0810;
+				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = "Rover Labs Inc.";
 				TargetAttributes = {
 					DBE762B81DE382CF00183297 = {
@@ -521,44 +236,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DBC5E4FB1E671F480030FE0C /* EventsService.swift in Sources */,
-				DBC5E50E1E6721680030FE0C /* DeviceContextProvider.swift in Sources */,
-				DB59777E1E7DAF0000CCB49E /* ServiceKey.swift in Sources */,
-				DBC5E4F51E671EEB0030FE0C /* Event.swift in Sources */,
-				DBC5E5141E6721B80030FE0C /* ScreenContextProvider.swift in Sources */,
-				DB5976E71E71CAEE00CCB49E /* Rover+User.swift in Sources */,
-				DBC5E4F71E671F1C0030FE0C /* EventBatch.swift in Sources */,
-				DBC5E50C1E6721560030FE0C /* ApplicationContextProvider.swift in Sources */,
-				DB5976EC1E71CC1A00CCB49E /* Container.swift in Sources */,
-				DB5977481E7346B600CCB49E /* AddAuthHeaderAction.swift in Sources */,
-				DB59777A1E7C32EF00CCB49E /* SyncCompleteAction.swift in Sources */,
-				DBC5E5061E67210E0030FE0C /* ContextProvider.swift in Sources */,
-				DB5977551E7347FA00CCB49E /* AddContextProviderAction.swift in Sources */,
-				DB5977821E7DAF6F00CCB49E /* Action.swift in Sources */,
-				DBC5E51A1E6721F60030FE0C /* ReachabilityContextProvider.swift in Sources */,
-				DB5977801E7DAF0F00CCB49E /* Service.swift in Sources */,
-				DB240A6D1E6F41E6002C7AC6 /* ServiceFactory.swift in Sources */,
-				DB5976E31E71CAAC00CCB49E /* IdentifyUserAction.swift in Sources */,
-				DBC5E5461E677C0F0030FE0C /* HTTPServiceFactory.swift in Sources */,
-				DB5977921E82AE4B00CCB49E /* ServiceStore.swift in Sources */,
-				DB5977571E73481000CCB49E /* Rover+Events.swift in Sources */,
-				DBB958FB1E525E3E003A30E7 /* Rover.swift in Sources */,
-				DBC5E4F31E671ED70030FE0C /* Attributes.swift in Sources */,
-				DBC5E5181E6721E70030FE0C /* TimeZoneContextProvider.swift in Sources */,
-				DBC5E5041E6720FA0030FE0C /* Context.swift in Sources */,
-				DBC5E5101E6721810030FE0C /* FrameworkContextProvider.swift in Sources */,
-				DB5977941E82B9B900CCB49E /* ServiceRegistrationError.swift in Sources */,
-				DB8E457C1E6CB2A200E9D293 /* EventsServiceFactory.swift in Sources */,
-				DB59774A1E7346D400CCB49E /* Rover+Data.swift in Sources */,
-				DBC5E5121E6721950030FE0C /* LocaleContextProvider.swift in Sources */,
-				DBC5E4F91E671F320030FE0C /* EventQueue.swift in Sources */,
-				DB8E457A1E6C970400E9D293 /* UserServiceFactory.swift in Sources */,
-				DB59775B1E75E34600CCB49E /* UserUpdate.swift in Sources */,
-				DB5976E01E71CA7B00CCB49E /* UserService.swift in Sources */,
-				DBC5E5081E6721220030FE0C /* Reachability.swift in Sources */,
-				DB5976EA1E71CBA400CCB49E /* Resolver.swift in Sources */,
-				DB59777C1E7C833D00CCB49E /* Dispatcher.swift in Sources */,
-				DBC5E5161E6721CF0030FE0C /* TelephonyContextProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -566,27 +243,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DBC5E4FE1E671F720030FE0C /* EventQueueTests.swift in Sources */,
-				DBC5E5221E67226B0030FE0C /* DeviceContextProviderTests.swift in Sources */,
-				DB5977371E72FA1A00CCB49E /* HTTPServiceFactoryTests.swift in Sources */,
-				DBC5E5001E671F860030FE0C /* EventsServiceTests.swift in Sources */,
-				DB5977411E73449300CCB49E /* UserServiceFactoryTests.swift in Sources */,
-				DBC5E5261E6722B20030FE0C /* LocaleContextProviderTests.swift in Sources */,
-				DBC5E5241E67229D0030FE0C /* FrameworkContextProviderTests.swift in Sources */,
-				DBC5E5201E67224B0030FE0C /* ApplicationContextProviderTests.swift in Sources */,
-				DBC5E52C1E6723820030FE0C /* TimeZoneContextProviderTests.swift in Sources */,
-				DB59773F1E7324FE00CCB49E /* UserServiceTests.swift in Sources */,
-				DB5977841E7F39A400CCB49E /* ServiceKeyTests.swift in Sources */,
-				DBC5E52A1E6723620030FE0C /* TelephonyContextProviderTests.swift in Sources */,
-				DB59775D1E75E66800CCB49E /* UserUpdateTests.swift in Sources */,
-				DB59774C1E7346FA00CCB49E /* Rover+DataTests.swift in Sources */,
-				DB5977901E81D3D500CCB49E /* EventBatchTests.swift in Sources */,
-				DB240A691E6F10B3002C7AC6 /* EventsServiceFactoryTests.swift in Sources */,
-				DB5977501E73478D00CCB49E /* Rover+EventsTests.swift in Sources */,
-				DB59774E1E73474D00CCB49E /* Rover+UserTests.swift in Sources */,
-				DBC5E52E1E67239C0030FE0C /* ReachabilityContextProviderTests.swift in Sources */,
-				DB5977981E830F2400CCB49E /* ServiceRegistrationErrorTests.swift in Sources */,
-				DBC5E5281E6723470030FE0C /* ScreenContextProviderTests.swift in Sources */,
 				DB240A6B1E6F1CB2002C7AC6 /* RoverTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -620,6 +276,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -673,6 +330,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -753,7 +411,6 @@
 		DBE762D11DE382CF00183297 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = WDEZX8QD47;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -772,7 +429,6 @@
 		DBE762D21DE382CF00183297 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = WDEZX8QD47;
 				FRAMEWORK_SEARCH_PATHS = (

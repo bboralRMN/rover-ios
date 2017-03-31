@@ -9,9 +9,4 @@ Pod::Spec.new do |s|
   s.source       = { :git => "https://github.com/RoverPlatform/rover-ios.git", :tag => "v#{s.version}" }
   s.source_files = "Rover"
   s.frameworks   = "Foundation"
-
-  s.dependency "RoverContext"
-  s.dependency "RoverData"
-  s.dependency "RoverEvents"
-  s.dependency "RoverLogger"
 end
