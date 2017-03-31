@@ -18,6 +18,7 @@
 		DB492F551E8EC01A00224076 /* RoverHTTP.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = DB492F4B1E8EBFD800224076 /* RoverHTTP.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DB492F561E8EC01A00224076 /* RoverSync.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = DB492F4C1E8EBFD800224076 /* RoverSync.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DB492F571E8EC01A00224076 /* RoverUser.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = DB492F4D1E8EBFD800224076 /* RoverUser.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		DB492F591E8EC04400224076 /* Rover.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB492F581E8EC04400224076 /* Rover.swift */; };
 		DBE762C31DE382CF00183297 /* Rover.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBE762B91DE382CF00183297 /* Rover.framework */; };
 		DBE762CA1DE382CF00183297 /* Rover.h in Headers */ = {isa = PBXBuildFile; fileRef = DBE762BC1DE382CF00183297 /* Rover.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
@@ -56,6 +57,7 @@
 		DB492F4B1E8EBFD800224076 /* RoverHTTP.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RoverHTTP.framework; path = Carthage/Build/iOS/RoverHTTP.framework; sourceTree = "<group>"; };
 		DB492F4C1E8EBFD800224076 /* RoverSync.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RoverSync.framework; path = Carthage/Build/iOS/RoverSync.framework; sourceTree = "<group>"; };
 		DB492F4D1E8EBFD800224076 /* RoverUser.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RoverUser.framework; path = Carthage/Build/iOS/RoverUser.framework; sourceTree = "<group>"; };
+		DB492F581E8EC04400224076 /* Rover.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rover.swift; sourceTree = "<group>"; };
 		DBE762B91DE382CF00183297 /* Rover.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Rover.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBE762BC1DE382CF00183297 /* Rover.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Rover.h; sourceTree = "<group>"; };
 		DBE762BD1DE382CF00183297 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -139,6 +141,7 @@
 			isa = PBXGroup;
 			children = (
 				DB1CA33F1E56D38600E2DB23 /* Supporting Files */,
+				DB492F581E8EC04400224076 /* Rover.swift */,
 			);
 			path = Rover;
 			sourceTree = "<group>";
@@ -215,7 +218,7 @@
 				TargetAttributes = {
 					DBE762B81DE382CF00183297 = {
 						CreatedOnToolsVersion = 8.1;
-						LastSwiftMigration = 0810;
+						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 					};
 					DBE762C11DE382CF00183297 = {
@@ -266,6 +269,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB492F591E8EC04400224076 /* Rover.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -441,6 +445,7 @@
 		DBE762D11DE382CF00183297 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = WDEZX8QD47;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -459,6 +464,7 @@
 		DBE762D21DE382CF00183297 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = WDEZX8QD47;
 				FRAMEWORK_SEARCH_PATHS = (

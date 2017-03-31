@@ -7,7 +7,14 @@
 //
 
 import XCTest
+import Foundation
 
 @testable import Rover
 
-class RoverTests: XCTestCase { }
+class RoverTests: XCTestCase {
+
+    func testAssemble() {
+        Rover.assemble(accountToken: "foo")
+        let _ = Rover.shared
+    }
+}
