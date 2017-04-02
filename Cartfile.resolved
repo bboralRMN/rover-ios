@@ -1,5 +1,5 @@
 github "RoverPlatform/rover-ios-events" "a75ac0c71eb1d95ca9fb39ae49437f382c37d316"
 github "RoverPlatform/rover-ios-foundation" "479a7a33ea467db683b38538f761085f2c1dc14e"
 github "RoverPlatform/rover-ios-http" "ee8143be441d5e198de246d042feaae68d896cb4"
-github "RoverPlatform/rover-ios-sync" "07f7395a2e952e4c8133de8cba8b1bd7620c2751"
-github "RoverPlatform/rover-ios-user" "0865792b704478e376eb352fc27001fb32c5567a"
+github "RoverPlatform/rover-ios-sync" "d2e09adbf420c9e72b0a7dcd9aa7b42a1865f605"
+github "RoverPlatform/rover-ios-user" "6195ad854ae44c479022c1e2cce276e90cfd17fb"
