@@ -14,39 +14,110 @@ import RoverHTTP
 import RoverSync
 import RoverUser
 
-class Rover: Container {
+public class Rover {
     
     static var _shared: Rover?
     
-    public static var shared: Rover {
+    static var shared: Rover {
         guard let shared = _shared else {
-            fatalError("Rover.shared accessed before calling assemble")
+            fatalError("Shared instance accessed before calling assemble")
         }
         
         return shared
     }
     
-    public static func assemble(accountToken: String) {
-        let rover = Rover()
+    public static func assemble(accountToken: String) -> Rover {
+        let assemblers: [Assembler] = [
+            HTTPAssembler(accountToken: accountToken),
+            EventsAssembler(),
+            SyncAssembler(),
+            UserAssembler()
+        ]
         
-        do {
-            let httpFactory = HTTPClientFactory(accountToken: accountToken)
-            
-            try rover.register(EventsDataService.self, factory: httpFactory)
-            try rover.register(EventsManagerService.self, factory: EventsManagerFactory())
-            
-            try rover.register(SyncDataService.self, factory: httpFactory)
-            
-            try rover.register(UserDataService.self, factory: httpFactory)
-            try rover.register(UserService.self, factory: UserFactory())
-        } catch {
-            logger.error(error.localizedDescription)
-        }
-        
+        let container = Container(assemblers: assemblers)
+        let rover = Rover(container: container)
         _shared = rover
+        return rover
     }
     
-    var serviceMap = ServiceMap()
+    var container: Container
     
-    var registeredServices = [ServiceKey]()
+    init(container: Container) {
+        self.container = container
+    }
+}
+
+// MARK: HTTP
+
+extension Rover {
+    
+    public static func addIdentifier(identifier: Identifier) {
+        let operation = AddIdentifierOperation(identifier: identifier)
+        shared.container.addOperation(operation)
+    }
+    
+    public static func configureHTTP(baseURL: URL?, session: HTTPSession?, path: String?) {
+        let operation = ConfigureHTTPOperation(baseURL: baseURL, session: session, path: path)
+        shared.container.addOperation(operation)
+    }
+    
+    public static func removeIdentifier(name: Identifier.Name) {
+        let operation = RemoveIdentifierOperation(name: name)
+        shared.container.addOperation(operation)
+    }
+}
+
+// MARK: Events
+
+extension Rover {
+    
+    public static func addContextProviders(contextProviders: [ContextProvider]) {
+        let operation = AddContextProvidersOperation(contextProviders: contextProviders)
+        shared.container.addOperation(operation)
+    }
+    
+    public static func configureEvents(flushAt: Int?, maxBatchSize: Int?, maxQueueSize: Int?) {
+        let operation = ConfigureEventsOperation(flushAt: flushAt, maxBatchSize: maxBatchSize, maxQueueSize: maxQueueSize)
+        shared.container.addOperation(operation)
+    }
+    
+    public static func flushEvents() {
+        let operation = FlushEventsOperation(minBatchSize: 1)
+        shared.container.addOperation(operation)
+    }
+    
+    public static func trackEvent(name: String, attributes: Attributes? = nil) {
+        let operation = TrackEventOperation(name: name, attributes: attributes)
+        shared.container.addOperation(operation)
+    }
+}
+
+// MARK: Sync
+
+extension Rover {
+    
+    public static func sync() {
+        let operation = SyncOperation()
+        shared.container.addOperation(operation)
+    }
+}
+
+// MARK: User
+
+extension Rover {
+    
+    public static func anonymizeUser() {
+        let operation = AnonymizeUserOperation()
+        shared.container.addOperation(operation)
+    }
+    
+    public static func identifyUser(userID: UserID) {
+        let operation = IdentifyUserOperation(userID: userID)
+        shared.container.addOperation(operation)
+    }
+    
+    public static func updateUser(updates: [UserUpdate]) {
+        let operation = UpdateUserOperation(updates: updates)
+        shared.container.addOperation(operation)
+    }
 }
