@@ -18,6 +18,17 @@ public class Rover {
     
     static var _shared: Rover?
     
+    var container: Container
+    
+    init(container: Container) {
+        self.container = container
+    }
+}
+
+// MARK: Assemble
+
+extension Rover {
+    
     static var shared: Rover {
         guard let shared = _shared else {
             fatalError("Shared instance accessed before calling assemble")
@@ -38,12 +49,6 @@ public class Rover {
         let rover = Rover(container: container)
         _shared = rover
         return rover
-    }
-    
-    var container: Container
-    
-    init(container: Container) {
-        self.container = container
     }
 }
 
