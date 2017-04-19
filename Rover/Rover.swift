@@ -14,28 +14,7 @@ import RoverHTTP
 import RoverSync
 import RoverUser
 
-public class Rover {
-    
-    static var _shared: Rover?
-    
-    var container: Container
-    
-    init(container: Container) {
-        self.container = container
-    }
-}
-
-// MARK: Assemble
-
-extension Rover {
-    
-    static var shared: Rover {
-        guard let shared = _shared else {
-            fatalError("Shared instance accessed before calling assemble")
-        }
-        
-        return shared
-    }
+public class Rover: Facade {
     
     public static func assemble(accountToken: String) -> Rover {
         let assemblers: [Assembler] = [
@@ -45,30 +24,7 @@ extension Rover {
             UserAssembler()
         ]
         
-        let container = Container(assemblers: assemblers)
-        let rover = Rover(container: container)
-        _shared = rover
-        return rover
-    }
-}
-
-// MARK: HTTP
-
-extension Rover {
-    
-    public static func addIdentifier(identifier: Identifier) {
-        let operation = AddIdentifierOperation(identifier: identifier)
-        shared.container.addOperation(operation)
-    }
-    
-    public static func configureHTTP(baseURL: URL?, session: HTTPSession?, path: String?) {
-        let operation = ConfigureHTTPOperation(baseURL: baseURL, session: session, path: path)
-        shared.container.addOperation(operation)
-    }
-    
-    public static func removeIdentifier(name: Identifier.Name) {
-        let operation = RemoveIdentifierOperation(name: name)
-        shared.container.addOperation(operation)
+        return assemble(assemblers) as! Rover
     }
 }
 
@@ -76,24 +32,9 @@ extension Rover {
 
 extension Rover {
     
-    public static func addContextProviders(contextProviders: [ContextProvider]) {
-        let operation = AddContextProvidersOperation(contextProviders: contextProviders)
-        shared.container.addOperation(operation)
-    }
-    
-    public static func configureEvents(flushAt: Int?, maxBatchSize: Int?, maxQueueSize: Int?) {
-        let operation = ConfigureEventsOperation(flushAt: flushAt, maxBatchSize: maxBatchSize, maxQueueSize: maxQueueSize)
-        shared.container.addOperation(operation)
-    }
-    
-    public static func flushEvents() {
-        let operation = FlushEventsOperation(minBatchSize: 1)
-        shared.container.addOperation(operation)
-    }
-    
-    public static func trackEvent(name: String, attributes: Attributes? = nil) {
+    public func trackEvent(name: String, attributes: Attributes? = nil) {
         let operation = TrackEventOperation(name: name, attributes: attributes)
-        shared.container.addOperation(operation)
+        addOperation(operation)
     }
 }
 
@@ -101,28 +42,36 @@ extension Rover {
 
 extension Rover {
     
-    public static func sync() {
+    public var currentUser: User? {
+        return container.resolve(SyncState.self)?.user
+    }
+    
+    public func sync(completionHandler: (() -> Void)?) {
         let operation = SyncOperation()
-        shared.container.addOperation(operation)
+        addOperation(operation) { _ in
+            completionHandler?()
+        }
     }
 }
 
-// MARK: User
+// MARK: User 
 
 extension Rover {
-    
-    public static func anonymizeUser() {
+
+    public func anonymizeUser() {
         let operation = AnonymizeUserOperation()
-        shared.container.addOperation(operation)
+        addOperation(operation)
     }
     
-    public static func identifyUser(userID: UserID) {
+    public func identifyUser(userID: UserID) {
         let operation = IdentifyUserOperation(userID: userID)
-        shared.container.addOperation(operation)
+        addOperation(operation)
     }
     
-    public static func updateUser(updates: [UserUpdate]) {
+    public func updateUser(updates: [UserUpdate], completionHandler: ((User?) -> Void)?) {
         let operation = UpdateUserOperation(updates: updates)
-        shared.container.addOperation(operation)
+        addOperation(operation) { _ in
+            completionHandler?(self.currentUser)
+        }
     }
 }
