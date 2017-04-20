@@ -1,5 +1,5 @@
 //
-//  Rover+assemble.swift
+//  Rover.swift
 //  Rover
 //
 //  Created by Sean Rucker on 2017-03-31.
@@ -14,9 +14,19 @@ import RoverHTTP
 import RoverSync
 import RoverUser
 
-public class Rover: Facade {
+public class Rover {
     
-    public static func assemble(accountToken: String) -> Rover {
+    static var sharedInstance: Rover?
+    
+    public static var shared: Rover {
+        guard let sharedInstance = sharedInstance else {
+            fatalError("Shared instance accessed before calling assemble")
+        }
+        
+        return sharedInstance
+    }
+    
+    @discardableResult public static func assemble(accountToken: String) -> Rover {
         let assemblers: [Assembler] = [
             HTTPAssembler(accountToken: accountToken),
             EventsAssembler(),
@@ -24,7 +34,16 @@ public class Rover: Facade {
             UserAssembler()
         ]
         
-        return assemble(assemblers) as! Rover
+        let container = Container(assemblers: assemblers)
+        let rover = Rover(container: container)
+        sharedInstance = rover
+        return rover
+    }
+    
+    var container: Container
+    
+    init(container: Container) {
+        self.container = container
     }
 }
 
@@ -34,7 +53,7 @@ extension Rover {
     
     public func trackEvent(name: String, attributes: Attributes? = nil) {
         let operation = TrackEventOperation(name: name, attributes: attributes)
-        addOperation(operation)
+        container.addOperation(operation)
     }
 }
 
@@ -48,7 +67,7 @@ extension Rover {
     
     public func sync(completionHandler: (() -> Void)?) {
         let operation = SyncOperation()
-        addOperation(operation) { _ in
+        container.addOperation(operation) { _ in
             completionHandler?()
         }
     }
@@ -60,17 +79,17 @@ extension Rover {
 
     public func anonymizeUser() {
         let operation = AnonymizeUserOperation()
-        addOperation(operation)
+        container.addOperation(operation)
     }
     
     public func identifyUser(userID: UserID) {
         let operation = IdentifyUserOperation(userID: userID)
-        addOperation(operation)
+        container.addOperation(operation)
     }
     
     public func updateUser(updates: [UserUpdate], completionHandler: ((User?) -> Void)?) {
         let operation = UpdateUserOperation(updates: updates)
-        addOperation(operation) { _ in
+        container.addOperation(operation) { _ in
             completionHandler?(self.currentUser)
         }
     }
