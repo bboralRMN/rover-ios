@@ -1,6 +1,7 @@
 github "RoverPlatform/rover-ios-events" "master"
 github "RoverPlatform/rover-ios-foundation" "master"
 github "RoverPlatform/rover-ios-http" "master"
+github "RoverPlatform/rover-ios-push" "master"
 github "RoverPlatform/rover-ios-sync" "master"
 github "RoverPlatform/rover-ios-user" "master"
 

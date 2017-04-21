@@ -11,6 +11,7 @@ import Foundation
 import RoverEvents
 import RoverFoundation
 import RoverHTTP
+import RoverPush
 import RoverSync
 import RoverUser
 
@@ -31,7 +32,8 @@ public class Rover {
             HTTPAssembler(accountToken: accountToken),
             EventsAssembler(),
             SyncAssembler(),
-            UserAssembler()
+            UserAssembler(),
+            PushAssembler()
         ]
         
         let container = Container(assemblers: assemblers)
@@ -53,6 +55,21 @@ extension Rover {
     
     public func trackEvent(name: String, attributes: Attributes? = nil) {
         let operation = TrackEventOperation(name: name, attributes: attributes)
+        container.addOperation(operation)
+    }
+}
+
+// MARK: Push
+
+extension Rover {
+    
+    public func captureDeviceToken(_ tokenData: Data) {
+        let operation = CaptureDeviceTokenOperation(tokenData: tokenData)
+        container.addOperation(operation)
+    }
+    
+    public func removeDeviceToken() {
+        let operation = RemoveDeviceTokenOperation()
         container.addOperation(operation)
     }
 }
